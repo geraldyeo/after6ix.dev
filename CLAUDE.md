@@ -15,6 +15,12 @@ pnpm install
 
 # Run tests (currently placeholder)
 pnpm test
+
+# Run linting
+pnpm lint
+
+# Run linting with auto-fix
+pnpm lint:fix
 ```
 
 ### Package Management
