@@ -70,6 +70,62 @@ The workspace follows Nx monorepo conventions:
 3. Projects should be generated using Nx generators to maintain consistency
 4. Each package in packages/ should have its own project.json or package.json
 
+## Git Commit Conventions
+
+This project follows the Conventional Commits specification for commit messages:
+
+### Commit Message Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Types
+- **feat**: A new feature
+- **fix**: A bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **perf**: A code change that improves performance
+- **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies
+- **ci**: Changes to our CI configuration files and scripts
+- **chore**: Other changes that don't modify src or test files
+- **revert**: Reverts a previous commit
+
+### Examples
+```bash
+# Feature with scope
+feat(auth): add OAuth2 integration
+
+# Fix without scope
+fix: resolve memory leak in data processing
+
+# Breaking change
+feat(api): change response format
+
+BREAKING CHANGE: API responses now use camelCase instead of snake_case
+
+# Multiple line body
+docs: update contribution guidelines
+
+- Add commit message conventions
+- Include code review process
+- Update testing requirements
+```
+
+### Tips for Writing Good Commit Messages
+1. Keep the subject line under 50 characters
+2. Use imperative mood in the subject line ("add" not "added" or "adds")
+3. Capitalize the first letter of the subject line
+4. Do not end the subject line with a period
+5. Separate subject from body with a blank line
+6. Wrap the body at 72 characters
+7. Use the body to explain what and why vs. how
+
 ## Important Notes
 
 - This is a fresh Nx workspace with infrastructure ready but no actual packages yet
