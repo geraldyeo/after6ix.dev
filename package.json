@@ -1,21 +1,17 @@
 {
-  "name": "@after6ix/source",
-  "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {},
-  "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "@nx/js": "21.3.5",
-    "@swc-node/register": "~1.9.1",
-    "@swc/core": "~1.5.7",
-    "@swc/helpers": "~0.5.11",
-    "nx": "21.3.5",
-    "prettier": "^2.6.2",
-    "tslib": "^2.3.0",
-    "typescript": "~5.8.2"
+  "name": "@after6ix/root",
+  "version": "1.0.0",
+  "author": "Gerald Yeo <gerald.yeo@gmail.com>",
+  "description": "",
+  "engines": {
+    "node": ">=22.15.0",
+    "pnpm": ">=10.11.0"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "packageManager": "pnpm@10.11.0"
 }

@@ -1,45 +1,73 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
 
-# compiled output
-dist
-tmp
-out-tsc
+# Testing
+coverage/
+*.lcov
+.nyc_output/
 
-# dependencies
-node_modules
+# Production builds
+dist/
+build/
+out/
+*.tsbuildinfo
 
-# IDEs and editors
-/.idea
-.history
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Misc
+.DS_Store
+*.pem
 
-# IDE - VSCode
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.history/
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
-
-# System Files
+# OS
 .DS_Store
 Thumbs.db
 
-.nx/cache
-.nx/workspace-data
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
+# Temporary files
+*.log
+tmp/
+temp/
+.cache/
+
+# TypeScript
+*.tsbuildinfo
+.tsc-out/
+
+# Next.js (if used)
+.next/
+out/
+.vercel/
+
+# Vite (if used)
+dist-ssr/
+*.local
+
+# Turbo (if used)
+.turbo/
+
+# Package manager
+.pnpm-store/
+.yarn/
