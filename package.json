@@ -10,18 +10,26 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "keywords": [],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
-    "@types/eslint__js": "^9.14.0",
+    "@tsconfig/node22": "^22.0.2",
     "eslint": "^9.31.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "sst": "^3.17.10",
     "typescript-eslint": "^8.38.0"
   }
 }
