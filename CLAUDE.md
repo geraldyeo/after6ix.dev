@@ -38,8 +38,10 @@ pnpm add -Dw <package>
 ## Architecture
 
 ### Workspace Structure
-- **`apps/*`** - Frontend modules (not yet created)
-- **`packages/*`** - Backend modules (not yet created)
+- **`apps/*`** - Frontend applications
+  - **`cv`** - CV and Resume Improver (@after6ix/cv)
+  - **`site`** - Main After6ix website (@after6ix/site)
+- **`packages/*`** - Backend modules and shared libraries (not yet created)
 
 The workspace is configured in `pnpm-workspace.yaml` to automatically include any packages in these directories.
 

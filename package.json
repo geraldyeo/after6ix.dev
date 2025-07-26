@@ -2,13 +2,14 @@
   "name": "@after6ix/root",
   "version": "1.0.0",
   "author": "Gerald Yeo <gerald.yeo@gmail.com>",
-  "description": "",
+  "description": "Monorepo for After6ix projects",
   "engines": {
     "node": ">=22.15.0",
     "pnpm": ">=10.11.0"
   },
+  "keywords": [],
   "license": "MIT",
-  "main": "index.js",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
     "dev": "sst dev",
     "build": "sst build",
@@ -17,12 +18,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "keywords": [],
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "@tsconfig/node22": "^22.0.2",

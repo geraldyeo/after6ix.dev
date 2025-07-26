@@ -4,15 +4,15 @@ export default $config({
       name: "after6ix",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
-      home: "aws",
+      home: "cloudflare",
+      providers: { cloudflare: "6.4.1" },
     };
   },
   async run() {
     // const storage = await import("./infra/storage");
     // await import("./infra/api");
-
     return {
-    //   MyBucket: storage.bucket.name,
+      //   MyBucket: storage.bucket.name,
     };
   },
 });

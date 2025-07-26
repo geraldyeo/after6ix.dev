@@ -1,0 +1,17 @@
+{
+  "name": "@after6ix/site",
+  "version": "1.0.0",
+  "author": "Gerald Yeo <gerald.yeo@gmail.com>",
+  "description": "Website for After6ix",
+  "engines": {
+    "node": ">=22.15.0",
+    "pnpm": ">=10.11.0"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
