@@ -68,6 +68,12 @@ dist-ssr/
 # Turbo (if used)
 .turbo/
 
+# SST
+.sst/
+.open-next/
+.sst.config.*.mjs
+.sst-cache/
+
 # Package manager
 .pnpm-store/
 .yarn/

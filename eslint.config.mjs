@@ -68,7 +68,7 @@ export default tseslint.config(
   
   // Disable type checking for config files
   {
-    files: ['**/*.config.{js,mjs,cjs}', '**/*.d.ts'],
+    files: ['**/*.config.{js,ts,mjs,cjs}', '**/*.d.ts'],
     extends: [tseslint.configs.disableTypeChecked],
   },
   

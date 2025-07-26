@@ -7,7 +7,8 @@ A TypeScript monorepo for after6ix.dev, built with modern web technologies and m
 ```
 after6ix.dev/
 ├── apps/                 # Frontend applications
-│   └── (React/Next.js applications)
+│   ├── cv/               # CV and Resume Improver
+│   └── site/             # Main After6ix website
 ├── packages/             # Shared packages and backend services
 │   └── (Node.js packages and libraries)
 ├── eslint.config.mjs     # ESLint configuration
