@@ -1,0 +1,28 @@
+{
+  "name": "@after6ix/core",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "Gerald Yeo <gerald.yeo@gmail.com>",
+  "description": "Core libraries and utilities for After6ix projects",
+  "engines": {
+    "node": ">=22.15.0",
+    "pnpm": ">=10.11.0"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "dev": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

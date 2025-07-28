@@ -10,6 +10,10 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "paths": {
+      "@after6ix/core": ["./packages/core/src/index.ts"],
+      "@after6ix/core/*": ["./packages/core/src/*"]
+    }
   }
 }
