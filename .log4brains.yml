@@ -1,0 +1,11 @@
+project:
+  name: "@after6ix"
+  tz: Asia/Singapore
+  adrFolder: ./docs/adr
+  packages:
+    - name: apps-site
+      path: ./apps/site
+      adrFolder: ./apps/site/docs/adr
+    - name: apps-cv
+      path: ./apps/cv
+      adrFolder: ./apps/cv/docs/adr
