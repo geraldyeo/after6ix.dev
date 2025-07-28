@@ -52,6 +52,34 @@ This is a pnpm workspace monorepo for after6ix.dev, currently in early developme
 - Present information in structured format
 - Highlight key insights and relationships
 
+### ADR Check Workflow (REQUIRED for Feature Work)
+
+When working on any new feature or modifying existing features, you MUST:
+
+1. **Check for existing ADRs** before implementation:
+   - Search global ADRs in `./docs/adr/` for monorepo-wide decisions
+   - Search package-specific ADRs based on the feature location:
+     - Site features: check `./apps/site/docs/adr/`
+     - CV features: check `./apps/cv/docs/adr/`
+   - Use `pnpm log4brains list` or search for relevant keywords in ADR files
+
+2. **Confirm ADR requirements** with the user:
+   - If relevant ADRs exist: Reference them and confirm the implementation aligns with documented decisions
+   - If no ADRs exist: Ask the user if an ADR should be created before proceeding
+   - If uncertain about scope: Ask the user whether the decision should be global or package-specific
+
+3. **Reference ADRs in code**:
+   - Add comments in code referencing relevant ADR numbers (e.g., `// See ADR-0001`)
+   - Ensure implementation follows the decisions documented in ADRs
+
+Example workflow:
+```
+User: "Add authentication to the CV app"
+AI: Let me check for existing ADRs about authentication...
+[Searches ./docs/adr/ and ./apps/cv/docs/adr/]
+AI: I found no existing ADRs about authentication. Should I create an ADR to document the authentication approach before implementing?
+```
+
 ## Commands
 
 ### Development Setup
