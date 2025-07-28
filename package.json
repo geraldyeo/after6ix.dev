@@ -19,7 +19,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "adr:new": "log4brains adr new",
-    "adr:preview": "log4brains preview"
+    "adr:preview": "log4brains preview",
+    "build:packages": "pnpm --filter \"./packages/**\" build",
+    "clean:packages": "pnpm --filter \"./packages/**\" clean",
+    "dev:packages": "pnpm --filter \"./packages/**\" --parallel dev",
+    "build:all": "tsc --build",
+    "clean:all": "tsc --build --clean"
   },
   "workspaces": [
     "apps/*",
@@ -28,11 +33,14 @@
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "@tsconfig/node22": "^22.0.2",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "eslint": "^9.31.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "log4brains": "1.1.0",
     "sst": "^3.17.10",
+    "typescript": "^5.6.0",
     "typescript-eslint": "^8.38.0"
   }
 }
