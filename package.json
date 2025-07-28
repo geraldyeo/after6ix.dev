@@ -16,7 +16,9 @@
     "deploy": "sst deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "adr:new": "log4brains adr new",
+    "adr:preview": "log4brains preview"
   },
   "workspaces": [
     "apps/*",

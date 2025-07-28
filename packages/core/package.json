@@ -1,0 +1,17 @@
+{
+  "name": "@after6ix/core",
+  "version": "1.0.0",
+  "author": "Gerald Yeo <gerald.yeo@gmail.com>",
+  "description": "Core libraries and utilities for After6ix projects",
+  "engines": {
+    "node": ">=22.15.0",
+    "pnpm": ">=10.11.0"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

@@ -83,6 +83,7 @@ export default tseslint.config(
       '**/*.tsbuildinfo',
       '.pnpm-store/',
       'pnpm-lock.yaml',
+      '.sst/',
     ],
   },
 );
