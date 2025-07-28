@@ -1,6 +1,7 @@
 {
   "name": "@after6ix/core",
   "version": "1.0.0",
+  "type": "module",
   "author": "Gerald Yeo <gerald.yeo@gmail.com>",
   "description": "Core libraries and utilities for After6ix projects",
   "engines": {

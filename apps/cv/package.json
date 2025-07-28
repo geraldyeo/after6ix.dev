@@ -1,6 +1,7 @@
 {
   "name": "@after6ix/cv",
   "version": "1.0.0",
+  "type": "module",
   "author": "Gerald Yeo <gerald.yeo@gmail.com>",
   "description": "CV and Resume Improver",
   "engines": {

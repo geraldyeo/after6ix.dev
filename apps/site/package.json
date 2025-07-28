@@ -1,6 +1,7 @@
 {
   "name": "@after6ix/site",
   "version": "1.0.0",
+  "type": "module",
   "author": "Gerald Yeo <gerald.yeo@gmail.com>",
   "description": "Website for After6ix",
   "engines": {

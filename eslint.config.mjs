@@ -4,13 +4,19 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  js.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  // Base JavaScript configuration for all files
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    ...js.configs.recommended,
+  },
   
-  // Base TypeScript configuration for all files
+  // TypeScript configuration with type checking
   {
     files: ['**/*.{ts,tsx,mts,cts}'],
+    extends: [
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+    ],
     languageOptions: {
       parserOptions: {
         projectService: true,
