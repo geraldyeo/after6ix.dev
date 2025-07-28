@@ -7,10 +7,12 @@ A TypeScript monorepo for after6ix.dev, built with modern web technologies and m
 ```
 after6ix.dev/
 ├── apps/                 # Frontend applications
-│   ├── cv/               # CV and Resume Improver
-│   └── site/             # Main After6ix website
-├── packages/             # Shared packages and backend services
-│   └── (Node.js packages and libraries)
+│   ├── cv/               # CV and Resume Improver (React)
+│   └── site/             # Main After6ix website (React)
+├── packages/             # Shared packages and utilities
+│   └── core/             # Core utilities and shared functions
+├── docs/
+│   └── adr/              # Global architecture decision records
 ├── eslint.config.mjs     # ESLint configuration
 ├── tsconfig.base.json    # Base TypeScript configuration
 ├── tsconfig.json         # Root TypeScript configuration
@@ -22,10 +24,11 @@ after6ix.dev/
 - **Language**: TypeScript (strict mode enabled)
 - **Package Manager**: pnpm (v10.11.0+)
 - **Runtime**: Node.js (v22.15.0+)
+- **Module System**: ES modules (`"type": "module"`)
 - **Build System**: TypeScript project references
 - **Code Quality**: ESLint with TypeScript and React support
-- **Frontend**: React applications with modern JSX transform
-- **Backend**: Node.js packages with ES modules support
+- **Frontend**: React 18 with modern JSX transform
+- **Infrastructure**: SST (Serverless Stack)
 
 ## 🚀 Getting Started
 
@@ -44,11 +47,26 @@ pnpm install
 ### Development
 
 ```bash
+# Build all packages
+pnpm -w run build:packages
+
+# Watch mode for package development
+pnpm -w run dev:packages
+
+# Build entire TypeScript project
+pnpm -w run build:all
+
+# Clean build artifacts
+pnpm -w run clean:all
+
 # Run linting
-pnpm lint
+pnpm -w run lint
 
 # Run linting with auto-fix
-pnpm lint:fix
+pnpm -w run lint:fix
+
+# Run SST development server
+pnpm -w run dev
 
 # Run tests (placeholder)
 pnpm test
@@ -69,17 +87,40 @@ pnpm add -Dw <package>
 
 ## 📁 Workspace Configuration
 
-- **apps/**: React applications with JSX/TSX support, React hooks linting
-- **packages/**: Node.js packages with CommonJS/ESM support, Node globals
+### Apps (Frontend Applications)
+- React 18 with TypeScript
+- Modern JSX transform (`react-jsx`)
+- Path mappings for absolute imports (`@/*`, `@components/*`, etc.)
+- Strict TypeScript configuration
 
-Each workspace package should have its own `tsconfig.json` extending from `tsconfig.base.json`.
+### Packages (Shared Libraries)
+- ES modules with TypeScript
+- Composite projects for project references
+- Build outputs to `dist` directory
+- Source files in `src` directory
 
-## 🔧 TypeScript Configuration
+Each workspace has its own `tsconfig.json` extending from `tsconfig.base.json`.
 
+## 🔧 Configuration
+
+### TypeScript
 - Strict mode with all type checking enabled
 - ES2022 target for modern JavaScript features
-- Project references for better monorepo support
+- Project references for cross-package imports
 - Declaration maps for improved debugging
+- Path mappings in base config for `@after6ix/*` imports
+
+### ESLint
+- Separate configurations for TypeScript and JavaScript files
+- React plugin for JSX/TSX files in apps workspace
+- Type-aware linting for TypeScript files
+- Ignores build artifacts and `.sst` directory
+
+### Cross-Package Imports
+```typescript
+// Import from @after6ix/core in any app
+import { greeting, formatDate } from '@after6ix/core';
+```
 
 ## 📚 Architecture Decision Records (ADR)
 

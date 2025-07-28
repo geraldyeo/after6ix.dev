@@ -92,10 +92,22 @@ pnpm install
 pnpm test
 
 # Run linting
-pnpm lint
+pnpm -w run lint
 
 # Run linting with auto-fix
-pnpm lint:fix
+pnpm -w run lint:fix
+
+# Build all packages
+pnpm -w run build:packages
+
+# Build entire TypeScript project
+pnpm -w run build:all
+
+# Watch mode for packages development
+pnpm -w run dev:packages
+
+# Clean build artifacts
+pnpm -w run clean:all
 ```
 
 ### Package Management
@@ -155,7 +167,8 @@ pnpm log4brains list
 - **`apps/*`** - Frontend applications
   - **`cv`** - CV and Resume Improver (@after6ix/cv)
   - **`site`** - Main After6ix website (@after6ix/site)
-- **`packages/*`** - Backend modules and shared libraries (not yet created)
+- **`packages/*`** - Shared libraries and utilities
+  - **`core`** - Core utilities and shared functions (@after6ix/core)
 
 The workspace is configured in `pnpm-workspace.yaml` to automatically include any packages in these directories.
 
@@ -163,16 +176,31 @@ The workspace is configured in `pnpm-workspace.yaml` to automatically include an
 
 - **`tsconfig.base.json`** - Shared strict TypeScript configuration with ES2022 target
 - **`tsconfig.json`** - Root configuration using TypeScript project references
+- **React Apps** - Both `apps/site` and `apps/cv` have React-specific TypeScript configurations
 - Composite projects enabled for better monorepo support
 - Strict mode with all checks enabled
+- Path mappings configured for absolute imports
 
 ### Key Requirements
 
 - Node.js >= 22.15.0
 - pnpm >= 10.11.0 (enforced via packageManager field)
 
+### Module System
+
+- All packages and apps use ES modules (`"type": "module"` in package.json)
+- ESLint is configured to handle both TypeScript and JavaScript files
+- TypeScript files get type-checking rules, JavaScript files get standard ESLint rules
+
+### Cross-Package Imports
+
+- Packages can import from each other using workspace protocol: `"@after6ix/core": "workspace:*"`
+- TypeScript paths are configured for clean imports
+- Build outputs go to `dist` directories
+
 ## Development Notes
 
-1. No build, lint, or format commands are currently configured - these should be added as needed
+1. Build packages before running apps that depend on them: `pnpm -w run build:packages`
 2. When creating new packages or apps, ensure they have their own `tsconfig.json` that extends from `tsconfig.base.json`
 3. TypeScript project references should be used for inter-package dependencies
+4. Use `pnpm exec` or `pnpm dlx` instead of `npx` for better pnpm compatibility
