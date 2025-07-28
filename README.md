@@ -81,6 +81,41 @@ Each workspace package should have its own `tsconfig.json` extending from `tscon
 - Project references for better monorepo support
 - Declaration maps for improved debugging
 
+## 📚 Architecture Decision Records (ADR)
+
+We use Architecture Decision Records to document important architectural decisions in this project.
+
+### ADR Commands
+
+```bash
+# Create a new ADR
+pnpm log4brains adr new
+
+# View ADRs in web UI (http://localhost:4004)
+pnpm log4brains preview
+
+# Build static ADR documentation
+pnpm log4brains build
+
+# List all ADRs
+pnpm log4brains list
+```
+
+### ADR Structure
+
+This project uses a multi-package ADR structure:
+
+- **Global ADRs**: `docs/adr/` - Monorepo-wide architectural decisions
+- **Site ADRs**: `apps/site/docs/adr/` - After6ix website specific decisions
+- **CV ADRs**: `apps/cv/docs/adr/` - CV app specific decisions
+
+When creating a new ADR with `pnpm log4brains adr new`, you'll be prompted to select the appropriate scope (Global, apps-site, or apps-cv).
+
+All ADRs are:
+- Written in Markdown using MADR (Markdown Architectural Decision Records) format
+- Numbered sequentially within their scope (e.g., `0001-use-log4brains.md`)
+- Viewable together in the log4brains web UI
+
 ## 📝 Contributing
 
 See [CLAUDE.md](./CLAUDE.md) for AI-assisted development guidelines.
