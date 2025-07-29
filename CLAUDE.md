@@ -43,6 +43,12 @@ The following specialized agents are available for specific development tasks:
 - **Purpose**: Comprehensive security audit including vulnerability assessment and authentication review
 - **Trigger**: Periodically for security reviews or when explicitly requested
 
+#### qa-automation-engineer
+
+- **When to use**: When planning tests, implementing test automation, or troubleshooting test failures
+- **Purpose**: Expert guidance on test planning, test automation frameworks, and various testing types (unit, integration, system, UI, regression)
+- **Trigger**: When working on test strategies, test implementation, or test infrastructure
+
 ### Tool-specific Guidelines
 
 #### Sequential Thinking
