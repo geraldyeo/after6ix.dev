@@ -15,6 +15,34 @@ This is a pnpm workspace monorepo for after6ix.dev, currently in early developme
 - Context7 must be used for any documentation lookup of libraries or API
 - Firecrawl must be used for extracting data for any web scraping tasks
 
+### Specialized Agents
+
+The following specialized agents are available for specific development tasks:
+
+#### pair-programming-reviewer
+
+- **When to use**: After writing significant code changes, during active development
+- **Purpose**: Reviews code for best practices, suggests improvements, catches potential issues
+- **Trigger**: Automatically invoked after completing code implementation
+
+#### prd-adr-reviewer
+
+- **When to use**: When creating or reviewing PRDs or ADRs
+- **Purpose**: Provides senior technical perspective on requirements and architectural decisions
+- **Trigger**: When working with documents in `./docs/adr/` or package-specific ADR directories
+
+#### devops-infra-reviewer
+
+- **When to use**: When modifying infrastructure code, CI/CD pipelines, or deployment configurations
+- **Purpose**: Reviews IaC files, GitHub Actions, Docker/Kubernetes configs for security and best practices
+- **Trigger**: When editing files in `.github/workflows/`, Dockerfiles, or infrastructure configs
+
+#### secops-security-auditor
+
+- **When to use**: Before major releases, after architectural changes, or when security concerns arise
+- **Purpose**: Comprehensive security audit including vulnerability assessment and authentication review
+- **Trigger**: Periodically for security reviews or when explicitly requested
+
 ### Tool-specific Guidelines
 
 #### Sequential Thinking
@@ -73,7 +101,8 @@ When working on any new feature or modifying existing features, you MUST:
    - Ensure implementation follows the decisions documented in ADRs
 
 Example workflow:
-```
+
+```text
 User: "Add authentication to the CV app"
 AI: Let me check for existing ADRs about authentication...
 [Searches ./docs/adr/ and ./apps/cv/docs/adr/]
@@ -152,7 +181,7 @@ pnpm log4brains list
 
 3. **ADR Format**: Uses MADR (Markdown Architectural Decision Records) format
 
-4. **Viewing ADRs**: Use `pnpm log4brains preview` to view all ADRs (global and package-specific) in a web UI at http://localhost:4004
+4. **Viewing ADRs**: Use `pnpm log4brains preview` to view all ADRs (global and package-specific) in a web UI at [localhost:4004](http://localhost:4004)
 
 5. **Building Documentation**: Use `pnpm log4brains build` to generate static HTML documentation in `.log4brains/out/`
 
