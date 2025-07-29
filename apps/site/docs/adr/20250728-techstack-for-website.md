@@ -2,7 +2,7 @@
 
 - Status: proposed
 - Deciders: Gerald Yeo
-- Date: 2025-01-29
+- Date: 2025-07-29
 - Tags: frontend, static-site, astro, deployment
 
 Technical Story: Selecting the appropriate tech stack for the After6ix main website that will serve as a blog and services showcase, while preparing for future SaaS integrations.
