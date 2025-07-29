@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies and build Log4brains
         run: |
           pnpm install
-          pnpm log4brains build --basePath /${{ github.event.repository.name }}/log4brains
+          pnpm adr:build --basePath /${{ github.event.repository.name }}/log4brains
       
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
