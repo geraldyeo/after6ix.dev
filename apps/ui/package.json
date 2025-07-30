@@ -1,0 +1,23 @@
+{
+  "name": "@after6ix/ui",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "Gerald Yeo <gerald.yeo@gmail.com>",
+  "description": "UI for After6ix",
+  "engines": {
+    "node": ">=22.15.0",
+    "pnpm": ">=10.11.0"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@after6ix/core": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

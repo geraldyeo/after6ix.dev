@@ -9,3 +9,6 @@ project:
     - name: apps-cv
       path: ./apps/cv
       adrFolder: ./apps/cv/docs/adr
+    - name: apps-ui
+      path: ./apps/ui
+      adrFolder: ./apps/ui/docs/adr
