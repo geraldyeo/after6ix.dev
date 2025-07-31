@@ -17,8 +17,7 @@ const config: StorybookConfig = {
   "addons": [
     getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-mdx-gfm')
+    getAbsolutePath('@storybook/addon-a11y')
   ],
   "framework": {
     "name": getAbsolutePath('@storybook/react-vite'),
@@ -37,6 +36,11 @@ const config: StorybookConfig = {
         '@styles': resolve(dirname(__filename), '../src/styles'),
       },
     };
+    
+    // Add Tailwind CSS v4 plugin
+    const tailwindcss = await import('@tailwindcss/vite').then(m => m.default);
+    config.plugins = [...(config.plugins || []), tailwindcss()];
+    
     return config;
   },
 };
