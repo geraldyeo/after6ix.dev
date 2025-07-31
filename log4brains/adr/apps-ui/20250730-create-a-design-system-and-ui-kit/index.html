@@ -1,0 +1,2495 @@
+<!DOCTYPE html><html lang="en"><head><meta name="theme-color" content="#2176AE"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap"/><link rel="stylesheet" data-href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&amp;display=swap"/><meta charSet="utf-8"/><meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/><link rel="shortcut icon" type="image/x-icon" href="/after6ix.dev/log4brains/favicon.ico"/><meta name="og:image" content="/after6ix.dev/log4brains/l4b-static/Log4brains-og.png"/><title>Create a design system and ui-kit ADR - Architecture knowledge base of @after6ix</title><meta name="next-head-count" content="5"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/css/919ca2d659e1b911d0f8.css" as="style"/><link rel="stylesheet" href="/after6ix.dev/log4brains/_next/static/css/919ca2d659e1b911d0f8.css" data-n-g=""/><noscript data-n-css=""></noscript><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/webpack-50bee04d1dc61f8adf5b.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/commons.e4256be35a0409db2893.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/39d4b69998343c06c2f6d09982e0011fc76b6c1e.6257a86b8cc60c2626df.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/main-2b34b3344eebda2adbc3.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/a3e17150ead73d62fba7a33a50672ae3f72841a5.ccd40cab9508bddeb5f6.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/pages/_app-882d5c7e9b454dd24ddd.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/e3826749.d6bab887d966ca5b6c01.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/9ed7e97f.57939778917eb1fad6bd.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/ffd01e96.b058e41bdbd248f9b4cd.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/5fc9c5e4.29b2451d08aa93429e70.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/45d2d314fc8da5e3d79852782e4a432ad4da6771.42d7149cf7e5045c3836.js" as="script"/><link rel="preload" href="/after6ix.dev/log4brains/_next/static/chunks/pages/adr/%5B...slug%5D-3cd230a29f7f0e7dec6e.js" as="script"/><style id="jss-server-side">html {
+  max-width: 100%;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+strong, b {
+  font-weight: 700;
+}
+body {
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  padding: 0 !important;
+  font-size: 0.875rem;
+  max-width: 100%;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  background-color: #fff;
+}
+@media print {
+  body {
+    background-color: #fff;
+  }
+}
+  body::backdrop {
+    background-color: #fff;
+  }
+  blockquote {
+    color: #9e9e9e;
+    margin: 0;
+    padding: 0 1em;
+    border-left: 0.25em solid #F8F8F8;
+  }
+  .MuiSvgIcon-root {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .MuiSvgIcon-colorPrimary {
+    color: #2176AE;
+  }
+  .MuiSvgIcon-colorSecondary {
+    color: #FF007B;
+  }
+  .MuiSvgIcon-colorAction {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .MuiSvgIcon-colorError {
+    color: #ff1744;
+  }
+  .MuiSvgIcon-colorDisabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  .MuiSvgIcon-fontSizeInherit {
+    font-size: inherit;
+  }
+  .MuiSvgIcon-fontSizeSmall {
+    font-size: 1.25rem;
+  }
+  .MuiSvgIcon-fontSizeLarge {
+    font-size: 2.1875rem;
+  }
+  .MuiTooltip-popper {
+    z-index: 1500;
+    pointer-events: none;
+  }
+  .MuiTooltip-popperInteractive {
+    pointer-events: auto;
+  }
+  .MuiTooltip-popperArrow[x-placement*="bottom"] .MuiTooltip-arrow {
+    top: 0;
+    left: 0;
+    margin-top: -0.71em;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .MuiTooltip-popperArrow[x-placement*="top"] .MuiTooltip-arrow {
+    left: 0;
+    bottom: 0;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: -0.71em;
+  }
+  .MuiTooltip-popperArrow[x-placement*="right"] .MuiTooltip-arrow {
+    left: 0;
+    width: 0.71em;
+    height: 1em;
+    margin-top: 4px;
+    margin-left: -0.71em;
+    margin-bottom: 4px;
+  }
+  .MuiTooltip-popperArrow[x-placement*="left"] .MuiTooltip-arrow {
+    right: 0;
+    width: 0.71em;
+    height: 1em;
+    margin-top: 4px;
+    margin-right: -0.71em;
+    margin-bottom: 4px;
+  }
+  .MuiTooltip-popperArrow[x-placement*="left"] .MuiTooltip-arrow::before {
+    transform-origin: 0 0;
+  }
+  .MuiTooltip-popperArrow[x-placement*="right"] .MuiTooltip-arrow::before {
+    transform-origin: 100% 100%;
+  }
+  .MuiTooltip-popperArrow[x-placement*="top"] .MuiTooltip-arrow::before {
+    transform-origin: 100% 0;
+  }
+  .MuiTooltip-popperArrow[x-placement*="bottom"] .MuiTooltip-arrow::before {
+    transform-origin: 0 100%;
+  }
+  .MuiTooltip-tooltip {
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.625rem;
+    max-width: 300px;
+    word-wrap: break-word;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.4em;
+    border-radius: 4px;
+    background-color: rgba(97, 97, 97, 0.9);
+  }
+  .MuiTooltip-tooltipArrow {
+    margin: 0;
+    position: relative;
+  }
+  .MuiTooltip-arrow {
+    color: rgba(97, 97, 97, 0.9);
+    width: 1em;
+    height: 0.71em;
+    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
+  }
+  .MuiTooltip-arrow::before {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    content: "";
+    display: block;
+    transform: rotate(45deg);
+    background-color: currentColor;
+  }
+  .MuiTooltip-touch {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.14286em;
+  }
+  .MuiTooltip-tooltipPlacementLeft {
+    margin: 0 24px ;
+    transform-origin: right center;
+  }
+@media (min-width:900px) {
+  .MuiTooltip-tooltipPlacementLeft {
+    margin: 0 14px;
+  }
+}
+  .MuiTooltip-tooltipPlacementRight {
+    margin: 0 24px;
+    transform-origin: left center;
+  }
+@media (min-width:900px) {
+  .MuiTooltip-tooltipPlacementRight {
+    margin: 0 14px;
+  }
+}
+  .MuiTooltip-tooltipPlacementTop {
+    margin: 24px 0;
+    transform-origin: center bottom;
+  }
+@media (min-width:900px) {
+  .MuiTooltip-tooltipPlacementTop {
+    margin: 14px 0;
+  }
+}
+  .MuiTooltip-tooltipPlacementBottom {
+    margin: 24px 0;
+    transform-origin: center top;
+  }
+@media (min-width:900px) {
+  .MuiTooltip-tooltipPlacementBottom {
+    margin: 14px 0;
+  }
+}
+  .MuiButtonBase-root {
+    color: inherit;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    display: inline-flex;
+    outline: 0;
+    padding: 0;
+    position: relative;
+    align-items: center;
+    user-select: none;
+    border-radius: 0;
+    vertical-align: middle;
+    -moz-appearance: none;
+    justify-content: center;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiButtonBase-root::-moz-focus-inner {
+    border-style: none;
+  }
+  .MuiButtonBase-root.Mui-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+@media print {
+  .MuiButtonBase-root {
+    color-adjust: exact;
+  }
+}
+  .MuiButton-root {
+    color: rgba(0, 0, 0, 0.87);
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+  }
+  .MuiButton-root:hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+@media (hover: none) {
+  .MuiButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-root:hover.Mui-disabled {
+    background-color: transparent;
+  }
+  .MuiButton-label {
+    width: 100%;
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .MuiButton-text {
+    padding: 6px 8px;
+  }
+  .MuiButton-textPrimary {
+    color: #2176AE;
+  }
+  .MuiButton-textPrimary:hover {
+    background-color: rgba(33, 118, 174, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-textPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-textSecondary {
+    color: #FF007B;
+  }
+  .MuiButton-textSecondary:hover {
+    background-color: rgba(255, 0, 123, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-textSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-outlined {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    padding: 5px 15px;
+  }
+  .MuiButton-outlined.Mui-disabled {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiButton-outlinedPrimary {
+    color: #2176AE;
+    border: 1px solid rgba(33, 118, 174, 0.5);
+  }
+  .MuiButton-outlinedPrimary:hover {
+    border: 1px solid #2176AE;
+    background-color: rgba(33, 118, 174, 0.04);
+  }
+@media (hover: none) {
+  .MuiButton-outlinedPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-outlinedSecondary {
+    color: #FF007B;
+    border: 1px solid rgba(255, 0, 123, 0.5);
+  }
+  .MuiButton-outlinedSecondary:hover {
+    border: 1px solid #FF007B;
+    background-color: rgba(255, 0, 123, 0.04);
+  }
+  .MuiButton-outlinedSecondary.Mui-disabled {
+    border: 1px solid rgba(0, 0, 0, 0.26);
+  }
+@media (hover: none) {
+  .MuiButton-outlinedSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiButton-contained {
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+  .MuiButton-contained:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+    background-color: #d5d5d5;
+  }
+  .MuiButton-contained.Mui-focusVisible {
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+  }
+  .MuiButton-contained:active {
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+  }
+  .MuiButton-contained.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+@media (hover: none) {
+  .MuiButton-contained:hover {
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+    background-color: #e0e0e0;
+  }
+}
+  .MuiButton-contained:hover.Mui-disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  .MuiButton-containedPrimary {
+    color: #fff;
+    background-color: #2176AE;
+  }
+  .MuiButton-containedPrimary:hover {
+    background-color: rgb(23, 82, 121);
+  }
+@media (hover: none) {
+  .MuiButton-containedPrimary:hover {
+    background-color: #2176AE;
+  }
+}
+  .MuiButton-containedSecondary {
+    color: #fff;
+    background-color: #FF007B;
+  }
+  .MuiButton-containedSecondary:hover {
+    background-color: rgb(178, 0, 86);
+  }
+@media (hover: none) {
+  .MuiButton-containedSecondary:hover {
+    background-color: #FF007B;
+  }
+}
+  .MuiButton-disableElevation {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation:hover {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation.Mui-focusVisible {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation:active {
+    box-shadow: none;
+  }
+  .MuiButton-disableElevation.Mui-disabled {
+    box-shadow: none;
+  }
+  .MuiButton-colorInherit {
+    color: inherit;
+    border-color: currentColor;
+  }
+  .MuiButton-textSizeSmall {
+    padding: 4px 5px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-textSizeLarge {
+    padding: 8px 11px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-outlinedSizeSmall {
+    padding: 3px 9px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-outlinedSizeLarge {
+    padding: 7px 21px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-containedSizeSmall {
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+  }
+  .MuiButton-containedSizeLarge {
+    padding: 8px 22px;
+    font-size: 0.9375rem;
+  }
+  .MuiButton-fullWidth {
+    width: 100%;
+  }
+  .MuiButton-startIcon {
+    display: inherit;
+    margin-left: -4px;
+    margin-right: 8px;
+  }
+  .MuiButton-startIcon.MuiButton-iconSizeSmall {
+    margin-left: -2px;
+  }
+  .MuiButton-endIcon {
+    display: inherit;
+    margin-left: 8px;
+    margin-right: -4px;
+  }
+  .MuiButton-endIcon.MuiButton-iconSizeSmall {
+    margin-right: -2px;
+  }
+  .MuiButton-iconSizeSmall > *:first-child {
+    font-size: 18px;
+  }
+  .MuiButton-iconSizeMedium > *:first-child {
+    font-size: 20px;
+  }
+  .MuiButton-iconSizeLarge > *:first-child {
+    font-size: 22px;
+  }
+@media (min-width:0px) and (max-width:899.95px) {
+  .jss27 {
+    display: none;
+  }
+}
+@media (min-width:0px) {
+  .jss28 {
+    display: none;
+  }
+}
+@media (max-width:899.95px) {
+  .jss29 {
+    display: none;
+  }
+}
+@media (min-width:900px) and (max-width:1059.95px) {
+  .jss30 {
+    display: none;
+  }
+}
+@media (min-width:900px) {
+  .jss31 {
+    display: none;
+  }
+}
+@media (max-width:1059.95px) {
+  .jss32 {
+    display: none;
+  }
+}
+@media (min-width:1060px) and (max-width:1279.95px) {
+  .jss33 {
+    display: none;
+  }
+}
+@media (min-width:1060px) {
+  .jss34 {
+    display: none;
+  }
+}
+@media (max-width:1279.95px) {
+  .jss35 {
+    display: none;
+  }
+}
+@media (min-width:1280px) and (max-width:1919.95px) {
+  .jss36 {
+    display: none;
+  }
+}
+@media (min-width:1280px) {
+  .jss37 {
+    display: none;
+  }
+}
+@media (max-width:1919.95px) {
+  .jss38 {
+    display: none;
+  }
+}
+@media (min-width:1920px) {
+  .jss39 {
+    display: none;
+  }
+}
+@media (min-width:1920px) {
+  .jss40 {
+    display: none;
+  }
+}
+@media (min-width:0px) {
+  .jss41 {
+    display: none;
+  }
+}
+  .MuiDivider-root {
+    border: none;
+    height: 1px;
+    margin: 0;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+  .MuiDivider-absolute {
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  }
+  .MuiDivider-inset {
+    margin-left: 72px;
+  }
+  .MuiDivider-light {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+  .MuiDivider-middle {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .MuiDivider-vertical {
+    width: 1px;
+    height: 100%;
+  }
+  .MuiDivider-flexItem {
+    height: auto;
+    align-self: stretch;
+  }
+  .MuiTypography-root {
+    margin: 0;
+  }
+  .MuiTypography-body2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+  }
+  .MuiTypography-body1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+  }
+  .MuiTypography-caption {
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+  }
+  .MuiTypography-button {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+  }
+  .MuiTypography-h1 {
+    font-size: 3.5rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 300;
+    line-height: 1.167;
+    letter-spacing: -0.01562em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h1 {
+    font-size: 5.3556rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h1 {
+    font-size: 5.5698rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h1 {
+    font-size: 5.9983rem;
+  }
+}
+  .MuiTypography-h2 {
+    font-size: 2.375rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.00833em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h2 {
+    font-size: 3.3333rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h2 {
+    font-size: 3.5417rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h2 {
+    font-size: 3.75rem;
+  }
+}
+  .MuiTypography-h3 {
+    font-size: 2rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h3 {
+    font-size: 2.7273rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h3 {
+    font-size: 2.7273rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h3 {
+    font-size: 2.9545rem;
+  }
+}
+  .MuiTypography-h4 {
+    font-size: 1.5625rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h4 {
+    font-size: 2.0243rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h4 {
+    font-size: 2.0243rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h4 {
+    font-size: 2.0243rem;
+  }
+}
+  .MuiTypography-h5 {
+    font-size: 1.25rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.334;
+    letter-spacing: 0em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h5 {
+    font-size: 1.4993rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h5 {
+    font-size: 1.4993rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h5 {
+    font-size: 1.4993rem;
+  }
+}
+  .MuiTypography-h6 {
+    font-size: 1.125rem;
+    font-family: "Roboto Slab", "Noto Serif", "Times New Roman", serif;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+  }
+@media (min-width:900px) {
+  .MuiTypography-h6 {
+    font-size: 1.25rem;
+  }
+}
+@media (min-width:1060px) {
+  .MuiTypography-h6 {
+    font-size: 1.25rem;
+  }
+}
+@media (min-width:1280px) {
+  .MuiTypography-h6 {
+    font-size: 1.25rem;
+  }
+}
+  .MuiTypography-subtitle1 {
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: 0.00938em;
+  }
+  .MuiTypography-subtitle2 {
+    font-size: 0.875rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.57;
+    letter-spacing: 0.00714em;
+  }
+  .MuiTypography-overline {
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 2.66;
+    letter-spacing: 0.08333em;
+    text-transform: uppercase;
+  }
+  .MuiTypography-srOnly {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .MuiTypography-alignLeft {
+    text-align: left;
+  }
+  .MuiTypography-alignCenter {
+    text-align: center;
+  }
+  .MuiTypography-alignRight {
+    text-align: right;
+  }
+  .MuiTypography-alignJustify {
+    text-align: justify;
+  }
+  .MuiTypography-noWrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .MuiTypography-gutterBottom {
+    margin-bottom: 0.35em;
+  }
+  .MuiTypography-paragraph {
+    margin-bottom: 16px;
+  }
+  .MuiTypography-colorInherit {
+    color: inherit;
+  }
+  .MuiTypography-colorPrimary {
+    color: #2176AE;
+  }
+  .MuiTypography-colorSecondary {
+    color: #FF007B;
+  }
+  .MuiTypography-colorTextPrimary {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .MuiTypography-colorTextSecondary {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .MuiTypography-colorError {
+    color: #ff1744;
+  }
+  .MuiTypography-displayInline {
+    display: inline;
+  }
+  .MuiTypography-displayBlock {
+    display: block;
+  }
+  .MuiLink-root:hover {
+    color: rgb(23, 82, 121);
+  }
+  .MuiLink-underlineNone {
+    text-decoration: none;
+  }
+  .MuiLink-underlineHover {
+    text-decoration: none;
+  }
+  .MuiLink-underlineHover:hover {
+    text-decoration: underline;
+  }
+  .MuiLink-underlineAlways {
+    text-decoration: underline;
+  }
+  .MuiLink-button {
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    position: relative;
+    user-select: none;
+    border-radius: 0;
+    vertical-align: middle;
+    -moz-appearance: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiLink-button::-moz-focus-inner {
+    border-style: none;
+  }
+  .MuiLink-button.Mui-focusVisible {
+    outline: auto;
+  }
+  .MuiPaper-root {
+    color: rgba(0, 0, 0, 0.87);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: #fff;
+  }
+  .MuiPaper-rounded {
+    border-radius: 4px;
+  }
+  .MuiPaper-outlined {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiPaper-elevation0 {
+    box-shadow: none;
+  }
+  .MuiPaper-elevation1 {
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation2 {
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation3 {
+    box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation4 {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation5 {
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation6 {
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation7 {
+    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation8 {
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation9 {
+    box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation10 {
+    box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation11 {
+    box-shadow: 0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation12 {
+    box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation13 {
+    box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation14 {
+    box-shadow: 0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation15 {
+    box-shadow: 0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation16 {
+    box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation17 {
+    box-shadow: 0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation18 {
+    box-shadow: 0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation19 {
+    box-shadow: 0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation20 {
+    box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation21 {
+    box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation22 {
+    box-shadow: 0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation23 {
+    box-shadow: 0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12);
+  }
+  .MuiPaper-elevation24 {
+    box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
+  }
+  .MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+  }
+  .MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+@media (hover: none) {
+  .MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-edgeStart {
+    margin-left: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+  }
+  .MuiIconButton-edgeEnd {
+    margin-right: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+  }
+  .MuiIconButton-colorInherit {
+    color: inherit;
+  }
+  .MuiIconButton-colorPrimary {
+    color: #2176AE;
+  }
+  .MuiIconButton-colorPrimary:hover {
+    background-color: rgba(33, 118, 174, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-colorSecondary {
+    color: #FF007B;
+  }
+  .MuiIconButton-colorSecondary:hover {
+    background-color: rgba(255, 0, 123, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+  }
+  .MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .MuiAppBar-root {
+    width: 100%;
+    display: flex;
+    z-index: 1100;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+  .MuiAppBar-positionFixed {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: fixed;
+  }
+@media print {
+  .MuiAppBar-positionFixed {
+    position: absolute;
+  }
+}
+  .MuiAppBar-positionAbsolute {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: absolute;
+  }
+  .MuiAppBar-positionSticky {
+    top: 0;
+    left: auto;
+    right: 0;
+    position: sticky;
+  }
+  .MuiAppBar-positionStatic {
+    position: static;
+  }
+  .MuiAppBar-positionRelative {
+    position: relative;
+  }
+  .MuiAppBar-colorDefault {
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #f5f5f5;
+  }
+  .MuiAppBar-colorPrimary {
+    color: #fff;
+    background-color: #2176AE;
+  }
+  .MuiAppBar-colorSecondary {
+    color: #fff;
+    background-color: #FF007B;
+  }
+  .MuiAppBar-colorInherit {
+    color: inherit;
+  }
+  .MuiAppBar-colorTransparent {
+    color: inherit;
+    background-color: transparent;
+  }
+  .MuiBackdrop-root {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: -1;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiBackdrop-invisible {
+    background-color: transparent;
+  }
+  .MuiButtonGroup-root {
+    display: inline-flex;
+    border-radius: 4px;
+  }
+  .MuiButtonGroup-contained {
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);
+  }
+  .MuiButtonGroup-disableElevation {
+    box-shadow: none;
+  }
+  .MuiButtonGroup-fullWidth {
+    width: 100%;
+  }
+  .MuiButtonGroup-vertical {
+    flex-direction: column;
+  }
+  .MuiButtonGroup-grouped {
+    min-width: 40px;
+  }
+  .MuiButtonGroup-groupedHorizontal:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .MuiButtonGroup-groupedHorizontal:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .MuiButtonGroup-groupedVertical:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .MuiButtonGroup-groupedVertical:not(:last-child) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .MuiButtonGroup-groupedTextHorizontal:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.23);
+  }
+  .MuiButtonGroup-groupedTextVertical:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.23);
+  }
+  .MuiButtonGroup-groupedTextPrimary:not(:last-child) {
+    border-color: rgba(33, 118, 174, 0.5);
+  }
+  .MuiButtonGroup-groupedTextSecondary:not(:last-child) {
+    border-color: rgba(255, 0, 123, 0.5);
+  }
+  .MuiButtonGroup-groupedOutlinedHorizontal:not(:first-child) {
+    margin-left: -1px;
+  }
+  .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child) {
+    border-right-color: transparent;
+  }
+  .MuiButtonGroup-groupedOutlinedVertical:not(:first-child) {
+    margin-top: -1px;
+  }
+  .MuiButtonGroup-groupedOutlinedVertical:not(:last-child) {
+    border-bottom-color: transparent;
+  }
+  .MuiButtonGroup-groupedOutlinedPrimary:hover {
+    border-color: #2176AE;
+  }
+  .MuiButtonGroup-groupedOutlinedSecondary:hover {
+    border-color: #FF007B;
+  }
+  .MuiButtonGroup-groupedContained {
+    box-shadow: none;
+  }
+  .MuiButtonGroup-groupedContainedHorizontal:not(:last-child) {
+    border-right: 1px solid #bdbdbd;
+  }
+  .MuiButtonGroup-groupedContainedHorizontal:not(:last-child).Mui-disabled {
+    border-right: 1px solid rgba(0, 0, 0, 0.26);
+  }
+  .MuiButtonGroup-groupedContainedVertical:not(:last-child) {
+    border-bottom: 1px solid #bdbdbd;
+  }
+  .MuiButtonGroup-groupedContainedVertical:not(:last-child).Mui-disabled {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.26);
+  }
+  .MuiButtonGroup-groupedContainedPrimary:not(:last-child) {
+    border-color: rgb(23, 82, 121);
+  }
+  .MuiButtonGroup-groupedContainedSecondary:not(:last-child) {
+    border-color: rgb(178, 0, 86);
+  }
+  .MuiChip-root {
+    color: rgba(0, 0, 0, 0.87);
+    border: none;
+    cursor: default;
+    height: 32px;
+    display: inline-flex;
+    outline: 0;
+    padding: 0;
+    font-size: 0.8125rem;
+    box-sizing: border-box;
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    align-items: center;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    white-space: nowrap;
+    border-radius: 16px;
+    vertical-align: middle;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #e0e0e0;
+  }
+  .MuiChip-root.Mui-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .MuiChip-root .MuiChip-avatar {
+    color: #616161;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    margin-right: -6px;
+  }
+  .MuiChip-root .MuiChip-avatarColorPrimary {
+    color: #fff;
+    background-color: rgb(23, 82, 121);
+  }
+  .MuiChip-root .MuiChip-avatarColorSecondary {
+    color: #fff;
+    background-color: rgb(178, 0, 86);
+  }
+  .MuiChip-root .MuiChip-avatarSmall {
+    width: 18px;
+    height: 18px;
+    font-size: 0.625rem;
+    margin-left: 4px;
+    margin-right: -4px;
+  }
+  .MuiChip-sizeSmall {
+    height: 24px;
+  }
+  .MuiChip-colorPrimary {
+    color: #fff;
+    background-color: #2176AE;
+  }
+  .MuiChip-colorSecondary {
+    color: #fff;
+    background-color: #FF007B;
+  }
+  .MuiChip-clickable {
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiChip-clickable:hover, .MuiChip-clickable:focus {
+    background-color: rgb(206, 206, 206);
+  }
+  .MuiChip-clickable:active {
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+  }
+  .MuiChip-clickableColorPrimary:hover, .MuiChip-clickableColorPrimary:focus {
+    background-color: rgb(50, 128, 180);
+  }
+  .MuiChip-clickableColorSecondary:hover, .MuiChip-clickableColorSecondary:focus {
+    background-color: rgb(255, 20, 133);
+  }
+  .MuiChip-deletable:focus {
+    background-color: rgb(206, 206, 206);
+  }
+  .MuiChip-deletableColorPrimary:focus {
+    background-color: rgb(77, 145, 190);
+  }
+  .MuiChip-deletableColorSecondary:focus {
+    background-color: rgb(255, 51, 149);
+  }
+  .MuiChip-outlined {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    background-color: transparent;
+  }
+  .MuiChip-clickable.MuiChip-outlined:hover, .MuiChip-clickable.MuiChip-outlined:focus, .MuiChip-deletable.MuiChip-outlined:focus {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiChip-outlined .MuiChip-avatar {
+    margin-left: 4px;
+  }
+  .MuiChip-outlined .MuiChip-avatarSmall {
+    margin-left: 2px;
+  }
+  .MuiChip-outlined .MuiChip-icon {
+    margin-left: 4px;
+  }
+  .MuiChip-outlined .MuiChip-iconSmall {
+    margin-left: 2px;
+  }
+  .MuiChip-outlined .MuiChip-deleteIcon {
+    margin-right: 5px;
+  }
+  .MuiChip-outlined .MuiChip-deleteIconSmall {
+    margin-right: 3px;
+  }
+  .MuiChip-outlinedPrimary {
+    color: #2176AE;
+    border: 1px solid #2176AE;
+  }
+  .MuiChip-clickable.MuiChip-outlinedPrimary:hover, .MuiChip-clickable.MuiChip-outlinedPrimary:focus, .MuiChip-deletable.MuiChip-outlinedPrimary:focus {
+    background-color: rgba(33, 118, 174, 0.04);
+  }
+  .MuiChip-outlinedSecondary {
+    color: #FF007B;
+    border: 1px solid #FF007B;
+  }
+  .MuiChip-clickable.MuiChip-outlinedSecondary:hover, .MuiChip-clickable.MuiChip-outlinedSecondary:focus, .MuiChip-deletable.MuiChip-outlinedSecondary:focus {
+    background-color: rgba(255, 0, 123, 0.04);
+  }
+  .MuiChip-icon {
+    color: #616161;
+    margin-left: 5px;
+    margin-right: -6px;
+  }
+  .MuiChip-iconSmall {
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+    margin-right: -4px;
+  }
+  .MuiChip-iconColorPrimary {
+    color: inherit;
+  }
+  .MuiChip-iconColorSecondary {
+    color: inherit;
+  }
+  .MuiChip-label {
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-overflow: ellipsis;
+  }
+  .MuiChip-labelSmall {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .MuiChip-deleteIcon {
+    color: rgba(0, 0, 0, 0.26);
+    width: 22px;
+    cursor: pointer;
+    height: 22px;
+    margin: 0 5px 0 -6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiChip-deleteIcon:hover {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .MuiChip-deleteIconSmall {
+    width: 16px;
+    height: 16px;
+    margin-left: -4px;
+    margin-right: 4px;
+  }
+  .MuiChip-deleteIconColorPrimary {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .MuiChip-deleteIconColorPrimary:hover, .MuiChip-deleteIconColorPrimary:active {
+    color: #fff;
+  }
+  .MuiChip-deleteIconColorSecondary {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .MuiChip-deleteIconColorSecondary:hover, .MuiChip-deleteIconColorSecondary:active {
+    color: #fff;
+  }
+  .MuiChip-deleteIconOutlinedColorPrimary {
+    color: rgba(33, 118, 174, 0.7);
+  }
+  .MuiChip-deleteIconOutlinedColorPrimary:hover, .MuiChip-deleteIconOutlinedColorPrimary:active {
+    color: #2176AE;
+  }
+  .MuiChip-deleteIconOutlinedColorSecondary {
+    color: rgba(255, 0, 123, 0.7);
+  }
+  .MuiChip-deleteIconOutlinedColorSecondary:hover, .MuiChip-deleteIconOutlinedColorSecondary:active {
+    color: #FF007B;
+  }
+  .MuiCircularProgress-root {
+    display: inline-block;
+  }
+  .MuiCircularProgress-static {
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  .MuiCircularProgress-indeterminate {
+    animation: MuiCircularProgress-keyframes-circular-rotate 1.4s linear infinite;
+  }
+  .MuiCircularProgress-determinate {
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  .MuiCircularProgress-colorPrimary {
+    color: #2176AE;
+  }
+  .MuiCircularProgress-colorSecondary {
+    color: #FF007B;
+  }
+  .MuiCircularProgress-svg {
+    display: block;
+  }
+  .MuiCircularProgress-circle {
+    stroke: currentColor;
+  }
+  .MuiCircularProgress-circleStatic {
+    transition: stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  .MuiCircularProgress-circleIndeterminate {
+    animation: MuiCircularProgress-keyframes-circular-dash 1.4s ease-in-out infinite;
+    stroke-dasharray: 80px, 200px;
+    stroke-dashoffset: 0px;
+  }
+  .MuiCircularProgress-circleDeterminate {
+    transition: stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+@keyframes MuiCircularProgress-keyframes-circular-rotate {
+  0% {
+    transform-origin: 50% 50%;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes MuiCircularProgress-keyframes-circular-dash {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0px;
+  }
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+  .MuiCircularProgress-circleDisableShrink {
+    animation: none;
+  }
+  .MuiDrawer-docked {
+    flex: 0 0 auto;
+  }
+  .MuiDrawer-paper {
+    top: 0;
+    flex: 1 0 auto;
+    height: 100%;
+    display: flex;
+    outline: 0;
+    z-index: 1200;
+    position: fixed;
+    overflow-y: auto;
+    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+  }
+  .MuiDrawer-paperAnchorLeft {
+    left: 0;
+    right: auto;
+  }
+  .MuiDrawer-paperAnchorRight {
+    left: auto;
+    right: 0;
+  }
+  .MuiDrawer-paperAnchorTop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: auto;
+    max-height: 100%;
+  }
+  .MuiDrawer-paperAnchorBottom {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    max-height: 100%;
+  }
+  .MuiDrawer-paperAnchorDockedLeft {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiDrawer-paperAnchorDockedTop {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiDrawer-paperAnchorDockedRight {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiDrawer-paperAnchorDockedBottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .MuiList-root {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style: none;
+  }
+  .MuiList-padding {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .MuiList-subheader {
+    padding-top: 0;
+  }
+  .MuiSnackbar-root {
+    left: 8px;
+    right: 8px;
+    display: flex;
+    z-index: 1400;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+  }
+  .MuiSnackbar-anchorOriginTopCenter {
+    top: 8px;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginTopCenter {
+    top: 24px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+  .MuiSnackbar-anchorOriginBottomCenter {
+    bottom: 8px;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginBottomCenter {
+    left: 50%;
+    right: auto;
+    bottom: 24px;
+    transform: translateX(-50%);
+  }
+}
+  .MuiSnackbar-anchorOriginTopRight {
+    top: 8px;
+    justify-content: flex-end;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginTopRight {
+    top: 24px;
+    left: auto;
+    right: 24px;
+  }
+}
+  .MuiSnackbar-anchorOriginBottomRight {
+    bottom: 8px;
+    justify-content: flex-end;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginBottomRight {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+  }
+}
+  .MuiSnackbar-anchorOriginTopLeft {
+    top: 8px;
+    justify-content: flex-start;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginTopLeft {
+    top: 24px;
+    left: 24px;
+    right: auto;
+  }
+}
+  .MuiSnackbar-anchorOriginBottomLeft {
+    bottom: 8px;
+    justify-content: flex-start;
+  }
+@media (min-width:900px) {
+  .MuiSnackbar-anchorOriginBottomLeft {
+    left: 24px;
+    right: auto;
+    bottom: 24px;
+  }
+}
+  .MuiToolbar-root {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+  .MuiToolbar-gutters {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+@media (min-width:900px) {
+  .MuiToolbar-gutters {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+  .MuiToolbar-regular {
+    min-height: 56px;
+  }
+@media (min-width:0px) and (orientation: landscape) {
+  .MuiToolbar-regular {
+    min-height: 48px;
+  }
+}
+@media (min-width:900px) {
+  .MuiToolbar-regular {
+    min-height: 64px;
+  }
+}
+  .MuiToolbar-dense {
+    min-height: 48px;
+  }
+  .jss80 {
+    height: 18px;
+    font-size: 0.74rem;
+    font-weight: 500;
+    vertical-align: text-bottom;
+  }
+  .jss81 {
+    padding: 0 6px;
+  }
+  .jss82 {
+    color: #424242;
+  }
+  .jss83 {
+    color: #283593;
+  }
+  .jss84 {
+    color: #d84315;
+  }
+  .jss85 {
+    color: #558b2f;
+  }
+  .jss86 {
+    color: #6d4c41;
+  }
+  .jss87 {
+    color: #6d4c41;
+  }
+  .jss88:hover .jss89 {
+    visibility: visible;
+  }
+  .jss89 {
+    color: inherit;
+    visibility: hidden;
+    margin-left: 0.3ch;
+  }
+  .jss89:hover {
+    color: #2176AE;
+  }
+  .jss90 {
+    padding: 3px;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+  }
+  .jss92 > ul {
+    padding: 0 !important;
+  }
+  .jss93 {
+    font-weight: 700;
+    padding-bottom: 8px;
+  }
+  .jss94 {
+    padding-left: 1rem;
+    list-style-type: none;
+  }
+  .jss71 {
+    display: flex;
+  }
+  .jss72 {
+    flex-grow: 0.5;
+  }
+@media (max-width:1279.95px) {
+  .jss72 {
+    display: none;
+  }
+}
+  .jss73 {
+    flex-grow: 1;
+    padding-left: 16px;
+    overflow-wrap: anywhere;
+    padding-right: 16px;
+  }
+@media (min-width:1060px) {
+  .jss73 {
+    flex-grow: 0;
+    flex-basis: 782px;
+    flex-shrink: 0;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+  .jss73 img {
+    max-width: 100%;
+  }
+  .jss74 {
+    flex-grow: 1;
+    flex-basis: 180px;
+  }
+@media (max-width:1279.95px) {
+  .jss74 {
+    display: none;
+  }
+}
+  .jss75 {
+    top: 112px;
+    position: sticky;
+    min-width: 20ch;
+    align-self: flex-start;
+    padding-left: 16px;
+  }
+  .jss43 {
+    padding: 0;
+  }
+  .jss44 {
+    display: block;
+  }
+  .jss45:hover .jss57 {
+    background-color: #2176AE;
+  }
+  .jss46 .jss57 {
+    background-color: #FF007B;
+  }
+  .jss46 .jss44 {
+    color: #FF007B;
+  }
+  .jss46 .jss44:hover {
+    color: #FF007B;
+  }
+  .jss46:hover .jss57 {
+    background-color: #FF007B;
+  }
+  .jss47 {
+    flex: 0 0 calc(12ch - 11.5px);
+  }
+  .jss48 {
+    flex: 0 0 12ch;
+  }
+  .jss49 {
+    width: 35px;
+    height: 35px;
+  }
+  .jss50 {
+    color: #9e9e9e;
+    font-size: 0.8rem;
+  }
+  .jss51 {
+    margin-left: -1ch;
+  }
+  .jss52 {
+    vertical-align: middle;
+  }
+  .jss53 {
+    margin-right: 0.5ch;
+  }
+  .jss54 {
+    color: #616161;
+    font-size: 0.8rem;
+    white-space: pre;
+    vertical-align: text-top;
+  }
+  .jss55 {
+    flex: 0 0 calc(12ch - 12px);
+  }
+  .jss56 {
+    padding-bottom: 16px;
+  }
+  .jss58 {
+    background-color: #FF007B;
+  }
+  .jss62 {
+    text-decoration: line-through;
+  }
+  .jss63 {
+    text-decoration: line-through;
+  }
+  .jss64 {
+    text-decoration: line-through;
+  }
+  .jss1 {
+    display: flex;
+  }
+  .jss2 {
+    flex-grow: 0.5;
+  }
+@media (max-width:1279.95px) {
+  .jss2 {
+    display: none;
+  }
+}
+  .jss3 {
+    flex-grow: 1;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+@media (min-width:1060px) {
+  .jss3 {
+    flex-grow: 0;
+    flex-basis: 782px;
+    flex-shrink: 0;
+  }
+}
+  .jss4 {
+    flex-grow: 1;
+    flex-basis: 180px;
+  }
+@media (max-width:1279.95px) {
+  .jss4 {
+    display: none;
+  }
+}
+  .jss5 {
+    z-index: 1201;
+  }
+@media (min-width:900px) {
+  .jss6 {
+    display: none;
+  }
+}
+  .jss7 {
+    display: none;
+  }
+@media (min-width:900px) {
+  .jss7 {
+    width: 356px;
+    cursor: pointer;
+    display: flex;
+    flex-grow: 0;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}
+  .jss8 {
+    color: inherit;
+    display: block;
+    margin-left: 16px;
+  }
+  .jss8:hover {
+    color: inherit;
+  }
+  .jss9 {
+    z-index: 1298;
+  }
+  .jss10 {
+    width: 100%;
+    z-index: 1299;
+    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+@media (min-width:1060px) {
+  .jss10 {
+    width: 70%;
+  }
+}
+  .jss11 {
+    width: 100%;
+  }
+@media (min-width:900px) {
+  .jss12 {
+    width: 380px;
+    flex-shrink: 0;
+  }
+}
+  .jss13 {
+    width: 380px;
+  }
+  .jss14 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+@media (min-width:900px) {
+  .jss14 {
+    padding-top: 48px;
+  }
+}
+  .jss15 {
+    visibility: visible;
+    justify-content: space-between;
+  }
+@media (min-width:900px) {
+  .jss15 {
+    visibility: hidden;
+  }
+}
+  .jss16 {
+    overflow: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  .jss16::-webkit-scrollbar {
+    width: 6px;
+    background-color: [object Object];
+  }
+  .jss16::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #bdbdbd;
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+  }
+  .jss17 {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  .jss18 {
+    display: flex;
+    padding-left: 16px;
+    padding-right: 24px;
+    padding-bottom: 4px;
+    justify-content: space-between;
+  }
+@media (min-width:900px) {
+  .jss18 {
+    padding-left: 24px;
+  }
+}
+  .jss19 {
+    font-weight: 700;
+  }
+  .jss20 {
+    align-self: center;
+    margin-top: 30vh;
+  }
+  .jss21 {
+    flex-grow: 1;
+    padding-top: 16px;
+  }
+@media (min-width:900px) {
+  .jss21 {
+    padding-top: 48px;
+  }
+}
+  .jss22 {
+    min-height: calc(100vh - 35px - 72px);
+  }
+@media (min-width:900px) {
+  .jss22 {
+    min-height: calc(100vh - 35px - 112px);
+  }
+}
+  .jss23 {
+    color: #9e9e9e;
+    height: 35px;
+    display: flex;
+    margin-top: 48px;
+    background-color: #f5f5f5;
+  }
+  .jss24 {
+    font-size: 0.77rem;
+  }
+  .jss25 {
+    color: #757575;
+    font-size: 0.8rem;
+  }
+  .jss25:hover {
+    color: #424242;
+  }
+  .jss26 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .jss76 {
+    color: #616161;
+    display: flex;
+    justify-content: space-between;
+  }
+  .jss77 {
+    display: flex;
+  }
+  .jss77 > * {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .jss77 > *:first-child {
+    margin-left: 0;
+  }
+  .jss77 > *:last-child {
+    margin-right: 0;
+  }
+  .jss78 {
+    vertical-align: middle;
+  }
+  .jss79 {
+    color: #757575;
+  }
+  .jss65 {
+    margin-top: 8px;
+    margin-bottom: 32px;
+  }
+  .jss66 {
+    margin-bottom: 24px;
+  }
+  .jss67 {
+    margin-top: 96px;
+  }
+  .jss68 {
+    display: flex;
+    margin-top: 8px;
+    justify-content: space-between;
+  }
+  .jss70 {
+    color: #757575;
+    font-size: 0.77rem;
+    text-align: center;
+  }</style><style data-href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabWmQ.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmQ.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bWmQ.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuYjammQ.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBHMdazTgWw.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBHMdazTgWw.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBHMdazTgWw.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBHMdazTgWw.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBHMdazTgWw.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBHMdazTgWw.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3GUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3iUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3CUBHMdazTgWw.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3-UBHMdazTgWw.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMawCUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMaxKUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3OUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3KUBHMdazTgWw.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style><style data-href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&display=swap">@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjo0oSWaw.woff) format('woff')}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISWaw.woff) format('woff')}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjovoSWaw.woff) format('woff')}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoa4OWaw.woff) format('woff')}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufA5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufJ5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufB5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufO5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufC5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufD5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufN5qWr4xCC.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufA5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufJ5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufB5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufO5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufC5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufD5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufN5qWr4xCC.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufA5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufJ5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufB5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufO5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufC5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufD5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufN5qWr4xCC.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufA5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufJ5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufB5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufO5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufC5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufD5qWr4xCCQ_k.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/robotoslab/v35/BngMUXZYTXPIvIBgJJSb6ufN5qWr4xCC.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style></head><body><div id="__next"><div class="jss1"><header class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary jss5 mui-fixed MuiPaper-elevation4"><div class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"><button class="MuiButtonBase-root MuiIconButton-root jss6 MuiIconButton-colorInherit MuiIconButton-edgeStart" tabindex="0" type="button" aria-label="open drawer"><span class="MuiIconButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></span></button><div class="jss7"><div><img src="/after6ix.dev/log4brains/l4b-static/Log4brains-logo-dark.png" alt="Log4brains logo" width="50" height="50"/></div><div><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss8 MuiTypography-h6 MuiTypography-colorPrimary MuiTypography-noWrap" href="/after6ix.dev/log4brains/">@after6ix</a><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss8 MuiTypography-body2 MuiTypography-colorPrimary MuiTypography-noWrap" href="/after6ix.dev/log4brains/">Architecture knowledge base</a></div></div><div class="jss2"></div><div class="jss3"><div class="MuiBackdrop-root jss9" aria-hidden="true" style="opacity:0;visibility:hidden"></div></div><div class="jss4"></div></div></header><nav class="jss12" aria-label="architecture decision records list"><div class="jss31"></div><div class="jss29"><div class="MuiDrawer-root MuiDrawer-docked"><div class="MuiPaper-root MuiDrawer-paper jss13 MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"><div class="jss14"><div class="MuiToolbar-root MuiToolbar-regular jss15 MuiToolbar-gutters"><div></div><a class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeSmall" tabindex="0" aria-disabled="false" aria-label="go to homepage" title="Architecture knowledge base of @after6ix" href="/after6ix.dev/log4brains/"><span class="MuiIconButton-label"><img src="/after6ix.dev/log4brains/l4b-static/Log4brains-logo.png" alt="Log4brains logo" width="40" height="40"/></span></a><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeSmall" tabindex="0" type="button" aria-label="close drawer" title="Close"><span class="MuiIconButton-label"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span></button></div><div class="jss18"><h6 class="MuiTypography-root jss19 MuiTypography-subtitle2">Decision log</h6><div class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate" style="width:13px;height:13px;opacity:0;visibility:hidden" role="progressbar"><svg class="MuiCircularProgress-svg" viewBox="22 22 44 44"><circle class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6"></circle></svg></div></div><div class="MuiCircularProgress-root jss20 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate" style="width:30px;height:30px" role="progressbar"><svg class="MuiCircularProgress-svg" viewBox="22 22 44 44"><circle class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6"></circle></svg></div><ul class="MuiList-root jss17 MuiList-padding"></ul></div></div></div></div></nav><div class="jss21"><div class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"></div><main class="jss22"><div class="jss71"><div class="jss72"></div><div class="jss73"><h3 class="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom">Create a design system and ui-kit</h3><hr class="MuiDivider-root"/><div class="jss65 jss76"><div><div class="jss77"><p class="MuiTypography-root MuiTypography-body2" title="Package"><svg class="MuiSvgIcon-root jss78 MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5v4h2V5h4V3H5c-1.1 0-2 .9-2 2zm2 10H3v4c0 1.1.9 2 2 2h4v-2H5v-4zm14 4h-4v2h4c1.1 0 2-.9 2-2v-4h-2v4zm0-16h-4v2h4v4h2V5c0-1.1-.9-2-2-2z"></path></svg> <!-- -->apps-ui</p><p class="MuiTypography-root MuiTypography-body2" title="Publication date"><svg class="MuiSvgIcon-root jss78 MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"></path></svg> <!-- -->Jul 30, 2025</p><div title="Status"><div class="MuiChip-root jss80 jss83 MuiChip-outlined MuiChip-sizeSmall"><span class="MuiChip-label MuiChip-labelSmall jss81">PROPOSED</span></div></div></div><p class="MuiTypography-root MuiTypography-body2" title="Deciders"><svg class="MuiSvgIcon-root jss78 MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg> <!-- -->Gerald Yeo, Engineering Team</p><p class="MuiTypography-root MuiTypography-body2" title="Tags"><svg class="MuiSvgIcon-root jss78 MuiSvgIcon-fontSizeInherit" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"></path></svg> <span class="jss79">#design-system #ui-kit #frontend #monorepo</span></p></div><div><div><div role="group" class="MuiButtonGroup-root"><button class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined" tabindex="0" type="button" title="Copy link"><span class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></svg></span></button><a class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined" tabindex="0" aria-disabled="false" href="https://github.com/geraldyeo/after6ix.dev/blob/master/apps/ui/docs/adr/20250730-create-a-design-system-and-ui-kit.md" target="_blank" rel="noopener" title="View/edit on Github"><span class="MuiButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></svg></span></a></div></div></div></div><div><div><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Technical Story: Create a unified design system and UI kit for the After6ix monorepo to ensure consistency across all applications and improve development velocity.</p><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="context-and-problem-statement">Context and Problem Statement<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#context-and-problem-statement" title="Permanent link">¶</a></h2><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">The After6ix monorepo contains multiple applications (site, cv) that currently lack a unified design language. Without a centralized design system and UI kit, each application may develop inconsistent visual patterns, duplicate component implementations, and create a fragmented user experience. How can we establish a comprehensive design system that promotes consistency, reusability, and accelerates development across all workspace applications?</p><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="decision-drivers">Decision Drivers<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#decision-drivers" title="Permanent link">¶</a></h2><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Consistency</strong>: Need for unified visual language across all After6ix applications</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Developer Velocity</strong>: Reduce duplicate work by providing reusable components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Maintainability</strong>: Centralized updates to design tokens and components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Brand Identity</strong>: Establish a distinctive After6ix brand through consistent design</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Scalability</strong>: Support future applications and features without design debt</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>TypeScript Support</strong>: Leverage the monorepo&#x27;s TypeScript-first approach for type-safe components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Performance</strong>: Optimize bundle sizes through shared component libraries</span></li></ul><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="considered-options">Considered Options<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#considered-options" title="Permanent link">¶</a></h2><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Build Custom Design System</strong> - Create a bespoke design system tailored to After6ix needs</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Adopt Existing Design System</strong> - Use established systems like Material-UI, Ant Design, or Chakra UI</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Hybrid Approach</strong> - Build custom system on top of headless UI libraries (Radix UI, Headless UI)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>shadcn/ui Approach</strong> - Use shadcn/ui as foundation, customizing components with our design tokens</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>CSS Framework Only</strong> - Use Tailwind CSS with custom component library</span></li></ol><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="decision-outcome">Decision Outcome<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#decision-outcome" title="Permanent link">¶</a></h2><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Chosen option: <strong>&quot;shadcn/ui Approach&quot;</strong> - Use shadcn/ui as the foundation for our design system, customizing it with After6ix design tokens and extending with additional components as needed.</p><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">This approach provides:</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Battle-tested component patterns built on Radix UI</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Copy-paste architecture allows full ownership and customization</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Accessibility-first components from Radix UI</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Modern patterns using Tailwind CSS and CSS variables</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Type-safe component APIs with TypeScript</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">No external dependencies - components live in our codebase</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Easy to extend and modify to match After6ix brand</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Active community and regular updates to reference</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="positive-consequences">Positive Consequences<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#positive-consequences" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Unified Brand Experience</strong>: Consistent look and feel across all After6ix applications</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Faster Development</strong>: Pre-built components accelerate feature development</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Improved Accessibility</strong>: Radix UI provides WCAG-compliant components out of the box</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Type Safety</strong>: Full TypeScript support with auto-completion and compile-time checks</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Design Token System</strong>: Centralized management of colors, spacing, typography</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Documentation</strong>: Built-in component documentation and usage examples</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Testing</strong>: Easier to test with isolated component libraries</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="negative-consequences">Negative Consequences<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#negative-consequences" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Initial Investment</strong>: Significant upfront time required to build the system</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Learning Curve</strong>: Team needs to learn new design token conventions and component APIs</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Maintenance Overhead</strong>: Ongoing maintenance of the design system package</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Migration Effort</strong>: Existing components need to be refactored to use the new system</span></li></ul><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="pros-and-cons-of-the-options">Pros and Cons of the Options<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#pros-and-cons-of-the-options" title="Permanent link">¶</a></h2><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="build-custom-design-system">Build Custom Design System<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#build-custom-design-system" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Fully custom implementation from scratch</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because complete control over every aspect</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because can optimize for specific After6ix needs</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because requires significant development time</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because need to handle accessibility ourselves</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because higher risk of bugs and edge cases</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="adopt-existing-design-system">Adopt Existing Design System<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#adopt-existing-design-system" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Use Material-UI, Ant Design, or similar</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because immediate productivity with pre-built components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because well-tested and documented</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because large community support</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because limited customization without overrides</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because larger bundle sizes</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because may not align with After6ix brand vision</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="hybrid-approach">Hybrid Approach<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#hybrid-approach" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Radix UI primitives + Tailwind CSS + Custom tokens</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because accessibility handled by Radix UI</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because full control over visual design</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because smaller bundle size (only import what you use)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because can leverage Tailwind&#x27;s utility classes</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because headless components are framework-agnostic</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because requires implementing all styling from scratch</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because need to solve common patterns ourselves</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="shadcnui-approach-chosen">shadcn/ui Approach (Chosen)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#shadcnui-approach-chosen" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Use shadcn/ui components as foundation with custom theming</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because proven component patterns and implementations</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because copy-paste means we own the code</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because built on Radix UI (accessibility included)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because uses modern CSS variables for theming</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because active community and examples</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because easy to customize with our design tokens</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because no lock-in to external library</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because need to adapt default styles to After6ix brand</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because must maintain copied components</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="css-framework-only">CSS Framework Only<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#css-framework-only" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Tailwind CSS with custom React components</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because quick to implement basic components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Good, because utility-first approach is flexible</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because no accessibility primitives</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because need to implement complex interactions from scratch</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Bad, because inconsistent component APIs without a framework</span></li></ul><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="implementation-plan">Implementation Plan<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#implementation-plan" title="Permanent link">¶</a></h2><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="phase-1-foundation-week-1-2">Phase 1: Foundation (Week 1-2)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#phase-1-foundation-week-1-2" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Set up <code class="jss90">@after6ix/ui</code> package in the monorepo</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Configure shadcn/ui CLI and components.json</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Adapt shadcn/ui&#x27;s CSS variables to After6ix design tokens</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Install initial set of core components (Button, Card, Input, etc.)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Create custom theme configuration with our color palette</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="phase-2-core-components-week-3-4">Phase 2: Core Components (Week 3-4)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#phase-2-core-components-week-3-4" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Customize shadcn/ui components with After6ix styling</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Add additional components not in shadcn/ui as needed</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Set up Storybook for component documentation</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Create usage guidelines showing After6ix patterns</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="phase-3-advanced-components-week-5-6">Phase 3: Advanced Components (Week 5-6)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#phase-3-advanced-components-week-5-6" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Build complex components (DataTable, Forms, Modals)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Implement responsive design patterns</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Add animation and interaction patterns</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="phase-4-integration-week-7-8">Phase 4: Integration (Week 7-8)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#phase-4-integration-week-7-8" title="Permanent link">¶</a></h3><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Migrate existing apps to use design system</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Refine based on real-world usage</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Document migration guide</span></li></ul><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="design-tokens-structure">Design Tokens Structure<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#design-tokens-structure" title="Permanent link">¶</a></h2><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="color-system">Color System<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#color-system" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Based on the &quot;After6ix - Where Code Comes Alive&quot; brand concept, our color palette draws inspiration from twilight hours when developers do their best work.</p><pre><code class="jss90">// Color token structure
+interface ColorTokens {
+  // Primary - Twilight Purple
+  primary: {
+    50: &#x27;#FAF5FF&#x27;;
+    100: &#x27;#F3E8FF&#x27;;
+    200: &#x27;#E9D5FF&#x27;;
+    300: &#x27;#D8B4FE&#x27;;
+    400: &#x27;#C084FC&#x27;;
+    500: &#x27;#A855F7&#x27;;
+    600: &#x27;#9333EA&#x27;; // Base
+    700: &#x27;#7C3AED&#x27;;
+    800: &#x27;#6B46C1&#x27;;
+    900: &#x27;#581C87&#x27;;
+  };
+  
+  // Secondary - Deep Sky
+  secondary: {
+    50: &#x27;#EFF6FF&#x27;;
+    100: &#x27;#DBEAFE&#x27;;
+    200: &#x27;#BFDBFE&#x27;;
+    300: &#x27;#93C5FD&#x27;;
+    400: &#x27;#60A5FA&#x27;;
+    500: &#x27;#3B82F6&#x27;;
+    600: &#x27;#2563EB&#x27;; // Base
+    700: &#x27;#1D4ED8&#x27;;
+    800: &#x27;#1E40AF&#x27;;
+    900: &#x27;#1E3A8A&#x27;;
+  };
+  
+  // Accent - Electric Cyan
+  accent: {
+    50: &#x27;#ECFEFF&#x27;;
+    100: &#x27;#CFFAFE&#x27;;
+    200: &#x27;#A5F3FC&#x27;;
+    300: &#x27;#67E8F9&#x27;;
+    400: &#x27;#22D3EE&#x27;;
+    500: &#x27;#06B6D4&#x27;; // Base
+    600: &#x27;#0891B2&#x27;;
+    700: &#x27;#0E7490&#x27;;
+    800: &#x27;#155E75&#x27;;
+    900: &#x27;#164E63&#x27;;
+  };
+  
+  // Neutrals - Charcoal
+  neutral: {
+    50: &#x27;#FAFAFA&#x27;;
+    100: &#x27;#F4F4F5&#x27;;
+    200: &#x27;#E4E4E7&#x27;;
+    300: &#x27;#D4D4D8&#x27;;
+    400: &#x27;#A1A1AA&#x27;;
+    500: &#x27;#71717A&#x27;;
+    600: &#x27;#52525B&#x27;;
+    700: &#x27;#3F3F46&#x27;;
+    800: &#x27;#27272A&#x27;;
+    900: &#x27;#18181B&#x27;;
+  };
+  
+  // Semantic colors
+  semantic: {
+    success: { light: &#x27;#10B981&#x27;; base: &#x27;#059669&#x27;; dark: &#x27;#047857&#x27; };
+    error: { light: &#x27;#F87171&#x27;; base: &#x27;#EF4444&#x27;; dark: &#x27;#DC2626&#x27; };
+    warning: { light: &#x27;#FBBF24&#x27;; base: &#x27;#F59E0B&#x27;; dark: &#x27;#D97706&#x27; };
+    info: { light: &#x27;#38BDF8&#x27;; base: &#x27;#0EA5E9&#x27;; dark: &#x27;#0284C7&#x27; };
+  };
+}
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="typography-system">Typography System<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#typography-system" title="Permanent link">¶</a></h3><pre><code class="jss90">interface TypographyTokens {
+  fonts: {
+    sans: &#x27;Inter, system-ui, -apple-system, sans-serif&#x27;;
+    mono: &#x27;JetBrains Mono, Consolas, Monaco, monospace&#x27;;
+  };
+  
+  sizes: {
+    xs: &#x27;0.75rem&#x27;;    // 12px
+    sm: &#x27;0.875rem&#x27;;   // 14px
+    base: &#x27;1rem&#x27;;     // 16px
+    lg: &#x27;1.125rem&#x27;;   // 18px
+    xl: &#x27;1.25rem&#x27;;    // 20px
+    &#x27;2xl&#x27;: &#x27;1.5rem&#x27;;  // 24px
+    &#x27;3xl&#x27;: &#x27;1.875rem&#x27;; // 30px
+    &#x27;4xl&#x27;: &#x27;2.25rem&#x27;; // 36px
+    &#x27;5xl&#x27;: &#x27;3rem&#x27;;    // 48px
+  };
+  
+  weights: {
+    thin: 100;
+    light: 300;
+    normal: 400;
+    medium: 500;
+    semibold: 600;
+    bold: 700;
+    extrabold: 800;
+  };
+  
+  lineHeights: {
+    tight: 1.25;
+    snug: 1.375;
+    normal: 1.5;
+    relaxed: 1.625;
+    loose: 2;
+  };
+}
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="spacing-and-layout">Spacing &amp; Layout<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#spacing-and-layout" title="Permanent link">¶</a></h3><pre><code class="jss90">interface SpacingTokens {
+  0: &#x27;0&#x27;;
+  1: &#x27;0.25rem&#x27;;   // 4px
+  2: &#x27;0.5rem&#x27;;    // 8px
+  3: &#x27;0.75rem&#x27;;   // 12px
+  4: &#x27;1rem&#x27;;      // 16px
+  5: &#x27;1.25rem&#x27;;   // 20px
+  6: &#x27;1.5rem&#x27;;    // 24px
+  8: &#x27;2rem&#x27;;      // 32px
+  10: &#x27;2.5rem&#x27;;   // 40px
+  12: &#x27;3rem&#x27;;     // 48px
+  16: &#x27;4rem&#x27;;     // 64px
+  20: &#x27;5rem&#x27;;     // 80px
+  24: &#x27;6rem&#x27;;     // 96px
+}
+
+interface RadiusTokens {
+  none: &#x27;0&#x27;;
+  sm: &#x27;0.125rem&#x27;;  // 2px
+  base: &#x27;0.25rem&#x27;; // 4px
+  md: &#x27;0.375rem&#x27;;  // 6px
+  lg: &#x27;0.5rem&#x27;;    // 8px
+  xl: &#x27;0.75rem&#x27;;   // 12px
+  &#x27;2xl&#x27;: &#x27;1rem&#x27;;   // 16px
+  &#x27;3xl&#x27;: &#x27;1.5rem&#x27;; // 24px
+  full: &#x27;9999px&#x27;;
+}
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="effects">Effects<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#effects" title="Permanent link">¶</a></h3><pre><code class="jss90">interface ShadowTokens {
+  xs: &#x27;0 1px 2px 0 rgb(0 0 0 / 0.05)&#x27;;
+  sm: &#x27;0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)&#x27;;
+  base: &#x27;0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)&#x27;;
+  md: &#x27;0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)&#x27;;
+  lg: &#x27;0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)&#x27;;
+  xl: &#x27;0 25px 50px -12px rgb(0 0 0 / 0.25)&#x27;;
+  inner: &#x27;inset 0 2px 4px 0 rgb(0 0 0 / 0.05)&#x27;;
+  none: &#x27;none&#x27;;
+}
+
+interface AnimationTokens {
+  durations: {
+    fast: &#x27;150ms&#x27;;
+    base: &#x27;250ms&#x27;;
+    slow: &#x27;400ms&#x27;;
+    slower: &#x27;600ms&#x27;;
+  };
+  
+  easings: {
+    linear: &#x27;linear&#x27;;
+    in: &#x27;cubic-bezier(0.4, 0, 1, 1)&#x27;;
+    out: &#x27;cubic-bezier(0, 0, 0.2, 1)&#x27;;
+    inOut: &#x27;cubic-bezier(0.4, 0, 0.2, 1)&#x27;;
+    bounce: &#x27;cubic-bezier(0.68, -0.55, 0.265, 1.55)&#x27;;
+  };
+}
+</code></pre>
+<h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="design-token-integration-with-shadcnui">Design Token Integration with shadcn/ui<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#design-token-integration-with-shadcnui" title="Permanent link">¶</a></h2><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="customization-approaches">Customization Approaches<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#customization-approaches" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">shadcn/ui provides multiple layers of customization since you own the code:</p><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="1-css-variables-theme-layer">1. CSS Variables (Theme Layer)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#1-css-variables-theme-layer" title="Permanent link">¶</a></h4><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Modify CSS custom properties in your global CSS</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Perfect for color schemes, spacing, and typography</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Maintains consistency across all components</span></li></ul><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="2-component-code-structure-layer">2. Component Code (Structure Layer)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#2-component-code-structure-layer" title="Permanent link">¶</a></h4><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Directly edit the copied component files</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Add new props, change behavior, modify structure</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Full TypeScript support for type-safe modifications</span></li></ul><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="3-tailwind-classes-style-layer">3. Tailwind Classes (Style Layer)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#3-tailwind-classes-style-layer" title="Permanent link">¶</a></h4><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Modify className strings in components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Use class-variance-authority for variant management</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Extend with custom utility classes</span></li></ul><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="4-component-composition-api-layer">4. Component Composition (API Layer)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#4-component-composition-api-layer" title="Permanent link">¶</a></h4><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Wrap shadcn/ui components with your own</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Add business logic and custom props</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Create compound components for complex UIs</span></li></ul><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="how-our-tokens-map-to-shadcnui">How Our Tokens Map to shadcn/ui<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#how-our-tokens-map-to-shadcnui" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">shadcn/ui uses CSS variables for theming, which allows us to seamlessly integrate our After6ix design tokens:</p><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Color Tokens</strong>: Our color scales map to CSS custom properties in HSL format</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Typography Tokens</strong>: Font families, sizes, and weights integrate via Tailwind config</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Spacing Tokens</strong>: Direct mapping to Tailwind&#x27;s spacing scale</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Effect Tokens</strong>: Shadows and animations extend Tailwind&#x27;s defaults</span></li></ol><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="token-configuration">Token Configuration<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#token-configuration" title="Permanent link">¶</a></h3><pre><code class="jss90">// tailwind.config.ts
+export default {
+  theme: {
+    extend: {
+      colors: {
+        // After6ix color scales available as utilities
+        primary: {
+          50: &#x27;hsl(var(--primary-50))&#x27;,
+          100: &#x27;hsl(var(--primary-100))&#x27;,
+          // ... through 900
+          DEFAULT: &#x27;hsl(var(--primary))&#x27;,
+          foreground: &#x27;hsl(var(--primary-foreground))&#x27;,
+        },
+        secondary: { /* ... */ },
+        accent: { /* ... */ },
+      },
+      fontFamily: {
+        sans: [&#x27;Inter&#x27;, &#x27;system-ui&#x27;, &#x27;-apple-system&#x27;, &#x27;sans-serif&#x27;],
+        mono: [&#x27;JetBrains Mono&#x27;, &#x27;Consolas&#x27;, &#x27;Monaco&#x27;, &#x27;monospace&#x27;],
+      },
+      spacing: {
+        // Extends with our token values
+      },
+      animation: {
+        &#x27;fade-in&#x27;: &#x27;fadeIn var(--duration-base) var(--easing-out)&#x27;,
+        &#x27;slide-up&#x27;: &#x27;slideUp var(--duration-slow) var(--easing-out)&#x27;,
+      },
+    },
+  },
+};
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="customization-examples">Customization Examples<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#customization-examples" title="Permanent link">¶</a></h3><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="1-theme-customization-css-variables">1. Theme Customization (CSS Variables)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#1-theme-customization-css-variables" title="Permanent link">¶</a></h4><pre><code class="jss90">/* globals.css - Override shadcn/ui defaults with After6ix tokens */
+:root {
+  --primary: 267 80% 58%; /* Twilight Purple */
+  --secondary: 221 83% 53%; /* Deep Sky */
+  --accent: 189 94% 43%; /* Electric Cyan */
+}
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="2-component-structure-customization">2. Component Structure Customization<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#2-component-structure-customization" title="Permanent link">¶</a></h4><pre><code class="jss90">// components/ui/button.tsx - Add loading state
+export interface ButtonProps extends /* ... */ {
+  loading?: boolean;
+  icon?: React.ReactNode;
+}
+
+export const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
+  ({ loading, icon, children, disabled, ...props }, ref) =&gt; {
+    return (
+      &lt;Comp disabled={disabled || loading} {...props}&gt;
+        {loading &amp;&amp; &lt;Spinner className=&quot;mr-2&quot; /&gt;}
+        {icon &amp;&amp; &lt;span className=&quot;mr-2&quot;&gt;{icon}&lt;/span&gt;}
+        {children}
+      &lt;/Comp&gt;
+    );
+  }
+);
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="3-style-customization-tailwind">3. Style Customization (Tailwind)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#3-style-customization-tailwind" title="Permanent link">¶</a></h4><pre><code class="jss90">// components/ui/card.tsx - After6ix branded card
+const cardVariants = cva(
+  &quot;rounded-xl border transition-all duration-base&quot;,
+  {
+    variants: {
+      variant: {
+        default: &quot;bg-card border-border&quot;,
+        elevated: &quot;bg-card shadow-lg border-transparent&quot;,
+        gradient: &quot;bg-gradient-to-br from-primary-50 to-secondary-50 border-primary-200&quot;,
+        glass: &quot;bg-white/80 backdrop-blur-sm border-white/20&quot;,
+      }
+    }
+  }
+);
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="4-component-composition">4. Component Composition<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#4-component-composition" title="Permanent link">¶</a></h4><pre><code class="jss90">// components/after6ix/feature-card.tsx
+import { Card, CardContent, CardHeader } from &#x27;@/components/ui/card&#x27;;
+import { Badge } from &#x27;@/components/ui/badge&#x27;;
+
+export function FeatureCard({ 
+  title, 
+  description, 
+  icon, 
+  badge,
+  gradient = false 
+}: FeatureCardProps) {
+  return (
+    &lt;Card variant={gradient ? &quot;gradient&quot; : &quot;elevated&quot;}&gt;
+      &lt;CardHeader&gt;
+        &lt;div className=&quot;flex items-start justify-between&quot;&gt;
+          &lt;div className=&quot;p-2 rounded-lg bg-primary-100 text-primary-600&quot;&gt;
+            {icon}
+          &lt;/div&gt;
+          {badge &amp;&amp; &lt;Badge variant=&quot;secondary&quot;&gt;{badge}&lt;/Badge&gt;}
+        &lt;/div&gt;
+        &lt;h3 className=&quot;text-xl font-semibold mt-4&quot;&gt;{title}&lt;/h3&gt;
+      &lt;/CardHeader&gt;
+      &lt;CardContent&gt;
+        &lt;p className=&quot;text-muted-foreground&quot;&gt;{description}&lt;/p&gt;
+      &lt;/CardContent&gt;
+    &lt;/Card&gt;
+  );
+}
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="best-practices-for-maintainable-design-system">Best Practices for Maintainable Design System<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#best-practices-for-maintainable-design-system" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">For a scalable and maintainable design system using shadcn/ui and Tailwind, we recommend a layered approach:</p><h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="1-foundation-layer-css-variables-tailwind-config">1. Foundation Layer (CSS Variables + Tailwind Config)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#1-foundation-layer-css-variables-tailwind-config" title="Permanent link">¶</a></h4><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Use for</strong>: Brand colors, typography, spacing, shadows, animations
+<strong>Why</strong>: Single source of truth, easy to update globally, maintains consistency</p><pre><code class="jss90">// tailwind.config.ts - Core design tokens
+export default {
+  theme: {
+    extend: {
+      colors: {
+        // Reference CSS variables
+        primary: {
+          DEFAULT: &#x27;hsl(var(--primary))&#x27;,
+          foreground: &#x27;hsl(var(--primary-foreground))&#x27;,
+        },
+      },
+    },
+  },
+};
+
+// globals.css - Brand-specific values
+:root {
+  --primary: 267 80% 58%; /* After6ix Twilight Purple */
+}
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="2-component-layer-minimal-modifications">2. Component Layer (Minimal Modifications)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#2-component-layer-minimal-modifications" title="Permanent link">¶</a></h4><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Use for</strong>: Adding essential props, fixing accessibility issues
+<strong>Why</strong>: Preserves upgrade path, reduces maintenance burden</p><pre><code class="jss90">// ✅ Good: Extend with new props
+export interface ButtonProps extends BaseButtonProps {
+  loading?: boolean;
+}
+
+// ❌ Avoid: Changing core behavior
+// Don&#x27;t modify the underlying Radix UI implementation
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="3-variant-layer-cva-extensions">3. Variant Layer (CVA Extensions)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#3-variant-layer-cva-extensions" title="Permanent link">¶</a></h4><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Use for</strong>: New visual styles, component states
+<strong>Why</strong>: Leverages existing patterns, type-safe, predictable</p><pre><code class="jss90">// ✅ Good: Add new variants
+const buttonVariants = cva(baseClasses, {
+  variants: {
+    variant: {
+      ...existingVariants,
+      brand: &quot;bg-gradient-to-r from-primary-600 to-secondary-600&quot;,
+    },
+  },
+});
+</code></pre>
+<h4 class="MuiTypography-root jss88 MuiTypography-h6 MuiTypography-gutterBottom" id="4-composition-layer-new-components">4. Composition Layer (New Components)<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#4-composition-layer-new-components" title="Permanent link">¶</a></h4><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Use for</strong>: Business-specific components, complex patterns
+<strong>Why</strong>: Keeps base components clean, enables reuse</p><pre><code class="jss90">// ✅ Good: Compose from primitives
+export function FeatureCard({ ...props }) {
+  return (
+    &lt;Card&gt;
+      &lt;CardHeader&gt;...&lt;/CardHeader&gt;
+      &lt;CardContent&gt;...&lt;/CardContent&gt;
+    &lt;/Card&gt;
+  );
+}
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="recommended-architecture">Recommended Architecture<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#recommended-architecture" title="Permanent link">¶</a></h3><pre><code class="jss90">@after6ix/ui/
+├── styles/
+│   ├── globals.css          # CSS variables, base styles
+│   └── tokens.ts            # TypeScript token exports
+├── components/
+│   ├── ui/                  # shadcn/ui components (minimal changes)
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   └── ...
+│   └── after6ix/            # Custom composed components
+│       ├── feature-card.tsx
+│       ├── pricing-table.tsx
+│       └── ...
+├── lib/
+│   └── utils.ts             # Shared utilities
+└── index.ts                 # Public API exports
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="maintenance-guidelines">Maintenance Guidelines<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#maintenance-guidelines" title="Permanent link">¶</a></h3><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Minimize Core Changes</strong>: Keep shadcn/ui components as close to original as possible</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Document Deviations</strong>: When you must modify core components, document why</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Use Composition</strong>: Build complex components by composing primitives</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Centralize Tokens</strong>: All design decisions in CSS variables and Tailwind config</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Version Control</strong>: Tag releases when updating shadcn/ui components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Testing Strategy</strong>: Focus tests on custom components and compositions</span></li></ol><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="anti-patterns-to-avoid">Anti-Patterns to Avoid<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#anti-patterns-to-avoid" title="Permanent link">¶</a></h3><pre><code class="jss90">// ❌ Don&#x27;t: Heavily modify core components
+// This makes updates difficult
+const Button = () =&gt; {
+  // 100+ lines of custom logic
+};
+
+// ❌ Don&#x27;t: Inline style overrides
+&lt;Button style={{ backgroundColor: &#x27;#9333EA&#x27; }} /&gt;
+
+// ❌ Don&#x27;t: Create divergent component APIs
+&lt;Button color=&quot;purple&quot; size=&quot;medium&quot; /&gt; // Non-standard props
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="upgrade-strategy">Upgrade Strategy<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#upgrade-strategy" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">When shadcn/ui releases updates:</p><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Review changelog for breaking changes</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Copy new component versions to a branch</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Reapply minimal modifications</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Test composed components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Update documentation</span></li></ol><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">This approach balances customization needs with long-term maintainability.</p><h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="component-architecture">Component Architecture<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#component-architecture" title="Permanent link">¶</a></h2><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="component-structure">Component Structure<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#component-structure" title="Permanent link">¶</a></h3><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph">Each component follows a consistent structure:</p><pre><code class="jss90">// Component file structure
+components/
+├── Button/
+│   ├── Button.tsx          // Main component
+│   ├── Button.stories.tsx  // Storybook stories
+│   ├── Button.test.tsx     // Unit tests
+│   ├── Button.types.ts     // TypeScript interfaces
+│   ├── Button.styles.ts    // Styled components/CSS
+│   └── index.ts           // Public exports
+
+// Component template
+interface ComponentProps extends React.ComponentPropsWithoutRef&lt;&#x27;element&#x27;&gt; {
+  variant?: &#x27;primary&#x27; | &#x27;secondary&#x27; | &#x27;ghost&#x27;;
+  size?: &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
+  // ... other props
+}
+
+export const Component = forwardRef&lt;HTMLElement, ComponentProps&gt;(
+  ({ variant = &#x27;primary&#x27;, size = &#x27;md&#x27;, ...props }, ref) =&gt; {
+    // Implementation using Radix UI primitives
+  }
+);
+</code></pre>
+<h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="component-categories">Component Categories<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#component-categories" title="Permanent link">¶</a></h3><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Primitives</strong> - Basic building blocks</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Button, Input, Label, Textarea</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Typography (Heading, Text, Code)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Box, Flex, Grid</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Feedback</strong> - User feedback components</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Alert, Toast, Progress, Spinner</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Badge, Tooltip, Popover</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Form Controls</strong> - Form elements</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Checkbox, Radio, Switch, Slider</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Select, DatePicker, FilePicker</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Layout</strong> - Structure components</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Container, Section, Divider</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Card, Panel, Accordion</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Navigation</strong> - Navigation elements</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Tabs, Breadcrumb, Pagination</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Menu, Navigation, Sidebar</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Data Display</strong> - Data visualization</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Table, DataGrid, List</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Avatar, Timeline, Stat</span></li></ul></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph"><strong>Overlays</strong> - Modal components</p><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Dialog, Drawer, Modal</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">ContextMenu, DropdownMenu</span></li></ul></span></li></ol><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="component-api-principles">Component API Principles<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#component-api-principles" title="Permanent link">¶</a></h3><ol start="1"><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Composability</strong>: Components should work together seamlessly</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Accessibility</strong>: All components meet WCAG 2.1 AA standards</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Type Safety</strong>: Full TypeScript support with proper generics</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Flexibility</strong>: Support for <code class="jss90">as</code> prop for polymorphic components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Consistency</strong>: Similar props across similar components</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><strong>Performance</strong>: Use React.memo and proper optimization techniques</span></li></ol><h3 class="MuiTypography-root jss88 MuiTypography-h5 MuiTypography-gutterBottom" id="example-implementation">Example Implementation<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#example-implementation" title="Permanent link">¶</a></h3><pre><code class="jss90">// Example: Customizing shadcn/ui Button for After6ix
+import * as React from &#x27;react&#x27;;
+import { Slot } from &#x27;@radix-ui/react-slot&#x27;;
+import { cn } from &#x27;@/lib/utils&#x27;;
+import { cva, type VariantProps } from &#x27;class-variance-authority&#x27;;
+
+// shadcn/ui button adapted with After6ix design tokens
+const buttonVariants = cva(
+  &#x27;inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50&#x27;,
+  {
+    variants: {
+      variant: {
+        // Using After6ix twilight purple as primary
+        default: &#x27;bg-primary text-primary-foreground hover:bg-primary/90&#x27;,
+        // Using deep sky blue as secondary
+        secondary: &#x27;bg-secondary text-secondary-foreground hover:bg-secondary/90&#x27;,
+        // Using electric cyan for destructive/accent
+        destructive: &#x27;bg-destructive text-destructive-foreground hover:bg-destructive/90&#x27;,
+        outline: &#x27;border border-input bg-background hover:bg-accent hover:text-accent-foreground&#x27;,
+        ghost: &#x27;hover:bg-accent hover:text-accent-foreground&#x27;,
+        link: &#x27;text-primary underline-offset-4 hover:underline&#x27;,
+      },
+      size: {
+        default: &#x27;h-10 px-4 py-2&#x27;,
+        sm: &#x27;h-9 rounded-md px-3&#x27;,
+        lg: &#x27;h-11 rounded-md px-8&#x27;,
+        icon: &#x27;h-10 w-10&#x27;,
+      },
+    },
+    defaultVariants: {
+      variant: &#x27;default&#x27;,
+      size: &#x27;default&#x27;,
+    },
+  }
+);
+
+// CSS Variables integrating After6ix design tokens with shadcn/ui
+/*
+@layer base {
+  :root {
+    /* After6ix Color Tokens mapped to shadcn/ui conventions */
+    
+    /* Primary - Twilight Purple */
+    --primary-50: 280 100% 98%; /* #FAF5FF */
+    --primary-100: 282 100% 97%; /* #F3E8FF */
+    --primary-200: 281 100% 92%; /* #E9D5FF */
+    --primary-300: 280 97% 85%; /* #D8B4FE */
+    --primary-400: 280 89% 75%; /* #C084FC */
+    --primary-500: 280 91% 65%; /* #A855F7 */
+    --primary-600: 267 80% 58%; /* #9333EA - Base */
+    --primary-700: 263 90% 58%; /* #7C3AED */
+    --primary-800: 262 72% 50%; /* #6B46C1 */
+    --primary-900: 264 67% 35%; /* #581C87 */
+    
+    /* Secondary - Deep Sky */
+    --secondary-50: 214 100% 97%; /* #EFF6FF */
+    --secondary-100: 214 95% 93%; /* #DBEAFE */
+    --secondary-200: 213 97% 87%; /* #BFDBFE */
+    --secondary-300: 212 96% 78%; /* #93C5FD */
+    --secondary-400: 213 94% 68%; /* #60A5FA */
+    --secondary-500: 217 91% 60%; /* #3B82F6 */
+    --secondary-600: 221 83% 53%; /* #2563EB - Base */
+    --secondary-700: 224 76% 48%; /* #1D4ED8 */
+    --secondary-800: 226 71% 40%; /* #1E40AF */
+    --secondary-900: 224 64% 33%; /* #1E3A8A */
+    
+    /* Accent - Electric Cyan */
+    --accent-50: 183 100% 96%; /* #ECFEFF */
+    --accent-100: 185 95% 90%; /* #CFFAFE */
+    --accent-200: 186 94% 82%; /* #A5F3FC */
+    --accent-300: 187 92% 69%; /* #67E8F9 */
+    --accent-400: 188 91% 53%; /* #22D3EE */
+    --accent-500: 189 94% 43%; /* #06B6D4 - Base */
+    --accent-600: 192 91% 36%; /* #0891B2 */
+    --accent-700: 193 82% 31%; /* #0E7490 */
+    --accent-800: 194 70% 27%; /* #155E75 */
+    --accent-900: 196 64% 24%; /* #164E63 */
+    
+    /* shadcn/ui semantic mappings using After6ix tokens */
+    --background: 0 0% 100%; /* White */
+    --foreground: 240 10% 11%; /* Charcoal 900 #18181B */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 11%;
+    
+    --primary: var(--primary-600);
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: var(--secondary-600);
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 5% 96%; /* Neutral 100 */
+    --muted-foreground: 240 3.8% 46%; /* Neutral 600 */
+    
+    --accent: var(--accent-500);
+    --accent-foreground: 240 10% 11%;
+    
+    --destructive: 0 84% 60%; /* Error base */
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 6% 90%; /* Neutral 200 */
+    --input: 240 6% 90%;
+    --ring: var(--primary-600);
+    
+    /* Spacing &amp; Effects from After6ix tokens */
+    --radius: 0.5rem; /* radius-lg */
+    
+    /* Typography */
+    --font-sans: &quot;Inter&quot;, system-ui, -apple-system, sans-serif;
+    --font-mono: &quot;JetBrains Mono&quot;, Consolas, Monaco, monospace;
+  }
+  
+  .dark {
+    /* Dark mode adjustments */
+    --background: 240 10% 3.9%; /* Near black */
+    --foreground: 0 0% 95%; /* Neutral 100 */
+    
+    --card: 240 10% 9%;
+    --card-foreground: 0 0% 95%;
+    
+    --primary: 267 70% 65%; /* Adjusted for dark mode */
+    --secondary: 221 70% 60%;
+    --accent: 189 80% 50%;
+    
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 60%;
+    
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+  }
+}
+
+/* Extended color utilities for After6ix palette */
+@layer utilities {
+  /* Primary color scale */
+  .text-primary-50 { color: hsl(var(--primary-50)); }
+  .text-primary-100 { color: hsl(var(--primary-100)); }
+  /* ... etc for all scales */
+  
+  .bg-primary-50 { background-color: hsl(var(--primary-50)); }
+  .bg-primary-100 { background-color: hsl(var(--primary-100)); }
+  /* ... etc for all scales */
+  
+  /* Animation durations from tokens */
+  .duration-fast { transition-duration: 150ms; }
+  .duration-base { transition-duration: 250ms; }
+  .duration-slow { transition-duration: 400ms; }
+  .duration-slower { transition-duration: 600ms; }
+}
+*/
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;,
+    VariantProps&lt;typeof buttonVariants&gt; {
+  asChild?: boolean;
+}
+
+export const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
+  ({ className, variant, size, asChild = false, ...props }, ref) =&gt; {
+    const Comp = asChild ? Slot : &#x27;button&#x27;;
+    return (
+      &lt;Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      /&gt;
+    );
+  }
+);
+
+Button.displayName = &#x27;Button&#x27;;
+</code></pre>
+<h2 class="MuiTypography-root jss88 MuiTypography-h4 MuiTypography-gutterBottom" id="links">Links<a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss89 MuiTypography-colorPrimary" href="#links" title="Permanent link">¶</a></h2><ul><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary" href="https://ui.shadcn.com/">shadcn/ui Documentation</a></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary" href="https://www.radix-ui.com/">Radix UI Documentation</a></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary" href="https://tailwindcss.com/">Tailwind CSS</a></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1"><a class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary" href="https://cva.style/docs">Class Variance Authority</a></span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Related to [UI Package Setup ADR] (to be created)</span></li><li class="jss91"><span class="MuiTypography-root MuiTypography-body1">Implements [Global Styling Strategy ADR] (to be created)</span></li></ul></div></div><hr class="MuiDivider-root jss67"/><nav class="jss68"><div></div><div class="jss69"><p class="MuiTypography-root jss70 MuiTypography-body1">Last edited by <!-- -->Gerald Yeo</p><p class="MuiTypography-root jss70 MuiTypography-body1">on <!-- -->Jul 31, 2025 2:34 PM</p></div><div></div></nav></div><div class="jss74 jss75"></div></div></main><footer class="jss23"><div class="jss2"></div><div class="jss3 jss26"><p class="MuiTypography-root jss24 MuiTypography-body1">Powered by<!-- --> <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss25 MuiTypography-colorPrimary" href="https://github.com/thomvaill/log4brains" target="_blank" rel="noopener">Log4brains</a> <span style="font-size:0.8em">(v1.1.0)</span></p></div><div class="jss4"></div></footer></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"projectName":"@after6ix","currentAdr":{"slug":"apps-ui/20250730-create-a-design-system-and-ui-kit","package":"apps-ui","title":"Create a design system and ui-kit","status":"proposed","supersededBy":null,"tags":["design-system","ui-kit","frontend","monorepo"],"deciders":["Gerald Yeo","Engineering Team"],"body":{"enhancedMdx":"\nTechnical Story: Create a unified design system and UI kit for the After6ix monorepo to ensure consistency across all applications and improve development velocity.\n\n## Context and Problem Statement\n\nThe After6ix monorepo contains multiple applications (site, cv) that currently lack a unified design language. Without a centralized design system and UI kit, each application may develop inconsistent visual patterns, duplicate component implementations, and create a fragmented user experience. How can we establish a comprehensive design system that promotes consistency, reusability, and accelerates development across all workspace applications?\n\n## Decision Drivers\n\n- **Consistency**: Need for unified visual language across all After6ix applications\n- **Developer Velocity**: Reduce duplicate work by providing reusable components\n- **Maintainability**: Centralized updates to design tokens and components\n- **Brand Identity**: Establish a distinctive After6ix brand through consistent design\n- **Scalability**: Support future applications and features without design debt\n- **TypeScript Support**: Leverage the monorepo's TypeScript-first approach for type-safe components\n- **Performance**: Optimize bundle sizes through shared component libraries\n\n## Considered Options\n\n1. **Build Custom Design System** - Create a bespoke design system tailored to After6ix needs\n2. **Adopt Existing Design System** - Use established systems like Material-UI, Ant Design, or Chakra UI\n3. **Hybrid Approach** - Build custom system on top of headless UI libraries (Radix UI, Headless UI)\n4. **shadcn/ui Approach** - Use shadcn/ui as foundation, customizing components with our design tokens\n5. **CSS Framework Only** - Use Tailwind CSS with custom component library\n\n## Decision Outcome\n\nChosen option: **\"shadcn/ui Approach\"** - Use shadcn/ui as the foundation for our design system, customizing it with After6ix design tokens and extending with additional components as needed.\n\nThis approach provides:\n\n- Battle-tested component patterns built on Radix UI\n- Copy-paste architecture allows full ownership and customization\n- Accessibility-first components from Radix UI\n- Modern patterns using Tailwind CSS and CSS variables\n- Type-safe component APIs with TypeScript\n- No external dependencies - components live in our codebase\n- Easy to extend and modify to match After6ix brand\n- Active community and regular updates to reference\n\n### Positive Consequences\n\n- **Unified Brand Experience**: Consistent look and feel across all After6ix applications\n- **Faster Development**: Pre-built components accelerate feature development\n- **Improved Accessibility**: Radix UI provides WCAG-compliant components out of the box\n- **Type Safety**: Full TypeScript support with auto-completion and compile-time checks\n- **Design Token System**: Centralized management of colors, spacing, typography\n- **Documentation**: Built-in component documentation and usage examples\n- **Testing**: Easier to test with isolated component libraries\n\n### Negative Consequences\n\n- **Initial Investment**: Significant upfront time required to build the system\n- **Learning Curve**: Team needs to learn new design token conventions and component APIs\n- **Maintenance Overhead**: Ongoing maintenance of the design system package\n- **Migration Effort**: Existing components need to be refactored to use the new system\n\n## Pros and Cons of the Options\n\n### Build Custom Design System\n\nFully custom implementation from scratch\n\n- Good, because complete control over every aspect\n- Good, because can optimize for specific After6ix needs\n- Bad, because requires significant development time\n- Bad, because need to handle accessibility ourselves\n- Bad, because higher risk of bugs and edge cases\n\n### Adopt Existing Design System\n\nUse Material-UI, Ant Design, or similar\n\n- Good, because immediate productivity with pre-built components\n- Good, because well-tested and documented\n- Good, because large community support\n- Bad, because limited customization without overrides\n- Bad, because larger bundle sizes\n- Bad, because may not align with After6ix brand vision\n\n### Hybrid Approach\n\nRadix UI primitives + Tailwind CSS + Custom tokens\n\n- Good, because accessibility handled by Radix UI\n- Good, because full control over visual design\n- Good, because smaller bundle size (only import what you use)\n- Good, because can leverage Tailwind's utility classes\n- Good, because headless components are framework-agnostic\n- Bad, because requires implementing all styling from scratch\n- Bad, because need to solve common patterns ourselves\n\n### shadcn/ui Approach (Chosen)\n\nUse shadcn/ui components as foundation with custom theming\n\n- Good, because proven component patterns and implementations\n- Good, because copy-paste means we own the code\n- Good, because built on Radix UI (accessibility included)\n- Good, because uses modern CSS variables for theming\n- Good, because active community and examples\n- Good, because easy to customize with our design tokens\n- Good, because no lock-in to external library\n- Bad, because need to adapt default styles to After6ix brand\n- Bad, because must maintain copied components\n\n### CSS Framework Only\n\nTailwind CSS with custom React components\n\n- Good, because quick to implement basic components\n- Good, because utility-first approach is flexible\n- Bad, because no accessibility primitives\n- Bad, because need to implement complex interactions from scratch\n- Bad, because inconsistent component APIs without a framework\n\n## Implementation Plan\n\n### Phase 1: Foundation (Week 1-2)\n\n- Set up `@after6ix/ui` package in the monorepo\n- Configure shadcn/ui CLI and components.json\n- Adapt shadcn/ui's CSS variables to After6ix design tokens\n- Install initial set of core components (Button, Card, Input, etc.)\n- Create custom theme configuration with our color palette\n\n### Phase 2: Core Components (Week 3-4)\n\n- Customize shadcn/ui components with After6ix styling\n- Add additional components not in shadcn/ui as needed\n- Set up Storybook for component documentation\n- Create usage guidelines showing After6ix patterns\n\n### Phase 3: Advanced Components (Week 5-6)\n\n- Build complex components (DataTable, Forms, Modals)\n- Implement responsive design patterns\n- Add animation and interaction patterns\n\n### Phase 4: Integration (Week 7-8)\n\n- Migrate existing apps to use design system\n- Refine based on real-world usage\n- Document migration guide\n\n## Design Tokens Structure\n\n### Color System\n\nBased on the \"After6ix - Where Code Comes Alive\" brand concept, our color palette draws inspiration from twilight hours when developers do their best work.\n\n```typescript\n// Color token structure\ninterface ColorTokens {\n  // Primary - Twilight Purple\n  primary: {\n    50: '#FAF5FF';\n    100: '#F3E8FF';\n    200: '#E9D5FF';\n    300: '#D8B4FE';\n    400: '#C084FC';\n    500: '#A855F7';\n    600: '#9333EA'; // Base\n    700: '#7C3AED';\n    800: '#6B46C1';\n    900: '#581C87';\n  };\n  \n  // Secondary - Deep Sky\n  secondary: {\n    50: '#EFF6FF';\n    100: '#DBEAFE';\n    200: '#BFDBFE';\n    300: '#93C5FD';\n    400: '#60A5FA';\n    500: '#3B82F6';\n    600: '#2563EB'; // Base\n    700: '#1D4ED8';\n    800: '#1E40AF';\n    900: '#1E3A8A';\n  };\n  \n  // Accent - Electric Cyan\n  accent: {\n    50: '#ECFEFF';\n    100: '#CFFAFE';\n    200: '#A5F3FC';\n    300: '#67E8F9';\n    400: '#22D3EE';\n    500: '#06B6D4'; // Base\n    600: '#0891B2';\n    700: '#0E7490';\n    800: '#155E75';\n    900: '#164E63';\n  };\n  \n  // Neutrals - Charcoal\n  neutral: {\n    50: '#FAFAFA';\n    100: '#F4F4F5';\n    200: '#E4E4E7';\n    300: '#D4D4D8';\n    400: '#A1A1AA';\n    500: '#71717A';\n    600: '#52525B';\n    700: '#3F3F46';\n    800: '#27272A';\n    900: '#18181B';\n  };\n  \n  // Semantic colors\n  semantic: {\n    success: { light: '#10B981'; base: '#059669'; dark: '#047857' };\n    error: { light: '#F87171'; base: '#EF4444'; dark: '#DC2626' };\n    warning: { light: '#FBBF24'; base: '#F59E0B'; dark: '#D97706' };\n    info: { light: '#38BDF8'; base: '#0EA5E9'; dark: '#0284C7' };\n  };\n}\n```\n\n### Typography System\n\n```typescript\ninterface TypographyTokens {\n  fonts: {\n    sans: 'Inter, system-ui, -apple-system, sans-serif';\n    mono: 'JetBrains Mono, Consolas, Monaco, monospace';\n  };\n  \n  sizes: {\n    xs: '0.75rem';    // 12px\n    sm: '0.875rem';   // 14px\n    base: '1rem';     // 16px\n    lg: '1.125rem';   // 18px\n    xl: '1.25rem';    // 20px\n    '2xl': '1.5rem';  // 24px\n    '3xl': '1.875rem'; // 30px\n    '4xl': '2.25rem'; // 36px\n    '5xl': '3rem';    // 48px\n  };\n  \n  weights: {\n    thin: 100;\n    light: 300;\n    normal: 400;\n    medium: 500;\n    semibold: 600;\n    bold: 700;\n    extrabold: 800;\n  };\n  \n  lineHeights: {\n    tight: 1.25;\n    snug: 1.375;\n    normal: 1.5;\n    relaxed: 1.625;\n    loose: 2;\n  };\n}\n```\n\n### Spacing \u0026 Layout\n\n```typescript\ninterface SpacingTokens {\n  0: '0';\n  1: '0.25rem';   // 4px\n  2: '0.5rem';    // 8px\n  3: '0.75rem';   // 12px\n  4: '1rem';      // 16px\n  5: '1.25rem';   // 20px\n  6: '1.5rem';    // 24px\n  8: '2rem';      // 32px\n  10: '2.5rem';   // 40px\n  12: '3rem';     // 48px\n  16: '4rem';     // 64px\n  20: '5rem';     // 80px\n  24: '6rem';     // 96px\n}\n\ninterface RadiusTokens {\n  none: '0';\n  sm: '0.125rem';  // 2px\n  base: '0.25rem'; // 4px\n  md: '0.375rem';  // 6px\n  lg: '0.5rem';    // 8px\n  xl: '0.75rem';   // 12px\n  '2xl': '1rem';   // 16px\n  '3xl': '1.5rem'; // 24px\n  full: '9999px';\n}\n```\n\n### Effects\n\n```typescript\ninterface ShadowTokens {\n  xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)';\n  sm: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)';\n  base: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)';\n  md: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)';\n  lg: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';\n  xl: '0 25px 50px -12px rgb(0 0 0 / 0.25)';\n  inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)';\n  none: 'none';\n}\n\ninterface AnimationTokens {\n  durations: {\n    fast: '150ms';\n    base: '250ms';\n    slow: '400ms';\n    slower: '600ms';\n  };\n  \n  easings: {\n    linear: 'linear';\n    in: 'cubic-bezier(0.4, 0, 1, 1)';\n    out: 'cubic-bezier(0, 0, 0.2, 1)';\n    inOut: 'cubic-bezier(0.4, 0, 0.2, 1)';\n    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';\n  };\n}\n```\n\n## Design Token Integration with shadcn/ui\n\n### Customization Approaches\n\nshadcn/ui provides multiple layers of customization since you own the code:\n\n#### 1. CSS Variables (Theme Layer)\n\n- Modify CSS custom properties in your global CSS\n- Perfect for color schemes, spacing, and typography\n- Maintains consistency across all components\n\n#### 2. Component Code (Structure Layer)\n\n- Directly edit the copied component files\n- Add new props, change behavior, modify structure\n- Full TypeScript support for type-safe modifications\n\n#### 3. Tailwind Classes (Style Layer)\n\n- Modify className strings in components\n- Use class-variance-authority for variant management\n- Extend with custom utility classes\n\n#### 4. Component Composition (API Layer)\n\n- Wrap shadcn/ui components with your own\n- Add business logic and custom props\n- Create compound components for complex UIs\n\n### How Our Tokens Map to shadcn/ui\n\nshadcn/ui uses CSS variables for theming, which allows us to seamlessly integrate our After6ix design tokens:\n\n1. **Color Tokens**: Our color scales map to CSS custom properties in HSL format\n2. **Typography Tokens**: Font families, sizes, and weights integrate via Tailwind config\n3. **Spacing Tokens**: Direct mapping to Tailwind's spacing scale\n4. **Effect Tokens**: Shadows and animations extend Tailwind's defaults\n\n### Token Configuration\n\n```typescript\n// tailwind.config.ts\nexport default {\n  theme: {\n    extend: {\n      colors: {\n        // After6ix color scales available as utilities\n        primary: {\n          50: 'hsl(var(--primary-50))',\n          100: 'hsl(var(--primary-100))',\n          // ... through 900\n          DEFAULT: 'hsl(var(--primary))',\n          foreground: 'hsl(var(--primary-foreground))',\n        },\n        secondary: { /* ... */ },\n        accent: { /* ... */ },\n      },\n      fontFamily: {\n        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],\n        mono: ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],\n      },\n      spacing: {\n        // Extends with our token values\n      },\n      animation: {\n        'fade-in': 'fadeIn var(--duration-base) var(--easing-out)',\n        'slide-up': 'slideUp var(--duration-slow) var(--easing-out)',\n      },\n    },\n  },\n};\n```\n\n### Customization Examples\n\n#### 1. Theme Customization (CSS Variables)\n\n```css\n/* globals.css - Override shadcn/ui defaults with After6ix tokens */\n:root {\n  --primary: 267 80% 58%; /* Twilight Purple */\n  --secondary: 221 83% 53%; /* Deep Sky */\n  --accent: 189 94% 43%; /* Electric Cyan */\n}\n```\n\n#### 2. Component Structure Customization\n\n```tsx\n// components/ui/button.tsx - Add loading state\nexport interface ButtonProps extends /* ... */ {\n  loading?: boolean;\n  icon?: React.ReactNode;\n}\n\nexport const Button = React.forwardRef\u003cHTMLButtonElement, ButtonProps\u003e(\n  ({ loading, icon, children, disabled, ...props }, ref) =\u003e {\n    return (\n      \u003cComp disabled={disabled || loading} {...props}\u003e\n        {loading \u0026\u0026 \u003cSpinner className=\"mr-2\" /\u003e}\n        {icon \u0026\u0026 \u003cspan className=\"mr-2\"\u003e{icon}\u003c/span\u003e}\n        {children}\n      \u003c/Comp\u003e\n    );\n  }\n);\n```\n\n#### 3. Style Customization (Tailwind)\n\n```tsx\n// components/ui/card.tsx - After6ix branded card\nconst cardVariants = cva(\n  \"rounded-xl border transition-all duration-base\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-card border-border\",\n        elevated: \"bg-card shadow-lg border-transparent\",\n        gradient: \"bg-gradient-to-br from-primary-50 to-secondary-50 border-primary-200\",\n        glass: \"bg-white/80 backdrop-blur-sm border-white/20\",\n      }\n    }\n  }\n);\n```\n\n#### 4. Component Composition\n\n```tsx\n// components/after6ix/feature-card.tsx\nimport { Card, CardContent, CardHeader } from '@/components/ui/card';\nimport { Badge } from '@/components/ui/badge';\n\nexport function FeatureCard({ \n  title, \n  description, \n  icon, \n  badge,\n  gradient = false \n}: FeatureCardProps) {\n  return (\n    \u003cCard variant={gradient ? \"gradient\" : \"elevated\"}\u003e\n      \u003cCardHeader\u003e\n        \u003cdiv className=\"flex items-start justify-between\"\u003e\n          \u003cdiv className=\"p-2 rounded-lg bg-primary-100 text-primary-600\"\u003e\n            {icon}\n          \u003c/div\u003e\n          {badge \u0026\u0026 \u003cBadge variant=\"secondary\"\u003e{badge}\u003c/Badge\u003e}\n        \u003c/div\u003e\n        \u003ch3 className=\"text-xl font-semibold mt-4\"\u003e{title}\u003c/h3\u003e\n      \u003c/CardHeader\u003e\n      \u003cCardContent\u003e\n        \u003cp className=\"text-muted-foreground\"\u003e{description}\u003c/p\u003e\n      \u003c/CardContent\u003e\n    \u003c/Card\u003e\n  );\n}\n```\n\n### Best Practices for Maintainable Design System\n\nFor a scalable and maintainable design system using shadcn/ui and Tailwind, we recommend a layered approach:\n\n#### 1. Foundation Layer (CSS Variables + Tailwind Config)\n\n**Use for**: Brand colors, typography, spacing, shadows, animations\n**Why**: Single source of truth, easy to update globally, maintains consistency\n\n```typescript\n// tailwind.config.ts - Core design tokens\nexport default {\n  theme: {\n    extend: {\n      colors: {\n        // Reference CSS variables\n        primary: {\n          DEFAULT: 'hsl(var(--primary))',\n          foreground: 'hsl(var(--primary-foreground))',\n        },\n      },\n    },\n  },\n};\n\n// globals.css - Brand-specific values\n:root {\n  --primary: 267 80% 58%; /* After6ix Twilight Purple */\n}\n```\n\n#### 2. Component Layer (Minimal Modifications)\n\n**Use for**: Adding essential props, fixing accessibility issues\n**Why**: Preserves upgrade path, reduces maintenance burden\n\n```tsx\n// ✅ Good: Extend with new props\nexport interface ButtonProps extends BaseButtonProps {\n  loading?: boolean;\n}\n\n// ❌ Avoid: Changing core behavior\n// Don't modify the underlying Radix UI implementation\n```\n\n#### 3. Variant Layer (CVA Extensions)\n\n**Use for**: New visual styles, component states\n**Why**: Leverages existing patterns, type-safe, predictable\n\n```tsx\n// ✅ Good: Add new variants\nconst buttonVariants = cva(baseClasses, {\n  variants: {\n    variant: {\n      ...existingVariants,\n      brand: \"bg-gradient-to-r from-primary-600 to-secondary-600\",\n    },\n  },\n});\n```\n\n#### 4. Composition Layer (New Components)\n\n**Use for**: Business-specific components, complex patterns\n**Why**: Keeps base components clean, enables reuse\n\n```tsx\n// ✅ Good: Compose from primitives\nexport function FeatureCard({ ...props }) {\n  return (\n    \u003cCard\u003e\n      \u003cCardHeader\u003e...\u003c/CardHeader\u003e\n      \u003cCardContent\u003e...\u003c/CardContent\u003e\n    \u003c/Card\u003e\n  );\n}\n```\n\n### Recommended Architecture\n\n```ascii\n@after6ix/ui/\n├── styles/\n│   ├── globals.css          # CSS variables, base styles\n│   └── tokens.ts            # TypeScript token exports\n├── components/\n│   ├── ui/                  # shadcn/ui components (minimal changes)\n│   │   ├── button.tsx\n│   │   ├── card.tsx\n│   │   └── ...\n│   └── after6ix/            # Custom composed components\n│       ├── feature-card.tsx\n│       ├── pricing-table.tsx\n│       └── ...\n├── lib/\n│   └── utils.ts             # Shared utilities\n└── index.ts                 # Public API exports\n```\n\n### Maintenance Guidelines\n\n1. **Minimize Core Changes**: Keep shadcn/ui components as close to original as possible\n2. **Document Deviations**: When you must modify core components, document why\n3. **Use Composition**: Build complex components by composing primitives\n4. **Centralize Tokens**: All design decisions in CSS variables and Tailwind config\n5. **Version Control**: Tag releases when updating shadcn/ui components\n6. **Testing Strategy**: Focus tests on custom components and compositions\n\n### Anti-Patterns to Avoid\n\n```tsx\n// ❌ Don't: Heavily modify core components\n// This makes updates difficult\nconst Button = () =\u003e {\n  // 100+ lines of custom logic\n};\n\n// ❌ Don't: Inline style overrides\n\u003cButton style={{ backgroundColor: '#9333EA' }} /\u003e\n\n// ❌ Don't: Create divergent component APIs\n\u003cButton color=\"purple\" size=\"medium\" /\u003e // Non-standard props\n```\n\n### Upgrade Strategy\n\nWhen shadcn/ui releases updates:\n\n1. Review changelog for breaking changes\n2. Copy new component versions to a branch\n3. Reapply minimal modifications\n4. Test composed components\n5. Update documentation\n\nThis approach balances customization needs with long-term maintainability.\n\n## Component Architecture\n\n### Component Structure\n\nEach component follows a consistent structure:\n\n```typescript\n// Component file structure\ncomponents/\n├── Button/\n│   ├── Button.tsx          // Main component\n│   ├── Button.stories.tsx  // Storybook stories\n│   ├── Button.test.tsx     // Unit tests\n│   ├── Button.types.ts     // TypeScript interfaces\n│   ├── Button.styles.ts    // Styled components/CSS\n│   └── index.ts           // Public exports\n\n// Component template\ninterface ComponentProps extends React.ComponentPropsWithoutRef\u003c'element'\u003e {\n  variant?: 'primary' | 'secondary' | 'ghost';\n  size?: 'sm' | 'md' | 'lg';\n  // ... other props\n}\n\nexport const Component = forwardRef\u003cHTMLElement, ComponentProps\u003e(\n  ({ variant = 'primary', size = 'md', ...props }, ref) =\u003e {\n    // Implementation using Radix UI primitives\n  }\n);\n```\n\n### Component Categories\n\n1. **Primitives** - Basic building blocks\n   - Button, Input, Label, Textarea\n   - Typography (Heading, Text, Code)\n   - Box, Flex, Grid\n\n2. **Feedback** - User feedback components\n   - Alert, Toast, Progress, Spinner\n   - Badge, Tooltip, Popover\n\n3. **Form Controls** - Form elements\n   - Checkbox, Radio, Switch, Slider\n   - Select, DatePicker, FilePicker\n\n4. **Layout** - Structure components\n   - Container, Section, Divider\n   - Card, Panel, Accordion\n\n5. **Navigation** - Navigation elements\n   - Tabs, Breadcrumb, Pagination\n   - Menu, Navigation, Sidebar\n\n6. **Data Display** - Data visualization\n   - Table, DataGrid, List\n   - Avatar, Timeline, Stat\n\n7. **Overlays** - Modal components\n   - Dialog, Drawer, Modal\n   - ContextMenu, DropdownMenu\n\n### Component API Principles\n\n1. **Composability**: Components should work together seamlessly\n2. **Accessibility**: All components meet WCAG 2.1 AA standards\n3. **Type Safety**: Full TypeScript support with proper generics\n4. **Flexibility**: Support for `as` prop for polymorphic components\n5. **Consistency**: Similar props across similar components\n6. **Performance**: Use React.memo and proper optimization techniques\n\n### Example Implementation\n\n```typescript\n// Example: Customizing shadcn/ui Button for After6ix\nimport * as React from 'react';\nimport { Slot } from '@radix-ui/react-slot';\nimport { cn } from '@/lib/utils';\nimport { cva, type VariantProps } from 'class-variance-authority';\n\n// shadcn/ui button adapted with After6ix design tokens\nconst buttonVariants = cva(\n  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',\n  {\n    variants: {\n      variant: {\n        // Using After6ix twilight purple as primary\n        default: 'bg-primary text-primary-foreground hover:bg-primary/90',\n        // Using deep sky blue as secondary\n        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',\n        // Using electric cyan for destructive/accent\n        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',\n        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',\n        ghost: 'hover:bg-accent hover:text-accent-foreground',\n        link: 'text-primary underline-offset-4 hover:underline',\n      },\n      size: {\n        default: 'h-10 px-4 py-2',\n        sm: 'h-9 rounded-md px-3',\n        lg: 'h-11 rounded-md px-8',\n        icon: 'h-10 w-10',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n      size: 'default',\n    },\n  }\n);\n\n// CSS Variables integrating After6ix design tokens with shadcn/ui\n/*\n@layer base {\n  :root {\n    /* After6ix Color Tokens mapped to shadcn/ui conventions */\n    \n    /* Primary - Twilight Purple */\n    --primary-50: 280 100% 98%; /* #FAF5FF */\n    --primary-100: 282 100% 97%; /* #F3E8FF */\n    --primary-200: 281 100% 92%; /* #E9D5FF */\n    --primary-300: 280 97% 85%; /* #D8B4FE */\n    --primary-400: 280 89% 75%; /* #C084FC */\n    --primary-500: 280 91% 65%; /* #A855F7 */\n    --primary-600: 267 80% 58%; /* #9333EA - Base */\n    --primary-700: 263 90% 58%; /* #7C3AED */\n    --primary-800: 262 72% 50%; /* #6B46C1 */\n    --primary-900: 264 67% 35%; /* #581C87 */\n    \n    /* Secondary - Deep Sky */\n    --secondary-50: 214 100% 97%; /* #EFF6FF */\n    --secondary-100: 214 95% 93%; /* #DBEAFE */\n    --secondary-200: 213 97% 87%; /* #BFDBFE */\n    --secondary-300: 212 96% 78%; /* #93C5FD */\n    --secondary-400: 213 94% 68%; /* #60A5FA */\n    --secondary-500: 217 91% 60%; /* #3B82F6 */\n    --secondary-600: 221 83% 53%; /* #2563EB - Base */\n    --secondary-700: 224 76% 48%; /* #1D4ED8 */\n    --secondary-800: 226 71% 40%; /* #1E40AF */\n    --secondary-900: 224 64% 33%; /* #1E3A8A */\n    \n    /* Accent - Electric Cyan */\n    --accent-50: 183 100% 96%; /* #ECFEFF */\n    --accent-100: 185 95% 90%; /* #CFFAFE */\n    --accent-200: 186 94% 82%; /* #A5F3FC */\n    --accent-300: 187 92% 69%; /* #67E8F9 */\n    --accent-400: 188 91% 53%; /* #22D3EE */\n    --accent-500: 189 94% 43%; /* #06B6D4 - Base */\n    --accent-600: 192 91% 36%; /* #0891B2 */\n    --accent-700: 193 82% 31%; /* #0E7490 */\n    --accent-800: 194 70% 27%; /* #155E75 */\n    --accent-900: 196 64% 24%; /* #164E63 */\n    \n    /* shadcn/ui semantic mappings using After6ix tokens */\n    --background: 0 0% 100%; /* White */\n    --foreground: 240 10% 11%; /* Charcoal 900 #18181B */\n    \n    --card: 0 0% 100%;\n    --card-foreground: 240 10% 11%;\n    \n    --popover: 0 0% 100%;\n    --popover-foreground: 240 10% 11%;\n    \n    --primary: var(--primary-600);\n    --primary-foreground: 0 0% 98%;\n    \n    --secondary: var(--secondary-600);\n    --secondary-foreground: 0 0% 98%;\n    \n    --muted: 240 5% 96%; /* Neutral 100 */\n    --muted-foreground: 240 3.8% 46%; /* Neutral 600 */\n    \n    --accent: var(--accent-500);\n    --accent-foreground: 240 10% 11%;\n    \n    --destructive: 0 84% 60%; /* Error base */\n    --destructive-foreground: 0 0% 98%;\n    \n    --border: 240 6% 90%; /* Neutral 200 */\n    --input: 240 6% 90%;\n    --ring: var(--primary-600);\n    \n    /* Spacing \u0026 Effects from After6ix tokens */\n    --radius: 0.5rem; /* radius-lg */\n    \n    /* Typography */\n    --font-sans: \"Inter\", system-ui, -apple-system, sans-serif;\n    --font-mono: \"JetBrains Mono\", Consolas, Monaco, monospace;\n  }\n  \n  .dark {\n    /* Dark mode adjustments */\n    --background: 240 10% 3.9%; /* Near black */\n    --foreground: 0 0% 95%; /* Neutral 100 */\n    \n    --card: 240 10% 9%;\n    --card-foreground: 0 0% 95%;\n    \n    --primary: 267 70% 65%; /* Adjusted for dark mode */\n    --secondary: 221 70% 60%;\n    --accent: 189 80% 50%;\n    \n    --muted: 240 5% 15%;\n    --muted-foreground: 240 5% 60%;\n    \n    --border: 240 6% 20%;\n    --input: 240 6% 20%;\n  }\n}\n\n/* Extended color utilities for After6ix palette */\n@layer utilities {\n  /* Primary color scale */\n  .text-primary-50 { color: hsl(var(--primary-50)); }\n  .text-primary-100 { color: hsl(var(--primary-100)); }\n  /* ... etc for all scales */\n  \n  .bg-primary-50 { background-color: hsl(var(--primary-50)); }\n  .bg-primary-100 { background-color: hsl(var(--primary-100)); }\n  /* ... etc for all scales */\n  \n  /* Animation durations from tokens */\n  .duration-fast { transition-duration: 150ms; }\n  .duration-base { transition-duration: 250ms; }\n  .duration-slow { transition-duration: 400ms; }\n  .duration-slower { transition-duration: 600ms; }\n}\n*/\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes\u003cHTMLButtonElement\u003e,\n    VariantProps\u003ctypeof buttonVariants\u003e {\n  asChild?: boolean;\n}\n\nexport const Button = React.forwardRef\u003cHTMLButtonElement, ButtonProps\u003e(\n  ({ className, variant, size, asChild = false, ...props }, ref) =\u003e {\n    const Comp = asChild ? Slot : 'button';\n    return (\n      \u003cComp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      /\u003e\n    );\n  }\n);\n\nButton.displayName = 'Button';\n```\n\n## Links\n\n- [shadcn/ui Documentation](https://ui.shadcn.com/)\n- [Radix UI Documentation](https://www.radix-ui.com/)\n- [Tailwind CSS](https://tailwindcss.com/)\n- [Class Variance Authority](https://cva.style/docs)\n- Related to [UI Package Setup ADR] (to be created)\n- Implements [Global Styling Strategy ADR] (to be created)\n"},"creationDate":"2025-07-31T14:34:02.000Z","lastEditDate":"2025-07-31T14:34:02.000Z","lastEditAuthor":"Gerald Yeo","publicationDate":"2025-07-30T15:59:59.000Z","file":{"relativePath":"apps/ui/docs/adr/20250730-create-a-design-system-and-ui-kit.md","absolutePath":"/home/runner/work/after6ix.dev/after6ix.dev/apps/ui/docs/adr/20250730-create-a-design-system-and-ui-kit.md"},"repository":{"provider":"github","viewUrl":"https://github.com/geraldyeo/after6ix.dev/blob/master/apps/ui/docs/adr/20250730-create-a-design-system-and-ui-kit.md"}},"l4bVersion":"1.1.0"},"__N_SSG":true},"page":"/adr/[...slug]","query":{"slug":["apps-ui","20250730-create-a-design-system-and-ui-kit"]},"buildId":"1DHlt0L9gd2RT9dGG4htl","assetPrefix":"/after6ix.dev/log4brains","runtimeConfig":{},"isFallback":false,"gsp":true}</script><script nomodule="" src="/after6ix.dev/log4brains/_next/static/chunks/polyfills-0743bfcf6caf8c575f2f.js"></script><script src="/after6ix.dev/log4brains/_next/static/chunks/webpack-50bee04d1dc61f8adf5b.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/commons.e4256be35a0409db2893.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/39d4b69998343c06c2f6d09982e0011fc76b6c1e.6257a86b8cc60c2626df.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/main-2b34b3344eebda2adbc3.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/a3e17150ead73d62fba7a33a50672ae3f72841a5.ccd40cab9508bddeb5f6.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/pages/_app-882d5c7e9b454dd24ddd.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/e3826749.d6bab887d966ca5b6c01.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/9ed7e97f.57939778917eb1fad6bd.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/ffd01e96.b058e41bdbd248f9b4cd.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/5fc9c5e4.29b2451d08aa93429e70.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/45d2d314fc8da5e3d79852782e4a432ad4da6771.42d7149cf7e5045c3836.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/chunks/pages/adr/%5B...slug%5D-3cd230a29f7f0e7dec6e.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/1DHlt0L9gd2RT9dGG4htl/_buildManifest.js" async=""></script><script src="/after6ix.dev/log4brains/_next/static/1DHlt0L9gd2RT9dGG4htl/_ssgManifest.js" async=""></script></body></html>
