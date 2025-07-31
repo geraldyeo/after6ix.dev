@@ -8,8 +8,28 @@ This package provides:
 
 - **Design Tokens** - Colors, typography, spacing, shadows, animations, and more
 - **Tailwind CSS v4** - Modern utility-first CSS framework with After6ix customizations
+- **React Components** - Accessible, customizable UI components based on shadcn/ui
+- **Storybook Documentation** - Interactive component gallery and design token reference
 - **Utilities** - Helper functions for className management
 - **Type Safety** - Full TypeScript support with exported types
+
+## Quick Start
+
+```tsx
+// 1. Import styles in your app's root CSS file
+import '@after6ix/ui/styles';
+
+// 2. Use components in your React app
+import { Button } from '@after6ix/ui';
+
+function App() {
+  return (
+    <Button variant="primary">
+      Get Started
+    </Button>
+  );
+}
+```
 
 ## Installation
 
@@ -18,6 +38,12 @@ This package is part of the After6ix monorepo and is automatically available to 
 ```bash
 # Already linked in the workspace, no installation needed
 # Just import and use!
+```
+
+For external projects (when published):
+
+```bash
+pnpm add @after6ix/ui
 ```
 
 ## Usage
@@ -46,6 +72,33 @@ const styles = {
   fontFamily: typography.fonts.sans,
   boxShadow: shadows.md,
 };
+```
+
+### Using Components
+
+```typescript
+import { Button } from '@after6ix/ui';
+
+// Use the Button component with variants
+<Button variant="primary" size="lg">
+  Click me
+</Button>
+
+// All available variants
+<Button variant="default">Default</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="accent">Accent</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+
+// Size options
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="xl">Extra Large</Button>
+<Button size="icon">Icon</Button>
 ```
 
 ### Using Utilities
@@ -218,50 +271,66 @@ import type {
 
 ## Examples
 
-### Creating a Themed Button
+### Using the Button Component
+
+```tsx
+import { Button } from '@after6ix/ui';
+
+// Basic usage
+<Button>Click me</Button>
+
+// With variants and sizes
+<Button variant="secondary" size="lg">
+  Large Secondary Button
+</Button>
+
+// As a link (polymorphic)
+<Button asChild>
+  <a href="/about">Learn More</a>
+</Button>
+
+// With custom className
+<Button 
+  variant="accent" 
+  className="w-full md:w-auto"
+>
+  Full Width on Mobile
+</Button>
+
+// Icon button
+<Button size="icon" variant="ghost">
+  <svg>...</svg>
+</Button>
+```
+
+### Creating Custom Components with Design Tokens
 
 ```tsx
 import { cn } from '@after6ix/ui/utils';
+import { colors, spacing } from '@after6ix/ui/tokens';
 
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'accent';
-  size?: 'sm' | 'md' | 'lg';
+interface CardProps {
+  title: string;
+  description: string;
   className?: string;
-  children: React.ReactNode;
 }
 
-function Button({ 
-  variant = 'primary', 
-  size = 'md', 
-  className,
-  children 
-}: ButtonProps) {
+function Card({ title, description, className }: CardProps) {
   return (
-    <button
+    <div
       className={cn(
-        // Base styles
-        'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-base',
-        
-        // Variant styles
-        {
-          'bg-primary-600 text-white hover:bg-primary-700': variant === 'primary',
-          'bg-secondary-600 text-white hover:bg-secondary-700': variant === 'secondary',
-          'bg-accent-500 text-white hover:bg-accent-600': variant === 'accent',
-        }[variant],
-        
-        // Size styles
-        {
-          'px-3 py-1.5 text-sm': size === 'sm',
-          'px-4 py-2 text-base': size === 'md',
-          'px-6 py-3 text-lg': size === 'lg',
-        }[size],
-        
-        // User styles
+        'rounded-lg border border-neutral-200 p-6',
+        'shadow-sm hover:shadow-md transition-shadow duration-base',
         className
       )}
     >
-      {children}
-    </button>
+      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+        {title}
+      </h3>
+      <p className="text-neutral-600">
+        {description}
+      </p>
+    </div>
   );
 }
 ```
@@ -293,18 +362,129 @@ This package exports TypeScript source files directly. Consuming applications ha
 - Full TypeScript support in IDEs
 - Optimal tree-shaking in production builds
 
-## Future Components
+### Running Storybook
 
-The design system will be extended with shadcn/ui components customized with After6ix tokens. Components will be added incrementally as needed.
+To view the design system documentation and component gallery:
+
+```bash
+# From the ui package directory
+pnpm storybook
+
+# Or from the monorepo root
+pnpm --filter @after6ix/ui storybook
+```
+
+Storybook will be available at [http://localhost:6006](http://localhost:6006)
+
+### Building Storybook
+
+To build the static Storybook site:
+
+```bash
+# From the ui package directory
+pnpm build-storybook
+
+# Or from the monorepo root
+pnpm --filter @after6ix/ui build-storybook
+```
+
+The static site will be generated in `storybook-static/`
+
+## Package Structure
+
+```
+@after6ix/ui/
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # UI components (Button, Card, etc.)
+│   │   └── index.ts        # Component exports
+│   ├── lib/                # Utility functions
+│   │   └── utils.ts        # cn() and other helpers
+│   ├── stories/            # Storybook stories
+│   │   ├── design-tokens/  # Token documentation
+│   │   └── ui-kit/         # Component stories
+│   ├── styles/             # CSS and design tokens
+│   │   ├── globals.css     # Global styles and CSS variables
+│   │   ├── tailwind.css    # Tailwind v4 configuration
+│   │   └── tokens.ts       # TypeScript token definitions
+│   └── index.ts            # Main package exports
+├── docs/
+│   └── adr/                # Architecture Decision Records
+├── components.json         # shadcn/ui configuration
+├── tailwind.config.ts      # Tailwind configuration
+└── package.json            # Package configuration
+```
+
+## Architecture Decision Records
+
+Key design decisions for the UI package are documented in ADRs:
+
+- [Create a Design System and UI Kit](./docs/adr/20250730-create-a-design-system-and-ui-kit.md) - The foundational decision to build a comprehensive design system
+
+## Components
+
+### Available Components
+
+- **Button** - A versatile button component with multiple variants and sizes
+  - Variants: default, secondary, accent, destructive, outline, ghost, link
+  - Sizes: sm, default, lg, xl, icon
+  - Full accessibility support with focus states
+  - Polymorphic component support via `asChild` prop
+
+### Future Components
+
+The design system will be extended with additional shadcn/ui components customized with After6ix tokens. Components will be added incrementally as needed.
+
+## shadcn/ui Integration
+
+This package is configured to work with shadcn/ui's CLI tool. The `components.json` file defines:
+
+- Style: new-york variant
+- TypeScript support enabled
+- Tailwind CSS v4 configuration
+- Path aliases for clean imports
+
+To add new shadcn/ui components:
+
+```bash
+# From the ui package directory
+pnpm dlx shadcn@latest add <component-name>
+```
 
 ## Contributing
 
-When adding new tokens or utilities:
+When adding new components or features:
 
-1. Update the TypeScript interfaces in `src/styles/tokens.ts`
-2. Add corresponding CSS variables in `src/styles/tailwind.css`
-3. Document the additions in this README
-4. Ensure all tokens follow the existing naming conventions
+### Adding Components
+
+1. **Create the component** in `src/components/ui/`
+2. **Export it** from `src/components/index.ts`
+3. **Add Storybook stories** in `src/stories/ui-kit/`
+4. **Update documentation** in this README
+5. **Follow conventions**:
+   - Use `cva` for variant styling
+   - Support `asChild` prop for polymorphic components
+   - Include proper TypeScript types
+   - Ensure full accessibility
+
+### Adding Design Tokens
+
+1. **Update TypeScript interfaces** in `src/styles/tokens.ts`
+2. **Add CSS variables** in `src/styles/tailwind.css`
+3. **Create Storybook documentation** in `src/stories/design-tokens/`
+4. **Update this README** with new token documentation
+5. **Follow naming conventions**:
+   - Use semantic names (primary, secondary, accent)
+   - Include scale values (50-900 for colors)
+   - Be consistent with existing patterns
+
+### Code Style Guidelines
+
+- Use functional components with TypeScript
+- Prefer composition over inheritance
+- Keep components focused and single-purpose
+- Write comprehensive Storybook stories
+- Include JSDoc comments for public APIs
 
 ## License
 

@@ -1,50 +1,59 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
-import { Button } from '../components/ui/button';
+import { Meta, Story, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+import { Button } from '../../components/ui/button';
 
-<Meta title="UI Kit/Button" component={Button} />
+<Meta of={ButtonStories} />
 
 # Button
 
 The After6ix button component is built with our design tokens and provides consistent interaction patterns across the application.
 
+## Component Overview
+
+<Canvas of={ButtonStories.Default} />
+
+<Controls of={ButtonStories.Default} />
+
 ## Variants
+
+Our button component supports multiple visual variants for different use cases:
 
 <div className="grid grid-cols-2 gap-4 my-8">
   <div className="space-y-4">
     <div>
-      <Button variant="default">Primary Button</Button>
+      <Canvas of={ButtonStories.Default} />
       <p className="text-sm text-neutral-600 mt-2">Default primary action</p>
     </div>
     
     <div>
-      <Button variant="secondary">Secondary Button</Button>
+      <Canvas of={ButtonStories.Secondary} />
       <p className="text-sm text-neutral-600 mt-2">Secondary actions</p>
     </div>
     
     <div>
-      <Button variant="accent">Accent Button</Button>
+      <Canvas of={ButtonStories.Accent} />
       <p className="text-sm text-neutral-600 mt-2">Highlight important actions</p>
     </div>
     
     <div>
-      <Button variant="destructive">Destructive Button</Button>
+      <Canvas of={ButtonStories.Destructive} />
       <p className="text-sm text-neutral-600 mt-2">Dangerous actions like delete</p>
     </div>
   </div>
   
   <div className="space-y-4">
     <div>
-      <Button variant="outline">Outline Button</Button>
+      <Canvas of={ButtonStories.Outline} />
       <p className="text-sm text-neutral-600 mt-2">Low emphasis actions</p>
     </div>
     
     <div>
-      <Button variant="ghost">Ghost Button</Button>
+      <Canvas of={ButtonStories.Ghost} />
       <p className="text-sm text-neutral-600 mt-2">Minimal style for tertiary actions</p>
     </div>
     
     <div>
-      <Button variant="link">Link Button</Button>
+      <Canvas of={ButtonStories.Link} />
       <p className="text-sm text-neutral-600 mt-2">Navigation or external links</p>
     </div>
   </div>
@@ -53,42 +62,36 @@ The After6ix button component is built with our design tokens and provides consi
 ## Sizes
 
 <div className="flex items-center gap-4 my-8">
-  <Button size="sm">Small</Button>
-  <Button size="default">Default</Button>
-  <Button size="lg">Large</Button>
-  <Button size="xl">Extra Large</Button>
-  <Button size="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-  </Button>
+  <Canvas of={ButtonStories.Small} />
+  <Canvas of={ButtonStories.Default} />
+  <Canvas of={ButtonStories.Large} />
+  <Canvas of={ButtonStories.ExtraLarge} />
+  <Canvas of={ButtonStories.Icon} />
 </div>
 
 ## States
 
 <div className="flex flex-col my-8 gap-4">
   <div className="flex items-center gap-4">
-    <Button>Normal</Button>
-    <Button disabled>Disabled</Button>
+    <Canvas of={ButtonStories.Default} />
+    <Canvas of={ButtonStories.Disabled} />
   </div>
   
   <div className="flex items-center gap-4">
-    <Button>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-      </svg>
-      <span>With Icon</span>
-    </Button>
-    
-    <Button disabled>
-      <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span>Loading</span>
-    </Button>
+    <Canvas of={ButtonStories.WithIcon} />
+    <Canvas of={ButtonStories.Loading} />
   </div>
 </div>
+
+## Interactive Actions
+
+The button component supports various interaction handlers. Try clicking, hovering, and focusing on the button below to see the actions logged in the Actions panel:
+
+<Canvas of={ButtonStories.WithActions} />
+
+## API Reference
+
+<ArgTypes of={ButtonStories} />
 
 ## Usage Examples
 
@@ -116,6 +119,10 @@ function MyComponent() {
 ```
 
 ### As Link
+
+The button component can render as any element using the `asChild` prop from Radix UI:
+
+<Canvas of={ButtonStories.AsChild} />
 
 ```tsx
 <Button asChild>
