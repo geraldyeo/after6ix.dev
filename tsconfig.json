@@ -4,6 +4,7 @@
   "files": [],
   "references": [
     { "path": "./packages/core" },
+    { "path": "./apps/ui" },
     { "path": "./apps/site" },
     { "path": "./apps/cv" }
   ]

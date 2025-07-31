@@ -1,0 +1,163 @@
+import { Meta, Story, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+import { Button } from '../../components/ui/button';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+The After6ix button component is built with our design tokens and provides consistent interaction patterns across the application.
+
+## Component Overview
+
+<Canvas of={ButtonStories.Default} />
+
+<Controls of={ButtonStories.Default} />
+
+## Variants
+
+Our button component supports multiple visual variants for different use cases:
+
+<div className="grid grid-cols-2 gap-4 my-8">
+  <div className="space-y-4">
+    <div>
+      <Canvas of={ButtonStories.Default} />
+      <p className="text-sm text-neutral-600 mt-2">Default primary action</p>
+    </div>
+    
+    <div>
+      <Canvas of={ButtonStories.Secondary} />
+      <p className="text-sm text-neutral-600 mt-2">Secondary actions</p>
+    </div>
+    
+    <div>
+      <Canvas of={ButtonStories.Accent} />
+      <p className="text-sm text-neutral-600 mt-2">Highlight important actions</p>
+    </div>
+    
+    <div>
+      <Canvas of={ButtonStories.Destructive} />
+      <p className="text-sm text-neutral-600 mt-2">Dangerous actions like delete</p>
+    </div>
+  </div>
+  
+  <div className="space-y-4">
+    <div>
+      <Canvas of={ButtonStories.Outline} />
+      <p className="text-sm text-neutral-600 mt-2">Low emphasis actions</p>
+    </div>
+    
+    <div>
+      <Canvas of={ButtonStories.Ghost} />
+      <p className="text-sm text-neutral-600 mt-2">Minimal style for tertiary actions</p>
+    </div>
+    
+    <div>
+      <Canvas of={ButtonStories.Link} />
+      <p className="text-sm text-neutral-600 mt-2">Navigation or external links</p>
+    </div>
+  </div>
+</div>
+
+## Sizes
+
+<div className="flex items-center gap-4 my-8">
+  <Canvas of={ButtonStories.Small} />
+  <Canvas of={ButtonStories.Default} />
+  <Canvas of={ButtonStories.Large} />
+  <Canvas of={ButtonStories.ExtraLarge} />
+  <Canvas of={ButtonStories.Icon} />
+</div>
+
+## States
+
+<div className="flex flex-col my-8 gap-4">
+  <div className="flex items-center gap-4">
+    <Canvas of={ButtonStories.Default} />
+    <Canvas of={ButtonStories.Disabled} />
+  </div>
+  
+  <div className="flex items-center gap-4">
+    <Canvas of={ButtonStories.WithIcon} />
+    <Canvas of={ButtonStories.Loading} />
+  </div>
+</div>
+
+## Interactive Actions
+
+The button component supports various interaction handlers. Try clicking, hovering, and focusing on the button below to see the actions logged in the Actions panel:
+
+<Canvas of={ButtonStories.WithActions} />
+
+## API Reference
+
+<ArgTypes of={ButtonStories} />
+
+## Usage Examples
+
+### Basic Usage
+
+```tsx
+import { Button } from '@after6ix/ui/components/button';
+
+function MyComponent() {
+  return (
+    <Button onClick={() => console.log('clicked')}>
+      Click me
+    </Button>
+  );
+}
+```
+
+### With Icons
+
+```tsx
+<Button>
+  <DownloadIcon />
+  Download Report
+</Button>
+```
+
+### As Link
+
+The button component can render as any element using the `asChild` prop from Radix UI:
+
+<Canvas of={ButtonStories.AsChild} />
+
+```tsx
+<Button asChild>
+  <a href="/dashboard">Go to Dashboard</a>
+</Button>
+```
+
+### Button Group
+
+<div className="inline-flex rounded-lg shadow-sm my-8">
+  <Button variant="outline" className="rounded-r-none">Left</Button>
+  <Button variant="outline" className="rounded-none border-l-0">Center</Button>
+  <Button variant="outline" className="rounded-l-none border-l-0">Right</Button>
+</div>
+
+```tsx
+<div className="inline-flex rounded-lg shadow-sm">
+  <Button variant="outline" className="rounded-r-none">Left</Button>
+  <Button variant="outline" className="rounded-none border-l-0">Center</Button>
+  <Button variant="outline" className="rounded-l-none border-l-0">Right</Button>
+</div>
+```
+
+## Accessibility
+
+- All buttons have proper focus states with visible focus rings
+- Disabled buttons have `aria-disabled` and prevent interaction
+- Icon-only buttons should include proper aria-labels
+- Keyboard navigation works with Tab and Enter/Space keys
+
+## Design Tokens Used
+
+- **Colors**: Primary, Secondary, Accent, Error (destructive), Neutral
+- **Typography**: Font size and weight tokens
+- **Spacing**: Padding uses spacing tokens
+- **Shadows**: Shadow tokens for depth
+- **Animations**: Transition duration tokens
+- **Border Radius**: Radius tokens for corners

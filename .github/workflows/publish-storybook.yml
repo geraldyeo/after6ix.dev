@@ -1,0 +1,45 @@
+name: Publish Storybook
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/ui/**'
+      - '.github/workflows/publish-storybook.yml'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false # required by JamesIves/github-pages-deploy-action
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.0' # Match project requirement
+      
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0 # Match project requirement
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build Storybook
+        run: pnpm --filter @after6ix/ui build-storybook -- --output-dir storybook-static
+      
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: apps/ui/storybook-static
+          target-folder: storybook
+          clean: true

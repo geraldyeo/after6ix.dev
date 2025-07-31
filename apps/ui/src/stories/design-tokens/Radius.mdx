@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { radius } from '../../styles/tokens';
+
+<Meta title="Design Tokens/Radius" />
+
+# Border Radius
+
+The After6ix radius system provides consistent values for creating rounded corners throughout the interface.
+
+## Radius Scale
+
+<div className="grid grid-cols-3 gap-4 my-8">
+  {Object.entries(radius).map(([key, value]) => (
+    <div key={key} className="p-4 bg-neutral-50 rounded-lg text-center">
+      <div 
+        className="mx-auto w-24 h-24 bg-primary-600 flex items-center justify-center text-white font-semibold"
+        style={{ borderRadius: value }}
+      >
+        {key}
+      </div>
+      <div className="mt-3">
+        <div className="text-sm font-mono text-neutral-600">{key}</div>
+        <div className="text-xs text-neutral-500">{value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+```tsx
+import { radius } from '@after6ix/ui/tokens';
+
+// In styles
+const cardStyle = {
+  borderRadius: radius.lg,
+};
+
+// With Tailwind classes
+<div className="rounded-lg">
+  {/* Border radius utilities map to our tokens */}
+</div>
+```

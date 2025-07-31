@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { opacity } from '../../styles/tokens';
+
+<Meta title="Design Tokens/Opacity" />
+
+# Opacity
+
+The After6ix opacity system provides consistent transparency values.
+
+## Opacity Scale
+
+<div className="grid grid-cols-3 gap-4 my-8">
+  {Object.entries(opacity).map(([key, value]) => (
+    <div key={key} className="p-4 bg-neutral-50 rounded-lg">
+      <div className="relative h-20 rounded overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-500" />
+        <div 
+          className="absolute inset-0 bg-white"
+          style={{ opacity: value }}
+        />
+      </div>
+      <div className="mt-3 text-center">
+        <div className="text-sm font-mono text-neutral-600">{key}%</div>
+        <div className="text-xs text-neutral-500">{value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+```tsx
+import { opacity } from '@after6ix/ui/tokens';
+
+// In styles
+const styles = {
+  opacity: opacity[50], // 50% opacity
+};
+
+// With Tailwind
+<div className="opacity-50">
+  {/* Opacity utilities */}
+</div>
+```

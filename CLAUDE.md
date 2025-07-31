@@ -49,6 +49,19 @@ The following specialized agents are available for specific development tasks:
 - **Purpose**: Expert guidance on test planning, test automation frameworks, and various testing types (unit, integration, system, UI, regression)
 - **Trigger**: When working on test strategies, test implementation, or test infrastructure
 
+#### design-system-architect
+
+- **When to use**: When architecting design systems, planning UI component libraries, creating reusable component architectures
+- **Purpose**: Helps establish design tokens, patterns, component hierarchies, naming conventions, and shareable UI kits
+- **Trigger**: When creating new design systems, planning component libraries, or establishing UI consistency across the monorepo
+
+#### ogilvy-creative-duo
+
+- **When to use**: When creating advertising or marketing materials requiring both visual and/or copy expertise
+- **Purpose**: Develops ad campaigns, slogans, social media content, and brand strategies using David Ogilvy's marketing principles
+- **Trigger**: When working on marketing content that needs compelling visuals paired with persuasive copy
+- **Examples**: Product launch campaigns, social media marketing posts, brand identity development
+
 ### Tool-specific Guidelines
 
 #### Sequential Thinking
@@ -202,10 +215,27 @@ pnpm log4brains list
 - **`apps/*`** - Frontend applications
   - **`cv`** - CV and Resume Improver (@after6ix/cv)
   - **`site`** - Main After6ix website (@after6ix/site)
+  - **`ui`** - Design system and UI components (@after6ix/ui)
 - **`packages/*`** - Shared libraries and utilities
   - **`core`** - Core utilities and shared functions (@after6ix/core)
 
 The workspace is configured in `pnpm-workspace.yaml` to automatically include any packages in these directories.
+
+### Shared Module Compilation Strategy
+
+**Important**: Shared packages (`@after6ix/ui`, `@after6ix/core`) are NOT pre-built. They export TypeScript source files directly, and consuming applications handle the compilation. This approach:
+
+- **Simplifies development** - No build step needed for shared packages
+- **Enables better tree-shaking** - Consuming apps optimize exactly what they use
+- **Improves DX** - Direct source imports with full TypeScript support
+- **Reduces complexity** - No need for complex build configurations in shared packages
+
+When creating new shared packages:
+
+1. Export TypeScript source files directly in `package.json`
+2. Set `"type": "module"` for ES modules
+3. Let consuming applications handle transpilation
+4. No need for build tools like tsup, rollup, or webpack
 
 ### TypeScript Configuration
 
@@ -215,6 +245,26 @@ The workspace is configured in `pnpm-workspace.yaml` to automatically include an
 - Composite projects enabled for better monorepo support
 - Strict mode with all checks enabled
 - Path mappings configured for absolute imports
+
+#### TypeScript Best Practices
+
+**IMPORTANT**: Always prioritize catching errors early:
+
+1. **Never use `skipLibCheck: true`** - We want to catch type issues in dependencies
+2. **Keep strict mode enabled** - All strict checks should remain on
+3. **Don't ignore type errors** - Fix them properly instead of using `@ts-ignore`
+4. **Validate third-party types** - If a library has type issues, consider:
+   - Updating to a fixed version
+   - Contributing fixes upstream
+   - Using a well-typed alternative
+   - Creating proper type definitions
+
+This approach ensures:
+
+- Runtime errors are caught at compile time
+- API contracts are validated across packages
+- Dependencies remain type-safe
+- Better developer experience with accurate IntelliSense
 
 ### Key Requirements
 
@@ -239,3 +289,11 @@ The workspace is configured in `pnpm-workspace.yaml` to automatically include an
 2. When creating new packages or apps, ensure they have their own `tsconfig.json` that extends from `tsconfig.base.json`
 3. TypeScript project references should be used for inter-package dependencies
 4. Use `pnpm exec` or `pnpm dlx` instead of `npx` for better pnpm compatibility
+
+## Documentation Guidelines
+
+To maintain readability, if this CLAUDE.md file exceeds 1000 words, refactor it by:
+
+- Moving detailed sections to separate files in `/docs` (e.g., project-setup.md, api-guidelines.md, testing-approach.md, deployment-notes.md)
+- Keeping only essential information in CLAUDE.md: tool usage instructions, specialized agent configurations, and links to the detailed documentation
+- This prevents the file from becoming unwieldy while preserving quick access to critical Claude Code instructions

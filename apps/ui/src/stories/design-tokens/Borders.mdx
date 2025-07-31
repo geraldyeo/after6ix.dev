@@ -1,0 +1,55 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { borders } from '../../styles/tokens';
+
+<Meta title="Design Tokens/Borders" />
+
+# Borders
+
+The After6ix border system provides consistent border widths and styles.
+
+## Border Widths
+
+<div className="space-y-3 my-8">
+  {Object.entries(borders.widths).map(([key, value]) => (
+    <div key={key} className="flex items-center gap-4 p-4">
+      <span className="text-sm font-mono text-neutral-600 w-20">{key}:</span>
+      <div 
+        className="flex-1 h-12 bg-white border-primary-600 border-l-0 border-r-0 border-t-0"
+        style={{ borderBottomWidth: value, borderBottomStyle: 'solid' }}
+      />
+      <span className="text-sm text-neutral-500">{value}</span>
+    </div>
+  ))}
+</div>
+
+## Border Styles
+
+<div className="space-y-3 my-8">
+  {Object.entries(borders.styles).map(([key, value]) => (
+    <div key={key} className="flex items-center gap-4 p-4">
+      <span className="text-sm font-mono text-neutral-600 w-20">{key}:</span>
+      <div 
+        className="flex-1 h-12 bg-white border-neutral-600 border-2 border-l-0 border-r-0 border-t-0"
+        style={{ borderBottomStyle: value }}
+      />
+      <span className="text-sm text-neutral-500">{value}</span>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+```tsx
+import { borders } from '@after6ix/ui/tokens';
+
+// In styles
+const styles = {
+  borderWidth: borders.widths.base,
+  borderStyle: borders.styles.solid,
+};
+
+// With Tailwind
+<div className="border-2 border-solid">
+  {/* Border utilities */}
+</div>
+```

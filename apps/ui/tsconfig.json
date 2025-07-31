@@ -1,10 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    
     // React specific settings
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
@@ -20,7 +16,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    
+
     // Interop
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -30,9 +26,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@utils/*": ["./src/utils/*"]
-    }
+      "@lib/*": ["./src/lib/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@styles/*": ["./src/styles/*"],
+    },
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "build", "coverage"],

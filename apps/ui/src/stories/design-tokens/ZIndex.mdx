@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { zIndex } from '../../styles/tokens';
+
+<Meta title="Design Tokens/Z-Index" />
+
+# Z-Index
+
+The After6ix z-index system provides a consistent layering scale for managing the stacking order of UI elements.
+
+## Z-Index Scale
+
+<div className="space-y-3 my-8">
+  {Object.entries(zIndex).map(([key, value]) => (
+    <div key={key} className="flex items-center gap-4 p-4 bg-neutral-50 rounded-lg">
+      <span className="text-sm font-mono text-neutral-600 w-24">{key}:</span>
+      <span className="text-2xl font-bold text-primary-600">{value}</span>
+      <span className="text-sm text-neutral-500 ml-auto">
+        {key === 'base' && 'Ground level elements'}
+        {key === 'dropdown' && 'Dropdowns, tooltips'}
+        {key === 'sticky' && 'Sticky headers, toolbars'}
+        {key === 'overlay' && 'Modal backdrops'}
+        {key === 'modal' && 'Modals, dialogs'}
+        {key === 'popover' && 'Popovers, context menus'}
+        {key === 'toast' && 'Toast notifications'}
+        {key === 'tooltip' && 'Tooltips, hints'}
+      </span>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+```tsx
+import { zIndex } from '@after6ix/ui/tokens';
+
+// In styles
+const modalStyle = {
+  zIndex: zIndex.modal,
+};
+
+// Component stacking
+<>
+  <div style={{ zIndex: zIndex.overlay }}>Backdrop</div>
+  <div style={{ zIndex: zIndex.modal }}>Modal</div>
+  <div style={{ zIndex: zIndex.toast }}>Toast</div>
+</>
+```

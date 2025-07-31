@@ -77,3 +77,5 @@ dist-ssr/
 # Package manager
 .pnpm-store/
 .yarn/
+*storybook.log
+storybook-static

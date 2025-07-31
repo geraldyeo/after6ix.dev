@@ -7,10 +7,10 @@
     
     // React specific settings
     "jsx": "react-jsx",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     
     // Module settings for bundlers
-    "module": "ESNext",
+    "module": "es2022",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowJs": true,
