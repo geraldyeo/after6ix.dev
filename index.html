@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After6ix Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+                Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #9333EA 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #a5a5a5;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #9333EA 0%, #2563EB 50%, #06B6D4 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #3a3a3a;
+            box-shadow: 0 12px 24px rgba(147, 51, 234, 0.15);
+        }
+
+        .card:hover::before {
+            transform: translateX(0);
+        }
+
+        .card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #06B6D4;
+        }
+
+        .card p {
+            color: #a5a5a5;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #9333EA;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: gap 0.2s ease;
+        }
+
+        .card-link:hover {
+            gap: 0.75rem;
+        }
+
+        .card-link::after {
+            content: '→';
+            font-size: 1.25rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #2a2a2a;
+            color: #666;
+        }
+
+        footer a {
+            color: #9333EA;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>After6ix Documentation</h1>
+            <p class="subtitle">Design System & Architecture Decisions</p>
+        </header>
+
+        <div class="cards">
+            <div class="card">
+                <h2>Design System</h2>
+                <p>
+                    Explore the After6ix UI design system with interactive component demos,
+                    design tokens for colors and typography, comprehensive documentation,
+                    and real-world usage examples.
+                </p>
+                <a href="./storybook/" class="card-link">View Storybook</a>
+            </div>
+
+            <div class="card">
+                <h2>Architecture Decisions</h2>
+                <p>
+                    Browse Architecture Decision Records (ADRs) documenting our key technical
+                    decisions, design patterns, technology choices, and the evolution of our
+                    system architecture.
+                </p>
+                <a href="./log4brains/" class="card-link">View ADRs</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="https://github.com/After6ix/after6ix.dev">GitHub Repository</a> •
+            <a href="https://after6ix.dev">Main Website</a>
+        </p>
+    </footer>
+</body>
+
+</html>
