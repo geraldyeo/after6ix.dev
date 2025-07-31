@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/blocks';
+import { spacing } from '../styles/tokens';
+
+<Meta title="Design Tokens/Spacing" />
+
+# Spacing
+
+The After6ix spacing system uses a consistent 4px base unit to create harmonious layouts.
+
+## Spacing Scale
+
+<div className="my-8">
+  <div className="space-y-2">
+    {Object.entries(spacing).map(([key, value]) => (
+      <div key={key} className="flex items-center gap-4">
+        <span className="text-sm font-mono text-neutral-500 w-16">{key}:</span>
+        <div className="flex items-center gap-4 flex-1">
+          <div 
+            className="bg-primary-600 h-8" 
+            style={{ width: value }}
+          />
+          <span className="text-sm text-neutral-600">{value}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+## Usage
+
+```tsx
+import { spacing } from '@after6ix/ui/tokens';
+
+// In styles
+const styles = {
+  padding: spacing[4],      // 16px
+  marginTop: spacing[8],    // 32px
+  gap: spacing[2],         // 8px
+};
+
+// With Tailwind classes
+<div className="p-4 mt-8 space-x-2">
+  {/* Tailwind's spacing scale matches our tokens */}
+</div>
+```

@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/blocks';
+import { typography } from '../styles/tokens';
+
+<Meta title="Design Tokens/Typography" />
+
+# Typography
+
+The After6ix typography system provides font families, sizes, weights, and line heights.
+
+## Font Families
+
+<div className="space-y-6 my-8">
+  <div className="p-6 bg-neutral-50 rounded-lg">
+    <h3 className="text-sm font-medium text-neutral-600 mb-2">Sans Serif</h3>
+    <p style={{ fontFamily: typography.fonts.sans }} className="text-2xl mb-2">
+      Inter - The quick brown fox jumps over the lazy dog
+    </p>
+    <p className="text-xs text-neutral-500 font-mono">{typography.fonts.sans}</p>
+  </div>
+  
+  <div className="p-6 bg-neutral-50 rounded-lg">
+    <h3 className="text-sm font-medium text-neutral-600 mb-2">Monospace</h3>
+    <p style={{ fontFamily: typography.fonts.mono }} className="text-2xl mb-2">
+      JetBrains Mono - const code = "Hello, World!";
+    </p>
+    <p className="text-xs text-neutral-500 font-mono">{typography.fonts.mono}</p>
+  </div>
+</div>
+
+## Type Scale
+
+<div className="space-y-3 my-8">
+  {Object.entries(typography.sizes).map(([key, value]) => (
+    <div key={key} className="flex items-baseline gap-4 py-2">
+      <span className="text-sm font-mono text-neutral-500 w-16">{key}:</span>
+      <p style={{ fontSize: value }} className="font-sans flex-1">
+        After6ix - Where Code Comes Alive
+      </p>
+      <span className="text-sm text-neutral-400">{value}</span>
+    </div>
+  ))}
+</div>
+
+## Font Weights
+
+<div className="space-y-2 my-8">
+  {Object.entries(typography.weights).map(([key, value]) => (
+    <div key={key} className="flex items-center gap-4 py-2">
+      <span className="text-sm font-mono text-neutral-500 w-24">{key}:</span>
+      <p style={{ fontWeight: value }} className="text-lg flex-1">
+        The quick brown fox jumps over the lazy dog
+      </p>
+      <span className="text-sm text-neutral-400">{value}</span>
+    </div>
+  ))}
+</div>
+
+## Line Heights
+
+<div className="space-y-4 my-8">
+  {Object.entries(typography.lineHeights).map(([key, value]) => (
+    <div key={key} className="border-b pb-4">
+      <div className="flex items-center gap-4 mb-2">
+        <span className="text-sm font-mono text-neutral-500 w-20">{key}:</span>
+        <span className="text-sm text-neutral-400">{value}</span>
+      </div>
+      <p style={{ lineHeight: value }} className="text-base max-w-2xl">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+  ))}
+</div>
+
+## Letter Spacing
+
+<div className="space-y-3 my-8">
+  {Object.entries(typography.letterSpacing).map(([key, value]) => (
+    <div key={key} className="flex items-center gap-4 py-2">
+      <span className="text-sm font-mono text-neutral-500 w-20">{key}:</span>
+      <p style={{ letterSpacing: value }} className="text-lg flex-1">
+        Letter spacing example
+      </p>
+      <span className="text-sm text-neutral-400">{value}</span>
+    </div>
+  ))}
+</div>
+

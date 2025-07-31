@@ -215,10 +215,27 @@ pnpm log4brains list
 - **`apps/*`** - Frontend applications
   - **`cv`** - CV and Resume Improver (@after6ix/cv)
   - **`site`** - Main After6ix website (@after6ix/site)
+  - **`ui`** - Design system and UI components (@after6ix/ui)
 - **`packages/*`** - Shared libraries and utilities
   - **`core`** - Core utilities and shared functions (@after6ix/core)
 
 The workspace is configured in `pnpm-workspace.yaml` to automatically include any packages in these directories.
+
+### Shared Module Compilation Strategy
+
+**Important**: Shared packages (`@after6ix/ui`, `@after6ix/core`) are NOT pre-built. They export TypeScript source files directly, and consuming applications handle the compilation. This approach:
+
+- **Simplifies development** - No build step needed for shared packages
+- **Enables better tree-shaking** - Consuming apps optimize exactly what they use
+- **Improves DX** - Direct source imports with full TypeScript support
+- **Reduces complexity** - No need for complex build configurations in shared packages
+
+When creating new shared packages:
+
+1. Export TypeScript source files directly in `package.json`
+2. Set `"type": "module"` for ES modules
+3. Let consuming applications handle transpilation
+4. No need for build tools like tsup, rollup, or webpack
 
 ### TypeScript Configuration
 
@@ -228,6 +245,26 @@ The workspace is configured in `pnpm-workspace.yaml` to automatically include an
 - Composite projects enabled for better monorepo support
 - Strict mode with all checks enabled
 - Path mappings configured for absolute imports
+
+#### TypeScript Best Practices
+
+**IMPORTANT**: Always prioritize catching errors early:
+
+1. **Never use `skipLibCheck: true`** - We want to catch type issues in dependencies
+2. **Keep strict mode enabled** - All strict checks should remain on
+3. **Don't ignore type errors** - Fix them properly instead of using `@ts-ignore`
+4. **Validate third-party types** - If a library has type issues, consider:
+   - Updating to a fixed version
+   - Contributing fixes upstream
+   - Using a well-typed alternative
+   - Creating proper type definitions
+
+This approach ensures:
+
+- Runtime errors are caught at compile time
+- API contracts are validated across packages
+- Dependencies remain type-safe
+- Better developer experience with accurate IntelliSense
 
 ### Key Requirements
 

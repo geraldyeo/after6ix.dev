@@ -1,0 +1,85 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { colors } from '../styles/tokens';
+
+<Meta title="Design Tokens/Colors" />
+
+# After6ix Design System
+
+The After6ix design system is inspired by twilight hours when developers do their best work. Our tokens provide a consistent foundation for building beautiful, accessible interfaces.
+
+## Color System
+
+### Primary - Twilight Purple
+
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    subtitle="Twilight Purple"
+    colors={colors.primary}
+  />
+</ColorPalette>
+
+### Secondary - Deep Sky
+
+<ColorPalette>
+  <ColorItem
+    title="Secondary"
+    subtitle="Deep Sky Blue"
+    colors={colors.secondary}
+  />
+</ColorPalette>
+
+### Accent - Electric Cyan
+
+<ColorPalette>
+  <ColorItem
+    title="Accent"
+    subtitle="Electric Cyan"
+    colors={colors.accent}
+  />
+</ColorPalette>
+
+### Neutral - Charcoal
+
+<ColorPalette>
+  <ColorItem
+    title="Neutral"
+    subtitle="Charcoal Gray"
+    colors={colors.neutral}
+  />
+</ColorPalette>
+
+### Semantic Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Success"
+    colors={colors.semantic.success}
+  />
+  <ColorItem
+    title="Error"
+    colors={colors.semantic.error}
+  />
+  <ColorItem
+    title="Warning"
+    colors={colors.semantic.warning}
+  />
+  <ColorItem
+    title="Info"
+    colors={colors.semantic.info}
+  />
+</ColorPalette>
+
+## Usage
+
+```tsx
+// Import tokens
+import { colors, spacing, typography } from '@after6ix/ui/tokens';
+
+// Use in styles
+const buttonStyle = {
+  backgroundColor: colors.primary[600],
+  padding: spacing[4],
+  fontSize: typography.sizes.base,
+};
+```
