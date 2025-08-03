@@ -1,0 +1,117 @@
+import { Meta, Primary, Controls, Story, Canvas } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./Card.stories";
+
+<Meta of={CardStories} />
+
+# Card
+
+A flexible container component for grouping related content and actions. Cards provide a clean way to display information in a contained, scannable format.
+
+<Primary />
+
+## Usage
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@after6ix/ui/components";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Card content goes here</p>
+  </CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+## Anatomy
+
+The Card component is composed of several sub-components:
+
+- **Card**: The main container
+- **CardHeader**: Contains the title and description
+- **CardTitle**: The main heading of the card
+- **CardDescription**: Supporting text for the title
+- **CardContent**: The main content area
+- **CardFooter**: Actions or additional information
+
+## Variants
+
+<Canvas of={CardStories.Default} />
+<Canvas of={CardStories.Shadow} />
+<Canvas of={CardStories.Bordered} />
+<Canvas of={CardStories.Elevated} />
+<Canvas of={CardStories.Ghost} />
+
+### Default
+The standard card with a subtle border. Use for most content containers.
+
+### Shadow
+Adds a shadow effect with hover state. Good for interactive cards or to create depth.
+
+### Bordered
+Features a more prominent 2px border. Use when you need stronger visual separation.
+
+### Elevated
+Creates a floating effect with a larger shadow. Perfect for featured content.
+
+### Ghost
+Transparent background variant. Useful for placeholder content or subtle grouping.
+
+## Padding Options
+
+Control the internal spacing of the card with the `padding` prop:
+
+<Canvas of={CardStories.WithoutPadding} />
+<Canvas of={CardStories.SmallPadding} />
+<Canvas of={CardStories.LargePadding} />
+
+- **none**: No padding (useful for images or custom layouts)
+- **sm**: 16px padding for compact layouts
+- **default**: 24px padding (recommended for most use cases)
+- **lg**: 32px padding for spacious layouts
+
+## Interactive Cards
+
+Cards can be made interactive by adding click handlers and hover effects:
+
+<Canvas of={CardStories.Interactive} />
+
+## Complex Layouts
+
+Cards are highly composable and can contain any type of content:
+
+<Canvas of={CardStories.ComplexContent} />
+
+## Props
+
+<Controls />
+
+## Accessibility
+
+- Cards are semantic containers and don't have specific ARIA requirements
+- When cards are interactive (clickable), ensure they have appropriate keyboard support
+- Use proper heading hierarchy within cards (CardTitle renders an h3 by default)
+- Add descriptive text to CardDescription for screen reader users
+
+## Best Practices
+
+1. **Consistent Spacing**: Use the same padding variant across similar cards
+2. **Clear Hierarchy**: Always include a CardTitle when using CardHeader
+3. **Actionable Cards**: If the entire card is clickable, indicate this visually with hover states
+4. **Content Organization**: Group related information within the same card
+5. **Visual Balance**: Don't overload cards with too much information
+
+## Design Tokens
+
+The Card component uses the following design tokens:
+
+- **Colors**: Neutral color scale for borders and backgrounds
+- **Spacing**: Consistent padding based on the spacing scale
+- **Border Radius**: `rounded-xl` (12px) for modern, friendly appearance
+- **Shadows**: Multiple levels from `shadow-md` to `shadow-xl`
+- **Transitions**: Smooth hover effects using `duration-base`
