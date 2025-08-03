@@ -12,3 +12,6 @@ export {
   cardVariants 
 } from './ui/card';
 export type { CardProps } from './ui/card';
+
+export { ThemeToggle, ThemeToggleGroup } from './ui/theme-toggle';
+export { ThemeDemo } from './ui/theme-demo';

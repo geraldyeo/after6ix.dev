@@ -1,0 +1,227 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { ThemeToggle, ThemeToggleGroup } from '../../components/ui/theme-toggle';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+
+<Meta title="Design Tokens/Theming" />
+
+# Theming System
+
+The After6ix design system includes a comprehensive theming solution that supports light, dark, and system preference themes with smooth transitions and consistent color application across all components.
+
+## Features
+
+- **Light & Dark Themes**: Complete support for both light and dark modes with optimized color palettes
+- **System Preference**: Automatically detects and respects user's system theme preference
+- **Smooth Transitions**: CSS-based transitions provide smooth visual feedback when switching themes
+- **CSS Custom Properties**: Uses CSS variables for runtime theme switching without page reloads
+- **Persistent State**: Remembers user's theme preference in localStorage
+- **Accessibility**: WCAG-compliant contrast ratios in both light and dark themes
+
+## Theme Tokens
+
+The theme system is built on a foundation of semantic color tokens that automatically adapt to the active theme:
+
+### Surface Colors
+- `--surface-primary`: Main background surfaces
+- `--surface-secondary`: Secondary background areas
+- `--surface-tertiary`: Tertiary surfaces and subtle backgrounds
+- `--surface-inverse`: High contrast surfaces
+
+### Text Colors
+- `--text-primary`: Primary text content (21:1 contrast)
+- `--text-secondary`: Secondary text content (7:1 contrast)
+- `--text-tertiary`: Tertiary text content (4.5:1 contrast)
+- `--text-inverse`: Inverse text for high contrast
+- `--text-disabled`: Disabled text states
+
+### Border Colors
+- `--border-primary`: Primary borders and dividers
+- `--border-secondary`: Secondary borders
+- `--border-focus`: Focus ring colors
+- `--border-error`: Error state borders
+
+## Usage
+
+### React Context
+
+Wrap your application with the `ThemeProvider` to enable theme functionality:
+
+```tsx
+import { ThemeProvider } from '@after6ix/ui'
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="app-theme">
+      {/* Your app content */}
+    </ThemeProvider>
+  )
+}
+```
+
+### useTheme Hook
+
+Access and control the theme state using the `useTheme` hook:
+
+```tsx
+import { useTheme } from '@after6ix/ui'
+
+function MyComponent() {
+  const { theme, setTheme, actualTheme } = useTheme()
+  
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <p>Actual theme: {actualTheme}</p>
+      <button onClick={() => setTheme('dark')}>
+        Switch to dark theme
+      </button>
+    </div>
+  )
+}
+```
+
+## Components
+
+### Theme Toggle Button
+
+A simple toggle that cycles between light, dark, and system themes:
+
+<Canvas>
+  <Story name="Theme Toggle">
+    <div className="flex items-center gap-4">
+      <ThemeToggle variant="button" size="default" />
+      <span>Click to cycle through themes</span>
+    </div>
+  </Story>
+</Canvas>
+
+### Theme Toggle Group
+
+A comprehensive theme selector with all options visible:
+
+<Canvas>
+  <Story name="Theme Toggle Group">
+    <ThemeToggleGroup />
+  </Story>
+</Canvas>
+
+## Theme Examples
+
+### Component Adaptation
+
+See how components automatically adapt to theme changes:
+
+<Canvas>
+  <Story name="Component Adaptation">
+    <div className="space-y-4 max-w-sm">
+      <Card>
+        <CardHeader>
+          <CardTitle>Adaptive Components</CardTitle>
+          <CardDescription>
+            These components automatically adapt to theme changes
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <Button variant="default" className="w-full">Primary</Button>
+          <Button variant="secondary" className="w-full">Secondary</Button>
+          <Button variant="outline" className="w-full">Outline</Button>
+          <Button variant="ghost" className="w-full">Ghost</Button>
+        </CardContent>
+      </Card>
+    </div>
+  </Story>
+</Canvas>
+
+### Surface Variations
+
+Different surface types respond appropriately to theme changes:
+
+<Canvas>
+  <Story name="Surface Variations">
+    <div className="space-y-4 max-w-md">
+      <Card variant="default">
+        <CardContent className="p-4">
+          <h4 className="font-medium">Default Card</h4>
+          <p className="text-sm text-muted-foreground">Basic card with border</p>
+        </CardContent>
+      </Card>
+      
+      <Card variant="shadow">
+        <CardContent className="p-4">
+          <h4 className="font-medium">Shadow Card</h4>
+          <p className="text-sm text-muted-foreground">Card with subtle shadow</p>
+        </CardContent>
+      </Card>
+      
+      <Card variant="elevated">
+        <CardContent className="p-4">
+          <h4 className="font-medium">Elevated Card</h4>
+          <p className="text-sm text-muted-foreground">Card with prominent shadow</p>
+        </CardContent>
+      </Card>
+    </div>
+  </Story>
+</Canvas>
+
+## Implementation Details
+
+### CSS Custom Properties
+
+The theme system uses CSS custom properties defined in `:root` for light mode and `.dark` for dark mode overrides:
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 6% 10%;
+  --primary: 267 80% 58%;
+  --primary-foreground: 0 0% 98%;
+  /* ... more tokens */
+}
+
+.dark {
+  --background: 240 11% 4%;
+  --foreground: 0 0% 98%;
+  --primary: 280 91% 65%;
+  --primary-foreground: 240 11% 4%;
+  /* ... more tokens */
+}
+```
+
+### Transition System
+
+Smooth transitions are applied during theme changes using the `.theme-transition` class:
+
+```css
+.theme-transition * {
+  transition: background-color var(--duration-base) var(--easing-out),
+              border-color var(--duration-base) var(--easing-out),
+              color var(--duration-base) var(--easing-out);
+}
+```
+
+### Component Integration
+
+Components use CSS custom properties through Tailwind's arbitrary value syntax:
+
+```tsx
+className="bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]"
+```
+
+## Best Practices
+
+1. **Use Semantic Tokens**: Always use semantic color tokens (`--text-primary`, `--surface-secondary`) rather than color scale tokens (`--neutral-900`) in components
+2. **Test Both Themes**: Ensure your components work well in both light and dark themes
+3. **Respect System Preference**: Default to `"system"` theme to respect user preferences
+4. **Smooth Transitions**: Let the theme system handle transitions automatically
+5. **Accessibility**: The provided tokens maintain WCAG AA contrast ratios - don't override without testing
+
+## Browser Support
+
+The theming system uses modern CSS features:
+
+- **CSS Custom Properties**: Supported in all modern browsers
+- **prefers-color-scheme**: Supported in all modern browsers
+- **localStorage**: Supported in all browsers
+
+For older browsers, graceful degradation provides a consistent light theme experience.

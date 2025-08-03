@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "@components/ui/card"
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, type CardProps } from "@components/ui/card"
 import { Button } from "@components/ui/button"
 
-const meta: Meta<typeof Card> = {
+const meta: Meta<CardProps> = {
   title: "UI Kit/Card",
   component: Card as any,
   parameters: {
@@ -16,6 +16,9 @@ const meta: Meta<typeof Card> = {
     padding: {
       control: { type: "select" },
       options: ["none", "sm", "default", "lg"],
+    },
+    children: {
+      control: false,
     },
   },
 }

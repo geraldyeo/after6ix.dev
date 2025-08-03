@@ -2,139 +2,229 @@
 
 @layer base {
   :root {
-    /* After6ix Color Tokens mapped to shadcn/ui conventions */
-    
-    /* Primary - Twilight Purple */
-    --primary-50: 280 100% 98%; /* #FAF5FF */
-    --primary-100: 282 100% 97%; /* #F3E8FF */
-    --primary-200: 281 100% 92%; /* #E9D5FF */
-    --primary-300: 280 97% 85%; /* #D8B4FE */
-    --primary-400: 280 89% 75%; /* #C084FC */
-    --primary-500: 280 91% 65%; /* #A855F7 */
-    --primary-600: 267 80% 58%; /* #9333EA - Base */
-    --primary-700: 263 90% 58%; /* #7C3AED */
-    --primary-800: 262 72% 50%; /* #6B46C1 */
-    --primary-900: 264 67% 35%; /* #581C87 */
-    
-    /* Secondary - Deep Sky */
-    --secondary-50: 214 100% 97%; /* #EFF6FF */
-    --secondary-100: 214 95% 93%; /* #DBEAFE */
-    --secondary-200: 213 97% 87%; /* #BFDBFE */
-    --secondary-300: 212 96% 78%; /* #93C5FD */
-    --secondary-400: 213 94% 68%; /* #60A5FA */
-    --secondary-500: 217 91% 60%; /* #3B82F6 */
-    --secondary-600: 221 83% 53%; /* #2563EB - Base */
-    --secondary-700: 224 76% 48%; /* #1D4ED8 */
-    --secondary-800: 226 71% 40%; /* #1E40AF */
-    --secondary-900: 224 64% 33%; /* #1E3A8A */
-    
-    /* Accent - Electric Cyan */
-    --accent-50: 183 100% 96%; /* #ECFEFF */
-    --accent-100: 185 95% 90%; /* #CFFAFE */
-    --accent-200: 186 94% 82%; /* #A5F3FC */
-    --accent-300: 187 92% 69%; /* #67E8F9 */
-    --accent-400: 188 91% 53%; /* #22D3EE */
-    --accent-500: 189 94% 43%; /* #06B6D4 - Base */
-    --accent-600: 192 91% 36%; /* #0891B2 */
-    --accent-700: 193 82% 31%; /* #0E7490 */
-    --accent-800: 194 70% 27%; /* #155E75 */
-    --accent-900: 196 64% 24%; /* #164E63 */
-    
-    /* Neutral - Charcoal */
-    --neutral-50: 0 0% 98%; /* #FAFAFA */
-    --neutral-100: 240 5% 96%; /* #F4F4F5 */
-    --neutral-200: 240 5% 90%; /* #E4E4E7 */
-    --neutral-300: 240 4% 84%; /* #D4D4D8 */
-    --neutral-400: 240 5% 65%; /* #A1A1AA */
-    --neutral-500: 240 4% 46%; /* #71717A */
-    --neutral-600: 240 5% 34%; /* #52525B */
-    --neutral-700: 240 5% 26%; /* #3F3F46 */
-    --neutral-800: 240 3% 16%; /* #27272A */
-    --neutral-900: 240 6% 10%; /* #18181B */
-    
-    /* shadcn/ui semantic mappings using After6ix tokens */
-    --background: 0 0% 100%; /* White */
-    --foreground: var(--neutral-900); /* Charcoal 900 */
-    
-    --card: 0 0% 100%;
-    --card-foreground: var(--neutral-900);
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: var(--neutral-900);
-    
+    /* After6ix Enhanced Color System - Light Mode Base */
+
+    /* Primary - Twilight Purple (Enhanced Scale) */
+    --primary-50: 280 100% 98%;   /* #FAF5FF - Lightest twilight mist */
+    --primary-100: 282 100% 97%;  /* #F3E8FF - Twilight dawn */
+    --primary-200: 281 100% 92%;  /* #E9D5FF - Soft purple haze */
+    --primary-300: 280 97% 85%;   /* #D8B4FE - Evening glow */
+    --primary-400: 280 89% 75%;   /* #C084FC - Dusk purple */
+    --primary-500: 280 91% 65%;   /* #A855F7 - Twilight hour */
+    --primary-600: 267 80% 58%;   /* #9333EA - Base - Deep twilight */
+    --primary-700: 263 90% 58%;   /* #7C3AED - Night purple */
+    --primary-800: 262 72% 50%;   /* #6B46C1 - Midnight purple */
+    --primary-900: 264 67% 35%;   /* #581C87 - Deep night */
+    --primary-950: 268 71% 22%;   /* #3B0764 - Darkest purple */
+
+    /* Secondary - Deep Sky (Enhanced Scale) */
+    --secondary-50: 214 100% 97%;  /* #EFF6FF - Lightest sky */
+    --secondary-100: 214 95% 93%;  /* #DBEAFE - Dawn sky */
+    --secondary-200: 213 97% 87%;  /* #BFDBFE - Morning blue */
+    --secondary-300: 212 96% 78%;  /* #93C5FD - Sky blue */
+    --secondary-400: 213 94% 68%;  /* #60A5FA - Clear sky */
+    --secondary-500: 217 91% 60%;  /* #3B82F6 - Deep sky */
+    --secondary-600: 221 83% 53%;  /* #2563EB - Base - Ocean blue */
+    --secondary-700: 224 76% 48%;  /* #1D4ED8 - Deep ocean */
+    --secondary-800: 226 71% 40%;  /* #1E40AF - Navy blue */
+    --secondary-900: 224 64% 33%;  /* #1E3A8A - Midnight blue */
+    --secondary-950: 223 79% 20%;  /* #172554 - Darkest navy */
+
+    /* Accent - Electric Cyan (Enhanced Scale) */
+    --accent-50: 183 100% 96%;   /* #ECFEFF - Lightest cyan mist */
+    --accent-100: 185 95% 90%;   /* #CFFAFE - Cyan vapor */
+    --accent-200: 186 94% 82%;   /* #A5F3FC - Soft cyan */
+    --accent-300: 187 92% 69%;   /* #67E8F9 - Electric cyan glow */
+    --accent-400: 188 91% 53%;   /* #22D3EE - Bright cyan */
+    --accent-500: 189 94% 43%;   /* #06B6D4 - Base - Electric cyan */
+    --accent-600: 192 91% 36%;   /* #0891B2 - Deep cyan */
+    --accent-700: 193 82% 31%;   /* #0E7490 - Teal cyan */
+    --accent-800: 194 70% 27%;   /* #155E75 - Dark teal */
+    --accent-900: 196 64% 24%;   /* #164E63 - Deep teal */
+    --accent-950: 196 89% 16%;   /* #083344 - Darkest teal */
+
+    /* Neutral - Charcoal (Enhanced Scale) */
+    --neutral-25: 0 0% 99%;      /* #FDFDFD - Ultra light gray */
+    --neutral-50: 0 0% 98%;      /* #FAFAFA - Lightest charcoal */
+    --neutral-100: 240 5% 96%;   /* #F4F4F5 - Light charcoal */
+    --neutral-200: 240 5% 90%;   /* #E4E4E7 - Soft gray */
+    --neutral-300: 240 4% 84%;   /* #D4D4D8 - Medium light gray */
+    --neutral-400: 240 5% 65%;   /* #A1A1AA - Medium gray */
+    --neutral-500: 240 4% 46%;   /* #71717A - Base gray */
+    --neutral-600: 240 5% 34%;   /* #52525B - Dark gray */
+    --neutral-700: 240 5% 26%;   /* #3F3F46 - Charcoal */
+    --neutral-800: 240 3% 16%;   /* #27272A - Deep charcoal */
+    --neutral-900: 240 6% 10%;   /* #18181B - Dark charcoal */
+    --neutral-950: 240 11% 4%;   /* #0A0A0B - Ultra dark charcoal */
+
+    /* Enhanced Semantic Colors */
+    --success-50: 142 76% 96%;   /* #F0FDF4 */
+    --success-100: 141 84% 93%;  /* #DCFCE7 */
+    --success-500: 142 71% 45%;  /* #22C55E */
+    --success-600: 142 76% 36%;  /* #16A34A */
+    --success-700: 142 72% 29%;  /* #15803D */
+    --success-900: 140 61% 17%;  /* #14532D */
+
+    --error-50: 0 86% 97%;       /* #FEF2F2 */
+    --error-100: 0 93% 94%;      /* #FEE2E2 */
+    --error-500: 0 84% 60%;      /* #EF4444 */
+    --error-600: 0 72% 51%;      /* #DC2626 */
+    --error-700: 0 74% 42%;      /* #B91C1C */
+    --error-900: 0 63% 31%;      /* #7F1D1D */
+
+    --warning-50: 48 100% 96%;   /* #FFFBEB */
+    --warning-100: 48 97% 88%;   /* #FEF3C7 */
+    --warning-500: 38 92% 50%;   /* #F59E0B */
+    --warning-600: 32 95% 44%;   /* #D97706 */
+    --warning-700: 31 91% 38%;   /* #B45309 */
+    --warning-900: 30 70% 26%;   /* #78350F */
+
+    --info-50: 214 100% 97%;     /* #EFF6FF */
+    --info-100: 214 95% 93%;     /* #DBEAFE */
+    --info-500: 217 91% 60%;     /* #3B82F6 */
+    --info-600: 221 83% 53%;     /* #2563EB */
+    --info-700: 224 76% 48%;     /* #1D4ED8 */
+    --info-900: 224 64% 33%;     /* #1E3A8A */
+
+    /* Light Mode Theme Variables */
+    --background: 0 0% 100%;                    /* Pure white */
+    --foreground: var(--neutral-900);           /* Dark charcoal text */
+
+    --surface-primary: 0 0% 100%;               /* Pure white */
+    --surface-secondary: var(--neutral-50);     /* Light gray */
+    --surface-tertiary: var(--neutral-100);     /* Lighter gray */
+    --surface-inverse: var(--neutral-900);      /* Dark for contrast */
+
+    --text-primary: var(--neutral-900);         /* Dark text (21:1 contrast) */
+    --text-secondary: var(--neutral-600);       /* Medium dark (7:1 contrast) */
+    --text-tertiary: var(--neutral-500);        /* Medium gray (4.5:1 contrast) */
+    --text-inverse: 0 0% 100%;                  /* White text on dark */
+    --text-disabled: var(--neutral-400);        /* Disabled text */
+
+    --border-primary: var(--neutral-200);       /* Light border */
+    --border-secondary: var(--neutral-300);     /* Medium border */
+    --border-focus: var(--primary-600);         /* Primary focus ring */
+    --border-error: var(--error-500);           /* Error border */
+
+    /* shadcn/ui semantic mappings */
+    --card: var(--surface-primary);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--surface-primary);
+    --popover-foreground: var(--text-primary);
+
     --primary: var(--primary-600);
     --primary-foreground: 0 0% 98%;
-    
-    --secondary: var(--secondary-600);
-    --secondary-foreground: 0 0% 98%;
-    
+
+    --secondary: var(--neutral-100);
+    --secondary-foreground: var(--neutral-900);
+
     --muted: var(--neutral-100);
     --muted-foreground: var(--neutral-600);
-    
+
     --accent: var(--accent-500);
-    --accent-foreground: var(--neutral-900);
-    
-    --destructive: 0 84% 60%; /* Error base */
+    --accent-foreground: var(--surface-primary);
+
+    --destructive: var(--error-500);
     --destructive-foreground: 0 0% 98%;
-    
-    --border: var(--neutral-200);
-    --input: var(--neutral-200);
-    --ring: var(--primary-600);
-    
-    /* Spacing & Effects from After6ix tokens */
-    --radius: 0.5rem; /* radius-lg */
-    
-    /* Typography */
+
+    --border: var(--border-primary);
+    --input: var(--border-primary);
+    --ring: var(--border-focus);
+
+    /* Design System Foundation */
+    --radius: 0.5rem;
     --font-sans: "Inter", system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", Consolas, Monaco, monospace;
-    
-    /* Animation durations */
+
+    /* Animation System */
+    --duration-instant: 75ms;
     --duration-fast: 150ms;
     --duration-base: 250ms;
     --duration-slow: 400ms;
     --duration-slower: 600ms;
-    
-    /* Animation easings */
+
     --easing-linear: linear;
     --easing-in: cubic-bezier(0.4, 0, 1, 1);
     --easing-out: cubic-bezier(0, 0, 0.2, 1);
     --easing-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --easing-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  
+
   .dark {
-    /* Dark mode adjustments */
-    --background: var(--neutral-900);
-    --foreground: var(--neutral-100);
-    
-    --card: var(--neutral-800);
-    --card-foreground: var(--neutral-100);
-    
-    --popover: var(--neutral-800);
-    --popover-foreground: var(--neutral-100);
-    
-    --primary: 267 70% 65%; /* Adjusted for dark mode */
-    --primary-foreground: var(--neutral-900);
-    
-    --secondary: 221 70% 60%; /* Adjusted for dark mode */
-    --secondary-foreground: var(--neutral-900);
-    
-    --muted: var(--neutral-700);
+    /* Dark Mode Theme - Comprehensive Override */
+    --background: var(--neutral-950);           /* Ultra dark background */
+    --foreground: var(--neutral-50);            /* Light text */
+
+    --surface-primary: var(--neutral-950);      /* Ultra dark */
+    --surface-secondary: var(--neutral-900);    /* Dark charcoal */
+    --surface-tertiary: var(--neutral-800);     /* Medium dark */
+    --surface-inverse: var(--neutral-25);       /* Light for contrast */
+
+    --text-primary: var(--neutral-50);          /* Light text (21:1 contrast) */
+    --text-secondary: var(--neutral-300);       /* Medium light (7:1 contrast) */
+    --text-tertiary: var(--neutral-400);        /* Medium gray (4.5:1 contrast) */
+    --text-inverse: var(--neutral-900);         /* Dark text on light */
+    --text-disabled: var(--neutral-600);        /* Disabled text */
+
+    --border-primary: var(--neutral-700);       /* Dark border */
+    --border-secondary: var(--neutral-600);     /* Medium dark border */
+    --border-focus: var(--primary-500);         /* Lighter focus for dark mode */
+    --border-error: var(--error-500);           /* Error border */
+
+    /* Adjusted brand colors for dark mode accessibility */
+    --primary: var(--primary-500);              /* Lighter primary for contrast */
+    --primary-foreground: var(--neutral-950);
+
+    --secondary: var(--neutral-800);            /* Dark secondary surface */
+    --secondary-foreground: var(--neutral-100);
+
+    --muted: var(--neutral-800);
     --muted-foreground: var(--neutral-400);
-    
-    --accent: 189 80% 50%; /* Adjusted for dark mode */
-    --accent-foreground: var(--neutral-900);
-    
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --border: var(--neutral-700);
-    --input: var(--neutral-700);
-    --ring: 267 70% 65%;
+
+    --accent: var(--accent-400);                /* Brighter accent for dark mode */
+    --accent-foreground: var(--neutral-950);
+
+    --destructive: var(--error-500);
+    --destructive-foreground: var(--neutral-950);
+
+    /* shadcn/ui dark mode mappings */
+    --card: var(--surface-secondary);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--surface-secondary);
+    --popover-foreground: var(--text-primary);
+
+    --border: var(--border-primary);
+    --input: var(--border-primary);
+    --ring: var(--border-focus);
   }
-  
+
+  /* Global styles with enhanced theming */
+  * {
+    border-color: hsl(var(--border));
+  }
+
   body {
     font-family: var(--font-sans);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color var(--duration-base) var(--easing-out),
+                color var(--duration-base) var(--easing-out);
+  }
+
+  /* Enhanced focus states */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Smooth theme transitions */
+  .theme-transition * {
+    transition: background-color var(--duration-base) var(--easing-out),
+                border-color var(--duration-base) var(--easing-out),
+                color var(--duration-base) var(--easing-out);
   }
 }
 

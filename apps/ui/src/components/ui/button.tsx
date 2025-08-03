@@ -5,23 +5,23 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-base disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-[--duration-base] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
         default:
-          "bg-primary-600 text-white shadow-sm hover:bg-primary-700 hover:shadow-md active:bg-primary-800",
+          "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] shadow-sm hover:bg-[hsl(var(--primary)/0.9)] hover:shadow-md active:bg-[hsl(var(--primary)/0.8)]",
         destructive:
-          "bg-error text-white shadow-sm hover:bg-error-dark hover:shadow-md",
+          "bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] shadow-sm hover:bg-[hsl(var(--destructive)/0.9)] hover:shadow-md",
         outline:
-          "border border-neutral-300 bg-white text-neutral-900 shadow-sm hover:bg-neutral-50 hover:border-neutral-400",
+          "border border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))] shadow-sm hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]",
         secondary:
-          "bg-secondary-600 text-white shadow-sm hover:bg-secondary-700 hover:shadow-md active:bg-secondary-800",
+          "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] shadow-sm hover:bg-[hsl(var(--secondary)/0.8)]",
         ghost:
-          "hover:bg-neutral-100 hover:text-neutral-900",
-        link: "text-primary-600 underline-offset-4 hover:underline hover:text-primary-700",
+          "hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]",
+        link: "text-[hsl(var(--primary))] underline-offset-4 hover:underline",
         accent:
-          "bg-accent-500 text-white shadow-sm hover:bg-accent-600 hover:shadow-md active:bg-accent-700",
+          "bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] shadow-sm hover:bg-[hsl(var(--accent)/0.9)] hover:shadow-md active:bg-[hsl(var(--accent)/0.8)]",
       },
       size: {
         default: "h-10 px-4 py-2",

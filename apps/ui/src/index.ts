@@ -13,3 +13,7 @@ export type { VariantProps } from 'class-variance-authority';
 
 // Export components
 export * from './components/index';
+
+// Export theme context and providers
+export { ThemeProvider, useTheme } from './contexts/theme-context';
+export type { Theme } from './contexts/theme-context';
