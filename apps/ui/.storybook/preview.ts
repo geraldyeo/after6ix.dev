@@ -1,4 +1,7 @@
 import type { Preview } from '@storybook/react-vite'
+import React from 'react'
+import { ThemeProvider } from '../src/contexts/theme-context'
+import { withThemeByClassName } from '@storybook/addon-themes'
 import '../src/styles/globals.css'
 
 const preview: Preview = {
@@ -13,36 +16,34 @@ const preview: Preview = {
       toc: true,
     },
     backgrounds: {
-      default: 'light',
-      values: [
-        {
-          name: 'light',
-          value: '#ffffff',
-        },
-        {
-          name: 'dark',
-          value: '#18181B', // neutral-900
-        },
-        {
-          name: 'neutral',
-          value: '#F4F4F5', // neutral-100
-        },
-      ],
+      disable: true, // Disable since we're using our theme system
     },
   },
-  globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      toolbar: {
-        icon: 'circlehollow',
-        items: ['light', 'dark'],
-        title: 'Theme',
-        dynamicTitle: true,
+  decorators: [
+    // First apply the theme class decorator
+    withThemeByClassName({
+      themes: {
+        light: 'light',
+        dark: 'dark',
       },
+      defaultTheme: 'light',
+    }),
+    // Then wrap with ThemeProvider for context
+    (Story, context) => {
+      // Get the current theme from addon-themes
+      const theme = context.globals.theme || 'light'
+      
+      return React.createElement(
+        ThemeProvider,
+        { 
+          defaultTheme: theme === 'dark' ? 'dark' : 'light',
+          enableSystem: false,
+          storageKey: 'storybook-theme',
+          children: React.createElement(Story)
+        }
+      )
     },
-  },
+  ],
 };
 
 export default preview;

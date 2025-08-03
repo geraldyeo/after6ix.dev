@@ -1,0 +1,28 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "after6ix",
+    "twilight",
+    "dusk",
+    "midnight",
+    "vapor",
+    "monorepo",
+    "pnpm",
+    "tsup",
+    "rollup",
+    "webpack",
+    "log4brains",
+    "MADR",
+    "ADRs",
+    "Storybook"
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.next/**",
+    "**/coverage/**",
+    "**/.log4brains/**"
+  ]
+}

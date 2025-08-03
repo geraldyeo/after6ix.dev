@@ -4,11 +4,12 @@ A TypeScript monorepo for after6ix.dev, built with modern web technologies and m
 
 ## 🏗️ Monorepo Structure
 
-```
+```ascii
 after6ix.dev/
 ├── apps/                 # Frontend applications
 │   ├── cv/               # CV and Resume Improver (React)
-│   └── site/             # Main After6ix website (React)
+│   ├── site/             # Main After6ix website (React)
+│   └── ui/               # Design system and UI kit
 ├── packages/             # Shared packages and utilities
 │   └── core/             # Core utilities and shared functions
 ├── docs/
@@ -88,12 +89,14 @@ pnpm add -Dw <package>
 ## 📁 Workspace Configuration
 
 ### Apps (Frontend Applications)
+
 - React 18 with TypeScript
 - Modern JSX transform (`react-jsx`)
 - Path mappings for absolute imports (`@/*`, `@components/*`, etc.)
 - Strict TypeScript configuration
 
 ### Packages (Shared Libraries)
+
 - ES modules with TypeScript
 - Composite projects for project references
 - Build outputs to `dist` directory
@@ -104,6 +107,7 @@ Each workspace has its own `tsconfig.json` extending from `tsconfig.base.json`.
 ## 🔧 Configuration
 
 ### TypeScript
+
 - Strict mode with all type checking enabled
 - ES2022 target for modern JavaScript features
 - Project references for cross-package imports
@@ -111,15 +115,33 @@ Each workspace has its own `tsconfig.json` extending from `tsconfig.base.json`.
 - Path mappings in base config for `@after6ix/*` imports
 
 ### ESLint
+
 - Separate configurations for TypeScript and JavaScript files
 - React plugin for JSX/TSX files in apps workspace
 - Type-aware linting for TypeScript files
 - Ignores build artifacts and `.sst` directory
 
 ### Cross-Package Imports
+
 ```typescript
 // Import from @after6ix/core in any app
 import { greeting, formatDate } from '@after6ix/core';
+```
+
+## 🎨 Design System
+
+The `apps/ui` workspace contains our design system and UI kit, providing a comprehensive set of reusable components and utilities:
+
+- **Components**: Buttons, Forms, Cards, Dialogs, Tables, and more
+- **Utilities**: Theme system, CSS utilities, and design tokens
+- **Documentation**: Component examples and usage guidelines
+- **TypeScript**: Fully typed components with excellent IDE support
+
+### Using the Design System
+
+```typescript
+// Import components from @after6ix/ui
+import { Button, Card, Input } from '@after6ix/ui';
 ```
 
 ## 📚 Architecture Decision Records (ADR)
@@ -149,10 +171,12 @@ This project uses a multi-package ADR structure:
 - **Global ADRs**: `docs/adr/` - Monorepo-wide architectural decisions
 - **Site ADRs**: `apps/site/docs/adr/` - After6ix website specific decisions
 - **CV ADRs**: `apps/cv/docs/adr/` - CV app specific decisions
+- **UI ADRs**: `apps/ui/docs/adr/` - Design system architectural decisions
 
-When creating a new ADR with `pnpm log4brains adr new`, you'll be prompted to select the appropriate scope (Global, apps-site, or apps-cv).
+When creating a new ADR with `pnpm log4brains adr new`, you'll be prompted to select the appropriate scope (Global, apps-site, apps-cv, or apps-ui).
 
 All ADRs are:
+
 - Written in Markdown using MADR (Markdown Architectural Decision Records) format
 - Numbered sequentially within their scope (e.g., `0001-use-log4brains.md`)
 - Viewable together in the log4brains web UI

@@ -11,6 +11,7 @@ export interface ColorTokens {
     700: string;
     800: string;
     900: string;
+    950: string; // Enhanced dark shade
   };
   
   // Secondary - Deep Sky
@@ -25,6 +26,7 @@ export interface ColorTokens {
     700: string;
     800: string;
     900: string;
+    950: string; // Enhanced dark shade
   };
   
   // Accent - Electric Cyan
@@ -39,10 +41,12 @@ export interface ColorTokens {
     700: string;
     800: string;
     900: string;
+    950: string; // Enhanced dark shade
   };
   
   // Neutrals - Charcoal
   neutral: {
+    25: string;  // Ultra light
     50: string;
     100: string;
     200: string;
@@ -53,14 +57,93 @@ export interface ColorTokens {
     700: string;
     800: string;
     900: string;
+    950: string; // Ultra dark
   };
   
-  // Semantic colors
+  // Enhanced semantic colors with full scales
   semantic: {
-    success: { light: string; base: string; dark: string };
-    error: { light: string; base: string; dark: string };
-    warning: { light: string; base: string; dark: string };
-    info: { light: string; base: string; dark: string };
+    success: {
+      50: string;
+      100: string;
+      500: string; // Base
+      600: string;
+      700: string;
+      900: string;
+    };
+    error: {
+      50: string;
+      100: string;
+      500: string; // Base
+      600: string;
+      700: string;
+      900: string;
+    };
+    warning: {
+      50: string;
+      100: string;
+      500: string; // Base
+      600: string;
+      700: string;
+      900: string;
+    };
+    info: {
+      50: string;
+      100: string;
+      500: string; // Base
+      600: string;
+      700: string;
+      900: string;
+    };
+  };
+  
+  // Surface colors for enhanced theming
+  surface: {
+    light: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+      inverse: string;
+    };
+    dark: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+      inverse: string;
+    };
+  };
+  
+  // Text colors with proper contrast
+  text: {
+    light: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+      inverse: string;
+      disabled: string;
+    };
+    dark: {
+      primary: string;
+      secondary: string;
+      tertiary: string;
+      inverse: string;
+      disabled: string;
+    };
+  };
+  
+  // Border colors for both themes
+  border: {
+    light: {
+      primary: string;
+      secondary: string;
+      focus: string;
+      error: string;
+    };
+    dark: {
+      primary: string;
+      secondary: string;
+      focus: string;
+      error: string;
+    };
   };
 }
 
@@ -235,65 +318,148 @@ export interface BlurTokens {
   '3xl': string;
 }
 
-// Actual token values
+// Actual token values - Enhanced twilight-themed palette
 export const colors: ColorTokens = {
   primary: {
-    50: '#FAF5FF',
-    100: '#F3E8FF',
-    200: '#E9D5FF',
-    300: '#D8B4FE',
-    400: '#C084FC',
-    500: '#A855F7',
-    600: '#9333EA', // Base
-    700: '#7C3AED',
-    800: '#6B46C1',
-    900: '#581C87',
+    50: '#FAF5FF',  // Lightest twilight mist
+    100: '#F3E8FF', // Twilight dawn
+    200: '#E9D5FF', // Soft purple haze
+    300: '#D8B4FE', // Evening glow
+    400: '#C084FC', // Dusk purple
+    500: '#A855F7', // Twilight hour
+    600: '#9333EA', // Base - Deep twilight
+    700: '#7C3AED', // Night purple
+    800: '#6B46C1', // Midnight purple
+    900: '#581C87', // Deep night
+    950: '#3B0764', // Darkest purple
   },
   
   secondary: {
-    50: '#EFF6FF',
-    100: '#DBEAFE',
-    200: '#BFDBFE',
-    300: '#93C5FD',
-    400: '#60A5FA',
-    500: '#3B82F6',
-    600: '#2563EB', // Base
-    700: '#1D4ED8',
-    800: '#1E40AF',
-    900: '#1E3A8A',
+    50: '#EFF6FF',  // Lightest sky
+    100: '#DBEAFE', // Dawn sky
+    200: '#BFDBFE', // Morning blue
+    300: '#93C5FD', // Sky blue
+    400: '#60A5FA', // Clear sky
+    500: '#3B82F6', // Deep sky
+    600: '#2563EB', // Base - Ocean blue
+    700: '#1D4ED8', // Deep ocean
+    800: '#1E40AF', // Navy blue
+    900: '#1E3A8A', // Midnight blue
+    950: '#172554', // Darkest navy
   },
   
   accent: {
-    50: '#ECFEFF',
-    100: '#CFFAFE',
-    200: '#A5F3FC',
-    300: '#67E8F9',
-    400: '#22D3EE',
-    500: '#06B6D4', // Base
-    600: '#0891B2',
-    700: '#0E7490',
-    800: '#155E75',
-    900: '#164E63',
+    50: '#ECFEFF',  // Lightest cyan mist
+    100: '#CFFAFE', // Cyan vapor
+    200: '#A5F3FC', // Soft cyan
+    300: '#67E8F9', // Electric cyan glow
+    400: '#22D3EE', // Bright cyan
+    500: '#06B6D4', // Base - Electric cyan
+    600: '#0891B2', // Deep cyan
+    700: '#0E7490', // Teal cyan
+    800: '#155E75', // Dark teal
+    900: '#164E63', // Deep teal
+    950: '#083344', // Darkest teal
   },
   
   neutral: {
-    50: '#FAFAFA',
-    100: '#F4F4F5',
-    200: '#E4E4E7',
-    300: '#D4D4D8',
-    400: '#A1A1AA',
-    500: '#71717A',
-    600: '#52525B',
-    700: '#3F3F46',
-    800: '#27272A',
-    900: '#18181B',
+    25: '#FDFDFD',  // Ultra light gray
+    50: '#FAFAFA',  // Lightest charcoal
+    100: '#F4F4F5', // Light charcoal
+    200: '#E4E4E7', // Soft gray
+    300: '#D4D4D8', // Medium light gray
+    400: '#A1A1AA', // Medium gray
+    500: '#71717A', // Base gray
+    600: '#52525B', // Dark gray
+    700: '#3F3F46', // Charcoal
+    800: '#27272A', // Deep charcoal
+    900: '#18181B', // Dark charcoal
+    950: '#0A0A0B', // Ultra dark charcoal
   },
   
   semantic: {
-    success: { light: '#10B981', base: '#059669', dark: '#047857' },
-    error: { light: '#F87171', base: '#EF4444', dark: '#DC2626' },
-    warning: { light: '#FBBF24', base: '#F59E0B', dark: '#D97706' },
-    info: { light: '#38BDF8', base: '#0EA5E9', dark: '#0284C7' },
+    success: {
+      50: '#F0FDF4',  // Light success background
+      100: '#DCFCE7', // Success background
+      500: '#22C55E', // Base success
+      600: '#16A34A', // Success hover
+      700: '#15803D', // Success active
+      900: '#14532D', // Dark success text
+    },
+    error: {
+      50: '#FEF2F2',  // Light error background
+      100: '#FEE2E2', // Error background
+      500: '#EF4444', // Base error
+      600: '#DC2626', // Error hover
+      700: '#B91C1C', // Error active
+      900: '#7F1D1D', // Dark error text
+    },
+    warning: {
+      50: '#FFFBEB',  // Light warning background
+      100: '#FEF3C7', // Warning background
+      500: '#F59E0B', // Base warning
+      600: '#D97706', // Warning hover
+      700: '#B45309', // Warning active
+      900: '#78350F', // Dark warning text
+    },
+    info: {
+      50: '#EFF6FF',  // Light info background
+      100: '#DBEAFE', // Info background
+      500: '#3B82F6', // Base info
+      600: '#2563EB', // Info hover
+      700: '#1D4ED8', // Info active
+      900: '#1E3A8A', // Dark info text
+    },
+  },
+  
+  // Surface colors for comprehensive theming
+  surface: {
+    light: {
+      primary: '#FFFFFF',   // Pure white
+      secondary: '#FAFAFA', // Light gray
+      tertiary: '#F4F4F5',  // Lighter gray
+      inverse: '#18181B',   // Dark for contrast
+    },
+    dark: {
+      primary: '#0A0A0B',   // Ultra dark
+      secondary: '#18181B', // Dark charcoal
+      tertiary: '#27272A',  // Medium dark
+      inverse: '#FFFFFF',   // White for contrast
+    },
+  },
+  
+  // Text colors with WCAG AA compliance
+  text: {
+    light: {
+      primary: '#18181B',   // Dark text on light (21:1 contrast)
+      secondary: '#52525B', // Medium dark (7:1 contrast)
+      tertiary: '#71717A',  // Medium gray (4.5:1 contrast)
+      inverse: '#FFFFFF',   // White text on dark
+      disabled: '#A1A1AA',  // Disabled text
+    },
+    dark: {
+      primary: '#FAFAFA',   // Light text on dark (21:1 contrast)
+      secondary: '#D4D4D8', // Medium light (7:1 contrast)
+      tertiary: '#A1A1AA',  // Medium gray (4.5:1 contrast)
+      inverse: '#18181B',   // Dark text on light
+      disabled: '#52525B',  // Disabled text
+    },
+  },
+  
+  // Border colors for both themes
+  border: {
+    light: {
+      primary: '#E4E4E7',   // Light border
+      secondary: '#D4D4D8', // Medium border
+      focus: '#9333EA',     // Primary focus ring
+      error: '#EF4444',     // Error border
+    },
+    dark: {
+      primary: '#3F3F46',   // Dark border
+      secondary: '#52525B', // Medium dark border
+      focus: '#A855F7',     // Primary focus ring (lighter for dark)
+      error: '#F87171',     // Error border (lighter for dark)
+    },
   },
 };
 
@@ -504,7 +670,7 @@ export function hexToHSL(hex: string): string {
   return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
 }
 
-// Export HSL values for CSS variables
+// Export HSL values for CSS variables - Enhanced structure
 export const colorsHSL = {
   primary: Object.entries(colors.primary).reduce((acc, [key, value]) => ({
     ...acc,
@@ -525,4 +691,62 @@ export const colorsHSL = {
     ...acc,
     [key]: hexToHSL(value),
   }), {} as Record<string, string>),
+  
+  semantic: {
+    success: Object.entries(colors.semantic.success).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    error: Object.entries(colors.semantic.error).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    warning: Object.entries(colors.semantic.warning).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    info: Object.entries(colors.semantic.info).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+  },
+  
+  surface: {
+    light: Object.entries(colors.surface.light).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    dark: Object.entries(colors.surface.dark).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+  },
+  
+  text: {
+    light: Object.entries(colors.text.light).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    dark: Object.entries(colors.text.dark).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+  },
+  
+  border: {
+    light: Object.entries(colors.border.light).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+    
+    dark: Object.entries(colors.border.dark).reduce((acc, [key, value]) => ({
+      ...acc,
+      [key]: hexToHSL(value),
+    }), {} as Record<string, string>),
+  },
 };

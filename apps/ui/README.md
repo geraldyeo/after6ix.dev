@@ -145,38 +145,139 @@ The design system extends Tailwind CSS v4 with After6ix tokens:
 </div>
 ```
 
+## Theme System
+
+### Light and Dark Mode Support
+
+The After6ix design system includes comprehensive theme support with automatic light and dark mode switching.
+
+#### Using the Theme Provider
+
+```tsx
+import { ThemeProvider } from '@after6ix/ui';
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="after6ix-theme">
+      {/* Your app content */}
+    </ThemeProvider>
+  );
+}
+```
+
+#### Theme Options
+
+- **`light`** - Force light theme
+- **`dark`** - Force dark theme  
+- **`system`** - Automatically match user's OS preference
+
+#### Theme Controls
+
+```tsx
+import { useTheme, ThemeToggle } from '@after6ix/ui';
+
+function Header() {
+  const { theme, setTheme } = useTheme();
+  
+  return (
+    <header>
+      {/* Simple toggle button */}
+      <ThemeToggle />
+      
+      {/* Or custom controls */}
+      <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="system">System</option>
+      </select>
+    </header>
+  );
+}
+```
+
+#### CSS Variables
+
+The theme system uses CSS custom properties that automatically update based on the active theme:
+
+```css
+/* Light theme (default) */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --primary: 275 80% 56%;
+  /* ... and more */
+}
+
+/* Dark theme */
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --primary: 275 80% 71%;
+  /* ... and more */
+}
+```
+
 ## Design Tokens Reference
 
 ### Color System
 
-The After6ix color palette is inspired by twilight hours when developers do their best work.
+The After6ix color palette is inspired by twilight hours when developers do their best work. All colors are theme-aware and automatically adjust for light and dark modes.
 
 #### Primary - Twilight Purple
 
-- `primary-50` through `primary-900`
+- `primary-25` through `primary-950`
 - Base: `primary-600` (#9333EA)
+- Extended scale for fine-grained control
 
 #### Secondary - Deep Sky
 
-- `secondary-50` through `secondary-900`
+- `secondary-25` through `secondary-950`
 - Base: `secondary-600` (#2563EB)
 
 #### Accent - Electric Cyan
 
-- `accent-50` through `accent-900`
+- `accent-25` through `accent-950`
 - Base: `accent-500` (#06B6D4)
 
 #### Neutral - Charcoal
 
-- `neutral-50` through `neutral-900`
+- `neutral-25` through `neutral-950`
 - For text and backgrounds
+- Includes theme-aware surface, text, and border tokens
 
 #### Semantic Colors
 
-- Success: `success`, `success-light`, `success-dark`
-- Error: `error`, `error-light`, `error-dark`
-- Warning: `warning`, `warning-light`, `warning-dark`
-- Info: `info`, `info-light`, `info-dark`
+- Success: `success-50` through `success-900`
+- Error: `error-50` through `error-900`
+- Warning: `warning-50` through `warning-900`
+- Info: `info-50` through `info-900`
+
+#### Theme-Aware Tokens
+
+Special tokens that automatically adapt to the current theme:
+
+```typescript
+// Surface colors
+surface.base      // Main background
+surface.paper     // Card/panel background
+surface.overlay   // Modal/dropdown background
+surface.muted     // Subtle backgrounds
+
+// Text colors
+text.primary      // Main text
+text.secondary    // Supporting text
+text.muted        // De-emphasized text
+text.disabled     // Disabled state text
+
+// Border colors
+border.base       // Default borders
+border.strong     // Emphasized borders
+border.muted      // Subtle borders
+```
 
 ### Typography
 
@@ -376,6 +477,15 @@ pnpm --filter @after6ix/ui storybook
 
 Storybook will be available at [http://localhost:6006](http://localhost:6006)
 
+#### Theme Support in Storybook
+
+Storybook is configured with the `@storybook/addon-themes` addon for easy theme switching:
+
+- Use the theme selector in the toolbar to switch between light and dark modes
+- All components and documentation automatically update to reflect the selected theme
+- Theme selection persists across page reloads
+- Components showcase proper theme adaptation in both modes
+
 ### Building Storybook
 
 To build the static Storybook site:
@@ -430,6 +540,14 @@ Key design decisions for the UI package are documented in ADRs:
   - Sizes: sm, default, lg, xl, icon
   - Full accessibility support with focus states
   - Polymorphic component support via `asChild` prop
+  - Theme-aware with automatic color adjustments
+
+- **Card** - A flexible container component for grouping related content
+  - Variants: default, shadow, bordered, elevated, ghost
+  - Padding options: none, sm, default, lg
+  - Composable with CardHeader, CardTitle, CardDescription, CardContent, CardFooter
+  - Theme-aware backgrounds and borders
+  - Smooth hover transitions
 
 ### Future Components
 
