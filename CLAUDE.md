@@ -17,50 +17,42 @@ This is a pnpm workspace monorepo for after6ix.dev, currently in early developme
 
 ### Specialized Agents
 
-The following specialized agents are available for specific development tasks:
+The following specialized agents are available organized by category:
 
-#### pair-programming-reviewer
+#### Analysis
 
-- **When to use**: After writing significant code changes, during active development
-- **Purpose**: Reviews code for best practices, suggests improvements, catches potential issues
-- **Trigger**: Automatically invoked after completing code implementation
+- **ogilvy-creative-duo**: Marketing and advertising creative development
+- **prd-adr-reviewer**: Technical review of PRDs and ADRs
+- **ui-ux-designer**: User interface and experience design
 
-#### prd-adr-reviewer
+#### Architecture
 
-- **When to use**: When creating or reviewing PRDs or ADRs
-- **Purpose**: Provides senior technical perspective on requirements and architectural decisions
-- **Trigger**: When working with documents in `./docs/adr/` or package-specific ADR directories
+- **cloud-architect**: Cloud infrastructure design and optimization
+- **design-system-architect**: Component libraries and design systems
 
-#### devops-infra-reviewer
+#### Development
 
-- **When to use**: When modifying infrastructure code, CI/CD pipelines, or deployment configurations
-- **Purpose**: Reviews IaC files, GitHub Actions, Docker/Kubernetes configs for security and best practices
-- **Trigger**: When editing files in `.github/workflows/`, Dockerfiles, or infrastructure configs
+- **api-documenter**: API documentation and OpenAPI specs
+- **architect-reviewer**: Code architecture review
+- **backend-architect**: Backend system architecture
+- **code-reviewer**: Code quality and best practices review
+- **database-optimizer**: Database performance optimization
+- **debugger-specialist**: P0 issue debugging and troubleshooting
+- **frontend-developer**: React components and frontend development
+- **pair-programmer**: Real-time code review and pair programming
+- **security-auditor**: Security audits and vulnerability assessment
+- **sql-query-optimizer**: SQL query optimization
+- **test-automator**: Test automation and coverage
+- **typescript-pro**: Advanced TypeScript patterns
 
-#### secops-security-auditor
+#### Infrastructure
 
-- **When to use**: Before major releases, after architectural changes, or when security concerns arise
-- **Purpose**: Comprehensive security audit including vulnerability assessment and authentication review
-- **Trigger**: Periodically for security reviews or when explicitly requested
+- **deployment-engineer**: CI/CD pipelines and containerization
+- **devops-troubleshooter**: Production issue debugging
 
-#### qa-automation-engineer
+#### Context Management
 
-- **When to use**: When planning tests, implementing test automation, or troubleshooting test failures
-- **Purpose**: Expert guidance on test planning, test automation frameworks, and various testing types (unit, integration, system, UI, regression)
-- **Trigger**: When working on test strategies, test implementation, or test infrastructure
-
-#### design-system-architect
-
-- **When to use**: When architecting design systems, planning UI component libraries, creating reusable component architectures
-- **Purpose**: Helps establish design tokens, patterns, component hierarchies, naming conventions, and shareable UI kits
-- **Trigger**: When creating new design systems, planning component libraries, or establishing UI consistency across the monorepo
-
-#### ogilvy-creative-duo
-
-- **When to use**: When creating advertising or marketing materials requiring both visual and/or copy expertise
-- **Purpose**: Develops ad campaigns, slogans, social media content, and brand strategies using David Ogilvy's marketing principles
-- **Trigger**: When working on marketing content that needs compelling visuals paired with persuasive copy
-- **Examples**: Product launch campaigns, social media marketing posts, brand identity development
+- **context-manager**: Multi-agent workflow coordination
 
 ### Tool-specific Guidelines
 
@@ -208,7 +200,7 @@ pnpm log4brains list
    - Use global ADRs for decisions about: monorepo structure, shared tooling, cross-package dependencies
    - Use package-specific ADRs for: UI/UX decisions, package-specific libraries, internal architecture
 
-## Architecture
+## Project Architecture
 
 ### Workspace Structure
 
