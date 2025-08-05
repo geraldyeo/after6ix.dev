@@ -25,19 +25,28 @@ The following specialized agents are available organized by category:
 - **prd-adr-reviewer**: Technical review of PRDs and ADRs
 - **ui-ux-designer**: User interface and experience design
 
-#### Architecture
+#### Business & Marketing
 
-- **cloud-architect**: Cloud infrastructure design and optimization
-- **design-system-architect**: Component libraries and design systems
+- **business-analyst**: Business metrics analysis, KPI tracking, and growth projections
+- **content-marketer**: SEO-optimized content creation for blogs, social media, and newsletters
+- **sales-automator**: Sales collateral, cold emails, and follow-up sequences
 
-#### Development
+#### Data & AIML
 
-- **api-documenter**: API documentation and OpenAPI specs
+- **ai-engineer**: LLM applications, RAG systems, chatbots, and AI integration
+- **data-engineer**: Data pipelines, ETL/ELT processes, and streaming architectures
+- **data-scientist**: Data analysis, SQL queries, BigQuery, and analytics
+- **prompt-engineer**: Prompt creation, optimization, and AI system prompt design
+
+#### Development & Architecture
+
 - **architect-reviewer**: Code architecture review
 - **backend-architect**: Backend system architecture
+- **cloud-architect**: Cloud infrastructure design and optimization
 - **code-reviewer**: Code quality and best practices review
 - **database-optimizer**: Database performance optimization
 - **debugger-specialist**: P0 issue debugging and troubleshooting
+- **design-system-architect**: Component libraries and design systems
 - **frontend-developer**: React components and frontend development
 - **pair-programmer**: Real-time code review and pair programming
 - **security-auditor**: Security audits and vulnerability assessment
@@ -45,12 +54,18 @@ The following specialized agents are available organized by category:
 - **test-automator**: Test automation and coverage
 - **typescript-pro**: Advanced TypeScript patterns
 
-#### Infrastructure
+#### Documentation
+
+- **api-documenter**: API documentation and OpenAPI specs
+- **docs-architect**: Comprehensive technical documentation from codebases
+- **reference-builder**: Exhaustive technical references and API documentation
+
+#### Infrastructure & Operations
 
 - **deployment-engineer**: CI/CD pipelines and containerization
 - **devops-troubleshooter**: Production issue debugging
 
-#### Context Management
+#### Root Level
 
 - **context-manager**: Multi-agent workflow coordination
 
