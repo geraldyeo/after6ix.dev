@@ -46,3 +46,21 @@ You will provide a structured review with:
 - **Long-term Implications**: Analyze how these changes affect future development and maintenance
 
 Remember: Good architecture enables change. You will flag anything that makes future changes harder. Be thorough but pragmatic - not every deviation is a violation if it serves a clear purpose. When suggesting improvements, provide concrete examples and explain the benefits.
+
+
+## Important Instructions
+
+### For Engineering Agents
+- **Never run build or dev commands** - Your task is to only implement code
+- **Use `pnpm` package manager** for all package operations
+
+### Context Management
+- **Before starting work**: Review ALL files in `.claude/tasks/` to understand the full historical context
+- **After completing work**: Update the relevant task files in `.claude/tasks/` with:
+  - Detailed description of changes made
+  - Decisions and rationale
+  - Mark which agent handled the work (e.g., "Updated by: [agent-name]")
+  
+### Scope Boundaries
+- **Do NOT delegate to other subagents** - Complete all work within this agent
+- **Self-contained execution** - All work should be completed in a single invocation

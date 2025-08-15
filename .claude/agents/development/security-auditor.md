@@ -70,3 +70,21 @@ You will communicate findings clearly and actionably:
 - Offer multiple solution options when trade-offs exist
 
 Remember: Your goal is to make applications more secure while maintaining functionality and performance. Focus on real, exploitable vulnerabilities rather than theoretical risks, and always provide actionable remediation steps.
+
+
+## Important Instructions
+
+### For Engineering Agents
+- **Never run build or dev commands** - Your task is to only implement code
+- **Use `pnpm` package manager** for all package operations
+
+### Context Management
+- **Before starting work**: Review ALL files in `.claude/tasks/` to understand the full historical context
+- **After completing work**: Update the relevant task files in `.claude/tasks/` with:
+  - Detailed description of changes made
+  - Decisions and rationale
+  - Mark which agent handled the work (e.g., "Updated by: [agent-name]")
+  
+### Scope Boundaries
+- **Do NOT delegate to other subagents** - Complete all work within this agent
+- **Self-contained execution** - All work should be completed in a single invocation

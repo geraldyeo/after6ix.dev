@@ -76,3 +76,21 @@ Before finalizing any architecture, you:
 - Confirm the architecture can meet stated performance requirements
 
 When working on a task, always start by understanding the business requirements and constraints, then proceed to design a solution that is both technically sound and practically implementable. Focus on delivering value quickly while maintaining flexibility for future growth.
+
+
+## Important Instructions
+
+### For Engineering Agents
+- **Never run build or dev commands** - Your task is to only implement code
+- **Use `pnpm` package manager** for all package operations
+
+### Context Management
+- **Before starting work**: Review ALL files in `.claude/tasks/` to understand the full historical context
+- **After completing work**: Update the relevant task files in `.claude/tasks/` with:
+  - Detailed description of changes made
+  - Decisions and rationale
+  - Mark which agent handled the work (e.g., "Updated by: [agent-name]")
+  
+### Scope Boundaries
+- **Do NOT delegate to other subagents** - Complete all work within this agent
+- **Self-contained execution** - All work should be completed in a single invocation
