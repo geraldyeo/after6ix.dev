@@ -6,14 +6,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a pnpm workspace monorepo for after6ix.dev, currently in early development stage. The project is TypeScript-dominant and uses strict TypeScript configuration.
 
+## Feature Development Workflow
+
+### Step 1: ADR Check/Creation (REQUIRED for Features)
+
+1. **Check for existing ADRs** before any feature work:
+   - Search global ADRs in `./docs/adr/` for monorepo-wide decisions
+   - Search package-specific ADRs based on feature location
+   - Use `pnpm log4brains list` or search for relevant keywords
+2. **If no ADR exists**:
+   - Ask clarifying questions about the feature
+   - Draft an ADR documenting the architectural decision
+   - Request approval for the ADR
+3. **If ADR exists**:
+   - Proceed to create implementation plan based on the ADR
+
+### Step 2: Implementation Planning
+
+1. **Enter plan mode** to create a detailed implementation plan
+2. **Document the plan** in `.claude/tasks/YYYY-MM-DD-TASK_NAME.md` with:
+   - Use ISO date format for chronological ordering (e.g., `2025-01-15-add-authentication.md`)
+   - Detailed implementation approach aligned with ADR
+   - Tasks broken down into manageable steps
+   - MVP-focused scope (avoid over-engineering)
+3. **Research requirements** when external knowledge is needed:
+   - Use Context7 first for library documentation/syntax
+   - Use Perplexity or research agents as fallback
+   - Use Sequential Thinking only for complex multi-step research
+4. **Request plan approval** - Present the plan and wait for explicit approval
+
+### Step 3: Implementation
+
+1. **Track progress** using TodoWrite tool for task management
+2. **Update the plan** in the same task file as you progress
+3. **Document completed work** by appending to the task file:
+   - Detailed descriptions of changes made
+   - Key decisions and their rationale
+   - Context needed for handover to other engineers
+4. **Run validation commands** after implementation:
+   - Run lint commands: `pnpm -w run lint`
+   - Run type-check commands (never build commands)
+5. **Reference ADRs in code** with comments (e.g., `// See ADR-0001`)
+
 ## Tool usages and core workflows with Claude Code
 
 ### Tools
 
-- Sequential Thinking must be used for all multi-step problems or research tasks
-- Perplexity Search must be used for any fact-finding or research queries
-- Context7 must be used for any documentation lookup of libraries or API
-- Firecrawl must be used for extracting data for any web scraping tasks
+- Sequential Thinking: Use for complex multi-step problems or research tasks
+- Context7: Primary tool for library documentation and API syntax lookup
+- Perplexity Search: Use for fact-finding or when Context7 doesn't have the information
+- Firecrawl: Use for extracting data from web pages and scraping tasks
+- Task tool with research agents: Fallback for specialized research needs
 
 ### Specialized Agents
 
@@ -106,34 +149,6 @@ The following specialized agents are available organized by category:
 - Present information in structured format
 - Highlight key insights and relationships
 
-### ADR Check Workflow (REQUIRED for Feature Work)
-
-When working on any new feature or modifying existing features, you MUST:
-
-1. **Check for existing ADRs** before implementation:
-   - Search global ADRs in `./docs/adr/` for monorepo-wide decisions
-   - Search package-specific ADRs based on the feature location:
-     - Site features: check `./apps/site/docs/adr/`
-     - CV features: check `./apps/cv/docs/adr/`
-   - Use `pnpm log4brains list` or search for relevant keywords in ADR files
-
-2. **Confirm ADR requirements** with the user:
-   - If relevant ADRs exist: Reference them and confirm the implementation aligns with documented decisions
-   - If no ADRs exist: Ask the user if an ADR should be created before proceeding
-   - If uncertain about scope: Ask the user whether the decision should be global or package-specific
-
-3. **Reference ADRs in code**:
-   - Add comments in code referencing relevant ADR numbers (e.g., `// See ADR-0001`)
-   - Ensure implementation follows the decisions documented in ADRs
-
-Example workflow:
-
-```text
-User: "Add authentication to the CV app"
-AI: Let me check for existing ADRs about authentication...
-[Searches ./docs/adr/ and ./apps/cv/docs/adr/]
-AI: I found no existing ADRs about authentication. Should I create an ADR to document the authentication approach before implementing?
-```
 
 ## Commands
 
@@ -257,7 +272,8 @@ When creating new shared packages:
 
 **IMPORTANT**: Always prioritize catching errors early:
 
-1. **Never use `skipLibCheck: true`** - We want to catch type issues in dependencies
+1. **Avoid `skipLibCheck: true` when possible** - Prefer catching type issues in dependencies
+   - If necessary due to third-party type issues, document why and what workarounds were attempted
 2. **Keep strict mode enabled** - All strict checks should remain on
 3. **Don't ignore type errors** - Fix them properly instead of using `@ts-ignore`
 4. **Validate third-party types** - If a library has type issues, consider:
@@ -265,6 +281,7 @@ When creating new shared packages:
    - Contributing fixes upstream
    - Using a well-typed alternative
    - Creating proper type definitions
+   - As last resort: use `skipLibCheck` with documentation
 
 This approach ensures:
 
@@ -292,15 +309,26 @@ This approach ensures:
 
 ## Development Notes
 
-1. Build packages before running apps that depend on them: `pnpm -w run build:packages`
+1. Shared packages (`@after6ix/ui`, `@after6ix/core`) export TypeScript source directly - no build needed
 2. When creating new packages or apps, ensure they have their own `tsconfig.json` that extends from `tsconfig.base.json`
 3. TypeScript project references should be used for inter-package dependencies
 4. Use `pnpm exec` or `pnpm dlx` instead of `npx` for better pnpm compatibility
+5. Claude should only run lint and type-check commands, not build commands
 
-## Documentation Guidelines
+## Documentation Structure
 
-To maintain readability, if this CLAUDE.md file exceeds 1000 words, refactor it by:
+### Task Documentation
 
-- Moving detailed sections to separate files in `/docs` (e.g., project-setup.md, api-guidelines.md, testing-approach.md, deployment-notes.md)
-- Keeping only essential information in CLAUDE.md: tool usage instructions, specialized agent configurations, and links to the detailed documentation
-- This prevents the file from becoming unwieldy while preserving quick access to critical Claude Code instructions
+- **`.claude/tasks/`** - Permanent storage for task plans and implementation notes
+  - File naming: `YYYY-MM-DD-TASK_NAME.md` (e.g., `2025-01-15-add-authentication.md`)
+  - ISO date format ensures chronological ordering
+  - Committed to repository for historical context
+  - Updated throughout implementation with progress and decisions
+  - Provides continuity across Claude sessions
+
+### CLAUDE.md Refactoring
+
+- **`/docs`** - For extracted sections when CLAUDE.md exceeds 1000 words
+  - Move detailed sections to separate files (e.g., project-setup.md, api-guidelines.md)
+  - Keep only essential information in CLAUDE.md
+  - Maintain links to detailed documentation
