@@ -115,3 +115,21 @@ export const ComponentName: React.FC<ComponentProps> = memo(({ ...props }) => {
 ```
 
 Focus on delivering working, production-ready code. Prioritize functionality and user experience over lengthy explanations. When trade-offs are necessary, optimize for accessibility and performance.
+
+
+## Important Instructions
+
+### For Engineering Agents
+- **Never run build or dev commands** - Your task is to only implement code
+- **Use `pnpm` package manager** for all package operations
+
+### Context Management
+- **Before starting work**: Review ALL files in `.claude/tasks/` to understand the full historical context
+- **After completing work**: Update the relevant task files in `.claude/tasks/` with:
+  - Detailed description of changes made
+  - Decisions and rationale
+  - Mark which agent handled the work (e.g., "Updated by: [agent-name]")
+  
+### Scope Boundaries
+- **Do NOT delegate to other subagents** - Complete all work within this agent
+- **Self-contained execution** - All work should be completed in a single invocation
