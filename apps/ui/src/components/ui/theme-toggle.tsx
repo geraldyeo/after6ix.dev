@@ -1,5 +1,5 @@
-import { Button } from "./button"
-import { useTheme } from "../../contexts/theme-context"
+import { Button } from "./button";
+import { useTheme } from "../../contexts/theme-context";
 
 // Simple icons as React components to avoid external dependencies
 const SunIcon = ({ className }: { className?: string }) => (
@@ -13,7 +13,7 @@ const SunIcon = ({ className }: { className?: string }) => (
     <circle cx={12} cy={12} r={5} />
     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
   </svg>
-)
+);
 
 const MoonIcon = ({ className }: { className?: string }) => (
   <svg
@@ -25,7 +25,7 @@ const MoonIcon = ({ className }: { className?: string }) => (
   >
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
-)
+);
 
 const MonitorIcon = ({ className }: { className?: string }) => (
   <svg
@@ -38,15 +38,15 @@ const MonitorIcon = ({ className }: { className?: string }) => (
     <rect x={2} y={3} width={20} height={14} rx={2} ry={2} />
     <path d="M8 21h8M12 17v4" />
   </svg>
-)
+);
 
 interface ThemeToggleProps {
-  variant?: "button" | "dropdown"
-  size?: "sm" | "default" | "lg"
+  variant?: "button" | "dropdown";
+  size?: "sm" | "default" | "lg";
 }
 
 export function ThemeToggle({ variant = "button", size = "default" }: ThemeToggleProps) {
-  const { theme, setTheme, actualTheme } = useTheme()
+  const { theme, setTheme, actualTheme } = useTheme();
 
   if (variant === "button") {
     return (
@@ -55,11 +55,11 @@ export function ThemeToggle({ variant = "button", size = "default" }: ThemeToggl
         size={size === "sm" ? "sm" : "default"}
         onClick={() => {
           if (theme === "light") {
-            setTheme("dark")
+            setTheme("dark");
           } else if (theme === "dark") {
-            setTheme("system")
+            setTheme("system");
           } else {
-            setTheme("light")
+            setTheme("light");
           }
         }}
         className="relative"
@@ -69,7 +69,7 @@ export function ThemeToggle({ variant = "button", size = "default" }: ThemeToggl
         <MoonIcon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-    )
+    );
   }
 
   // Dropdown variant with all options
@@ -82,11 +82,11 @@ export function ThemeToggle({ variant = "button", size = "default" }: ThemeToggl
         onClick={() => {
           // Cycle through themes: light -> dark -> system -> light
           if (theme === "light") {
-            setTheme("dark")
+            setTheme("dark");
           } else if (theme === "dark") {
-            setTheme("system")
+            setTheme("system");
           } else {
-            setTheme("light")
+            setTheme("light");
           }
         }}
       >
@@ -100,22 +100,22 @@ export function ThemeToggle({ variant = "button", size = "default" }: ThemeToggl
         </div>
       </Button>
     </div>
-  )
+  );
 }
 
 interface ThemeToggleGroupProps {
-  className?: string
+  className?: string;
 }
 
 export function ThemeToggleGroup({ className }: ThemeToggleGroupProps) {
-  const { theme, setTheme, actualTheme } = useTheme()
+  const { theme, setTheme, actualTheme } = useTheme();
 
   return (
     <div className={`flex rounded-lg border border-border p-1 ${className}`}>
       <Button
         variant={theme === "light" ? "default" : "ghost"}
         size="sm"
-        onClick={() => setTheme("light")}
+        onClick={() => { setTheme("light"); }}
         className="flex-1"
       >
         <SunIcon className="h-4 w-4 mr-2" />
@@ -124,7 +124,7 @@ export function ThemeToggleGroup({ className }: ThemeToggleGroupProps) {
       <Button
         variant={theme === "dark" ? "default" : "ghost"}
         size="sm"
-        onClick={() => setTheme("dark")}
+        onClick={() => { setTheme("dark"); }}
         className="flex-1"
       >
         <MoonIcon className="h-4 w-4 mr-2" />
@@ -133,7 +133,7 @@ export function ThemeToggleGroup({ className }: ThemeToggleGroupProps) {
       <Button
         variant={theme === "system" ? "default" : "ghost"}
         size="sm"
-        onClick={() => setTheme("system")}
+        onClick={() => { setTheme("system"); }}
         className="flex-1"
         title={`System theme (currently ${actualTheme})`}
       >
@@ -141,5 +141,5 @@ export function ThemeToggleGroup({ className }: ThemeToggleGroupProps) {
         System
       </Button>
     </div>
-  )
+  );
 }

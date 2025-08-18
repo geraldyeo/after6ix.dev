@@ -1,4 +1,4 @@
-import { ThemeProvider, ThemeToggle, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "../index"
+import { ThemeProvider, ThemeToggle, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "../index";
 
 export function ThemeExample() {
   return (
@@ -9,7 +9,7 @@ export function ThemeExample() {
             <h1 className="text-3xl font-bold">After6ix Theme System</h1>
             <ThemeToggle />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
@@ -34,7 +34,7 @@ export function ThemeExample() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[hsl(var(--muted-foreground))]">
-                  The theme system detects your operating system's theme preference and 
+                  The theme system detects your operating system's theme preference and
                   applies the appropriate theme automatically.
                 </p>
               </CardContent>
@@ -101,5 +101,5 @@ export function ThemeExample() {
         </div>
       </div>
     </ThemeProvider>
-  )
+  );
 }

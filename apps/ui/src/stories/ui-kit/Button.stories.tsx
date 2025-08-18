@@ -1,35 +1,35 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { action } from 'storybook/actions';
-import { Button, type ButtonProps } from '../../components/ui/button';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
+import { Button, type ButtonProps } from "../../components/ui/button";
 
 const meta: Meta<ButtonProps> = {
-  title: 'UI Kit/Button',
+  title: "UI Kit/Button",
   component: Button as any,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link', 'accent'],
-      description: 'The visual style of the button',
+      control: "select",
+      options: ["default", "destructive", "outline", "secondary", "ghost", "link", "accent"],
+      description: "The visual style of the button",
     },
     size: {
-      control: 'select',
-      options: ['default', 'sm', 'lg', 'xl', 'icon'],
-      description: 'The size of the button',
+      control: "select",
+      options: ["default", "sm", "lg", "xl", "icon"],
+      description: "The size of the button",
     },
     asChild: {
-      control: 'boolean',
-      description: 'Whether to render as a child component',
+      control: "boolean",
+      description: "Whether to render as a child component",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the button is disabled',
+      control: "boolean",
+      description: "Whether the button is disabled",
     },
     children: {
-      control: 'text',
-      description: 'The content of the button',
+      control: "text",
+      description: "The content of the button",
     },
   },
   args: {},
@@ -41,77 +41,77 @@ type Story = StoryObj<typeof meta>;
 // Basic variants
 export const Default: Story = {
   args: {
-    children: 'Primary Button',
+    children: "Primary Button",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary Button',
+    variant: "secondary",
+    children: "Secondary Button",
   },
 };
 
 export const Accent: Story = {
   args: {
-    variant: 'accent',
-    children: 'Accent Button',
+    variant: "accent",
+    children: "Accent Button",
   },
 };
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
-    children: 'Destructive Button',
+    variant: "destructive",
+    children: "Destructive Button",
   },
 };
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
-    children: 'Outline Button',
+    variant: "outline",
+    children: "Outline Button",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    variant: 'ghost',
-    children: 'Ghost Button',
+    variant: "ghost",
+    children: "Ghost Button",
   },
 };
 
 export const Link: Story = {
   args: {
-    variant: 'link',
-    children: 'Link Button',
+    variant: "link",
+    children: "Link Button",
   },
 };
 
 // Sizes
 export const Small: Story = {
   args: {
-    size: 'sm',
-    children: 'Small',
+    size: "sm",
+    children: "Small",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'lg',
-    children: 'Large',
+    size: "lg",
+    children: "Large",
   },
 };
 
 export const ExtraLarge: Story = {
   args: {
-    size: 'xl',
-    children: 'Extra Large',
+    size: "xl",
+    children: "Extra Large",
   },
 };
 
 export const Icon: Story = {
   args: {
-    size: 'icon',
+    size: "icon",
     children: (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -124,7 +124,7 @@ export const Icon: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    children: 'Disabled',
+    children: "Disabled",
   },
 };
 
@@ -159,12 +159,12 @@ export const Loading: Story = {
 // Interactive examples
 export const WithActions: Story = {
   args: {
-    children: 'Click me',
-    onClick: action('onClick'),
-    onMouseEnter: action('onMouseEnter'),
-    onMouseLeave: action('onMouseLeave'),
-    onFocus: action('onFocus'),
-    onBlur: action('onBlur'),
+    children: "Click me",
+    onClick: action("onClick"),
+    onMouseEnter: action("onMouseEnter"),
+    onMouseLeave: action("onMouseLeave"),
+    onFocus: action("onFocus"),
+    onBlur: action("onBlur"),
   },
 };
 
@@ -176,7 +176,7 @@ export const AsChild: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Using the `asChild` prop with Radix UI Slot to render as a different element',
+        story: "Using the `asChild` prop with Radix UI Slot to render as a different element",
       },
     },
   },

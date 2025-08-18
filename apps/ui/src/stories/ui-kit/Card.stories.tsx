@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
-import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, type CardProps } from "@components/ui/card"
-import { Button } from "@components/ui/button"
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, type CardProps } from "@components/ui/card";
+import { Button } from "@components/ui/button";
 
 const meta: Meta<CardProps> = {
   title: "UI Kit/Card",
@@ -21,10 +21,10 @@ const meta: Meta<CardProps> = {
       control: false,
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -44,7 +44,7 @@ export const Default: Story = {
       </>
     ),
   },
-}
+};
 
 export const Shadow: Story = {
   args: {
@@ -61,7 +61,7 @@ export const Shadow: Story = {
       </>
     ),
   },
-}
+};
 
 export const Bordered: Story = {
   args: {
@@ -78,7 +78,7 @@ export const Bordered: Story = {
       </>
     ),
   },
-}
+};
 
 export const Elevated: Story = {
   args: {
@@ -95,7 +95,7 @@ export const Elevated: Story = {
       </>
     ),
   },
-}
+};
 
 export const Ghost: Story = {
   args: {
@@ -113,16 +113,16 @@ export const Ghost: Story = {
       </>
     ),
   },
-}
+};
 
 export const WithoutPadding: Story = {
   args: {
     padding: "none",
     children: (
       <>
-        <img 
-          src="https://placehold.co/400x200" 
-          alt="Placeholder" 
+        <img
+          src="https://placehold.co/400x200"
+          alt="Placeholder"
           className="w-full h-48 object-cover rounded-t-xl"
         />
         <div className="p-6">
@@ -137,7 +137,7 @@ export const WithoutPadding: Story = {
       </>
     ),
   },
-}
+};
 
 export const SmallPadding: Story = {
   args: {
@@ -154,7 +154,7 @@ export const SmallPadding: Story = {
       </>
     ),
   },
-}
+};
 
 export const LargePadding: Story = {
   args: {
@@ -171,7 +171,7 @@ export const LargePadding: Story = {
       </>
     ),
   },
-}
+};
 
 export const Interactive: Story = {
   args: {
@@ -190,7 +190,7 @@ export const Interactive: Story = {
       </>
     ),
   },
-}
+};
 
 export const ComplexContent: Story = {
   args: {
@@ -232,4 +232,4 @@ export const ComplexContent: Story = {
       </>
     ),
   },
-}
+};

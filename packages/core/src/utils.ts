@@ -1,7 +1,7 @@
 // Utility functions for @after6ix/core
 
 export function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+  return date.toISOString().split("T")[0];
 }
 
 export function capitalize(str: string): string {

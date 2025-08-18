@@ -1,15 +1,15 @@
-import { Button } from "./button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./card"
-import { ThemeToggle, ThemeToggleGroup } from "./theme-toggle"
-import { useTheme } from "../../contexts/theme-context"
-import { cn } from "@lib/utils"
+import { Button } from "./button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./card";
+import { ThemeToggle, ThemeToggleGroup } from "./theme-toggle";
+import { useTheme } from "../../contexts/theme-context";
+import { cn } from "@lib/utils";
 
 interface ThemeDemoProps {
-  className?: string
+  className?: string;
 }
 
 export function ThemeDemo({ className }: ThemeDemoProps) {
-  const { theme, actualTheme } = useTheme()
+  const { theme, actualTheme } = useTheme();
 
   return (
     <div className={cn("space-y-6 max-w-4xl mx-auto", className)}>
@@ -39,7 +39,7 @@ export function ThemeDemo({ className }: ThemeDemoProps) {
             <span className="text-sm font-medium">Quick Toggle:</span>
             <ThemeToggle variant="button" />
           </div>
-          
+
           <div className="space-y-3">
             <span className="text-sm font-medium">Theme Selection:</span>
             <ThemeToggleGroup />
@@ -62,7 +62,7 @@ export function ThemeDemo({ className }: ThemeDemoProps) {
             <Button variant="secondary" className="w-full">Secondary Button</Button>
             <Button variant="accent" className="w-full">Accent Button</Button>
           </div>
-          
+
           <div className="space-y-3">
             <h4 className="font-medium text-sm text-muted-foreground">Utility Variants</h4>
             <Button variant="outline" className="w-full">Outline Button</Button>
@@ -195,11 +195,11 @@ export function ThemeDemo({ className }: ThemeDemoProps) {
                 <div>className="border-[hsl(var(--border))] text-[hsl(var(--foreground))]"</div>
               </div>
             </div>
-            
+
             <div>
               <h4 className="font-medium text-sm mb-2">React Hook Usage</h4>
               <div className="bg-[hsl(var(--muted))] p-4 rounded-lg text-sm font-mono">
-                <div>const {'{ theme, setTheme, actualTheme }'} = useTheme()</div>
+                <div>const {"{ theme, setTheme, actualTheme }"} = useTheme()</div>
                 <div>setTheme('dark') // or 'light' or 'system'</div>
               </div>
             </div>
@@ -207,5 +207,5 @@ export function ThemeDemo({ className }: ThemeDemoProps) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
