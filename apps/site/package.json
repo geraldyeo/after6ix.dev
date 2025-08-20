@@ -3,28 +3,35 @@
   "version": "1.0.0",
   "type": "module",
   "author": "Gerald Yeo <gerald.yeo@gmail.com>",
-  "description": "Website for After6ix",
+  "description": "After6ix main website built with Astro v5 and Tailwind v4",
   "engines": {
     "node": ">=22.15.0",
     "pnpm": ">=10.11.0"
   },
-  "keywords": [],
+  "keywords": [
+    "astro",
+    "website",
+    "tailwindcss",
+    "after6ix"
+  ],
   "license": "MIT",
-  "main": "index.js",
   "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "dev": "sst dev",
-    "deploy": "sst deploy",
-    "remove": "sst remove",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "type-check": "astro check"
   },
   "dependencies": {
-    "@after6ix/core": "workspace:*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@after6ix/ui": "workspace:*",
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.2.1"
   },
   "devDependencies": {
-    "@aws-sdk/client-ssm": "^3.864.0",
-    "sst": "^3.17.10"
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.7.3"
   }
 }

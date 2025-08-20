@@ -1,0 +1,83 @@
+---
+// Features component showcasing After6ix capabilities
+const features = [
+  {
+    title: "Creative Development",
+    description: "Pushing the boundaries of web technology with innovative solutions and cutting-edge frameworks.",
+    icon: "🎨",
+    gradient: "from-primary-500 to-purple-600"
+  },
+  {
+    title: "Performance First",
+    description: "Lightning-fast websites built for speed, SEO, and exceptional user experiences across all devices.",
+    icon: "⚡",
+    gradient: "from-secondary-500 to-blue-600"
+  },
+  {
+    title: "Modern Stack",
+    description: "Leveraging the latest technologies like Astro, React, TypeScript, and Tailwind CSS for scalable solutions.",
+    icon: "🚀",
+    gradient: "from-accent-500 to-teal-600"
+  }
+];
+---
+
+<section id="features" class="py-20 bg-white dark:bg-neutral-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+        What We Do
+      </h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        We specialize in creating exceptional digital experiences that combine 
+        beautiful design with robust technical implementation.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {features.map((feature) => (
+        <div class="group relative">
+          <div class="bg-white dark:bg-neutral-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-200 dark:border-neutral-700 h-full">
+            <!-- Icon with gradient background -->
+            <div class={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-r ${feature.gradient} mb-6`}>
+              <span class="text-2xl">{feature.icon}</span>
+            </div>
+
+            <!-- Content -->
+            <h3 class="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-4">
+              {feature.title}
+            </h3>
+            <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              {feature.description}
+            </p>
+
+            <!-- Hover effect -->
+            <div class={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional content section -->
+    <div class="mt-20 text-center">
+      <div class="bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-neutral-800 dark:to-neutral-700 rounded-2xl p-8 lg:p-12">
+        <h3 class="text-2xl lg:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+          Ready to Build Something Amazing?
+        </h3>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+          Let's collaborate on your next project. From concept to deployment, 
+          we'll help bring your vision to life with precision and creativity.
+        </p>
+        <a 
+          href="#contact" 
+          class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          Start Your Project
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

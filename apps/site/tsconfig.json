@@ -1,42 +1,18 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    
-    // React specific settings
-    "jsx": "react-jsx",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    
-    // Module settings for bundlers
-    "module": "es2022",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    
-    // Type checking
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    
-    // Interop
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    
-    // Path mappings for absolute imports
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@utils/*": ["./src/utils/*"]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "build", "coverage"],
-  "references": [
-    { "path": "../../packages/core" }
-  ]
+      "@after6ix/ui": ["../../apps/ui/src/index.ts"],
+      "@after6ix/ui/*": ["../../apps/ui/src/*"]
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
+  }
 }

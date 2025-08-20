@@ -25,7 +25,10 @@
 		"packages:clean": "pnpm --filter \"./packages/**\" clean",
 		"packages:dev": "pnpm --filter \"./packages/**\" --parallel dev",
 		"build:all": "tsc --build",
-		"clean:all": "tsc --build --clean"
+		"clean:all": "tsc --build --clean",
+		"dev:astro": "pnpm --filter @after6ix/astro-site dev",
+		"build:astro": "pnpm --filter @after6ix/astro-site build",
+		"preview:astro": "pnpm --filter @after6ix/astro-site preview"
 	},
 	"workspaces": [
 		"apps/*",
